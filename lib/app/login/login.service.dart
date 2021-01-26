@@ -18,11 +18,15 @@ final FacebookLogin facebookSignIn = FacebookLogin();
 
 //Todo: Sign in Google
 Future<String> signInWithGoogle(BuildContext context) async {
+  print("signInWithGoogle");
   await Firebase.initializeApp();
+  print("1");
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn().catchError((onError) {
     print("Error $onError");
   });
+  print("2");
   if (googleSignInAccount != null) {
+    print("3");
     final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
     if (googleSignInAuthentication != null) {
       final AuthCredential credential = GoogleAuthProvider.credential(
