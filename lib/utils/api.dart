@@ -68,7 +68,7 @@ class API {
   void signOut() {
     Application.sharePreference.clear();
     signOutGoogle();
-    logout();
+    // logout();
   }
 
   void handleTimeOutException(DioErrorType type) {

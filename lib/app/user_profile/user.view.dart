@@ -90,11 +90,11 @@ Widget userProfile(context, ClassModel classModel) {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 achievement(
-                    image: 'assets/honey_point.svg',
+                    image: 'assets/honey_point.jpg',
                     message: 'Level'.i18n,
                     userNumber: Application.user.level.toString()),
                 achievement(
-                    image: 'assets/droplets_yellow.svg',
+                    image: 'assets/droplets_yellow.jpg',
                     message: 'Lesson'.i18n,
                     userNumber: Application.user.score.toString())
               ],
@@ -165,7 +165,7 @@ Widget achievement({String image, String userNumber, String message}) {
       children: [
         Container(
           margin: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal),
-          child: SvgPicture.asset(
+          child: Image.asset(
             image,
             width: SizeConfig.blockSizeHorizontal * 10,
           ),

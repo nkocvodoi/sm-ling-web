@@ -5,7 +5,9 @@ import 'package:SMLingg/utils/network_exception.dart';
 class UserServiceGoogle {
   Future<void> loadUserProfile(String accessToken) async {
     Map<String, dynamic> paramsUser = {"access_token": accessToken};
+    print("11111");
     var response = await Application.api.post("/api/login/google", paramsUser);
+    print("22222");
     try {
       if (response.statusCode == 200) {
         Application.user = User.fromJson(response.data["data"]["user"] as Map<String, dynamic>);

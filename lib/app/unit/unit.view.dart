@@ -213,14 +213,14 @@ class _UnitState extends State<UnitScreen> {
                         children:[
                           Positioned(
                             bottom: -3,
-                            child: SvgPicture.asset(
-                              'assets/star.svg',
+                            child: Image.asset(
+                              'assets/star.jpg',
                               width: SizeConfig.blockSizeHorizontal * 12,
                               color: LevelColor.coreShadowColor[index % 7],
                             ),
                           ),
-                          SvgPicture.asset(
-                            'assets/star.svg',
+                          Image.asset(
+                            'assets/star.jpg',
                             width: SizeConfig.blockSizeHorizontal * 12,
                             color: LevelColor.coreColor[index % 7],
                           ),
@@ -252,11 +252,11 @@ class _UnitState extends State<UnitScreen> {
                 children: [
                   (unitModel.userLevel(unit - 1) == Application.unitList.units[unit - 1].totalLevels &&
                           unitModel.userLesson(unit - 1) == Application.unitList.units[unit - 1].totalLessonsOfLevel)
-                      ? SvgPicture.asset(
-                          'assets/droplets_yellow.svg',
+                      ? Image.asset(
+                          'assets/droplets_yellow.jpg',
                           height: SizeConfig.blockSizeVertical * 5,
                         )
-                      : SvgPicture.asset('assets/droplets.svg', height: SizeConfig.blockSizeVertical * 5),
+                      : Image.asset("assets/class/droplets.png", height: SizeConfig.blockSizeVertical * 5),
                   Text(
                     (unitModel.userLevel(unit - 1)).toString(),
                     style: TextStyle(
