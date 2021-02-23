@@ -1,3 +1,4 @@
+import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/config/config_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -33,16 +34,22 @@ class AppColor {
 }
 
 class TextSize {
-  static double fontSize18 = SizeConfig.safeBlockVertical * 2.5;
-  static double fontSize16 = SizeConfig.safeBlockVertical * 2.25;
-  static double fontSize20 = SizeConfig.safeBlockVertical * 3;
-  static double fontSize25 = SizeConfig.safeBlockVertical * 3.5;
-  static double fontSize40 = SizeConfig.safeBlockVertical * 6;
+  static double fontSize18 =
+      Application.sharePreference.getInt("setGrade") >= 5 ? SizeConfig.safeBlockHorizontal * 5 : SizeConfig.safeBlockVertical * 2.5;
+  static double fontSize16 =
+      Application.sharePreference.getInt("setGrade") >= 5 ? SizeConfig.safeBlockHorizontal * 5 : SizeConfig.safeBlockVertical * 2.25;
+  static double fontSize20 =
+      Application.sharePreference.getInt("setGrade") >= 5 ? SizeConfig.safeBlockHorizontal * 5 : SizeConfig.safeBlockVertical * 3;
+  static double fontSize25 =
+      Application.sharePreference.getInt("setGrade") >= 5 ? SizeConfig.safeBlockHorizontal * 5 : SizeConfig.safeBlockVertical * 3.5;
+  static double fontSize40 =
+      Application.sharePreference.getInt("setGrade") >= 5 ? SizeConfig.safeBlockHorizontal * 5 : SizeConfig.safeBlockVertical * 6;
   static double fontSize51 = SizeConfig.safeBlockHorizontal * 15;
   static double fontSize30 = SizeConfig.safeBlockHorizontal * 8;
   static double fontSize15 = SizeConfig.safeBlockHorizontal * 4;
   static String fontFamily = "Quicksand";
 }
+
 class LevelColor {
   static Color defaultLightColor = Color(0xFFADD6F3).withOpacity(0.4);
   static const Color defaultTextColor = Color(0xFF84BDE5);
@@ -56,7 +63,7 @@ class LevelColor {
     Color(0xFFB8F9A5),
     Color(0xFFBDD6FF),
   ];
-    static List<Color> coreShadowColor = [
+  static List<Color> coreShadowColor = [
     Color(0xFFEC6600),
     Color(0xFF6C71EF),
     Color(0xFF29AEC0),

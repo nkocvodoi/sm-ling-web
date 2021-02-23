@@ -3,6 +3,7 @@ import 'package:SMLingg/app/lesson/question/command_vs_vncontent_enarray.dart';
 import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/config/config_screen.dart';
 import 'package:SMLingg/models/lesson/lesson_info.dart';
+import 'package:SMLingg/resources/i18n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +13,7 @@ import '../lesson.provider.dart';
 class QuestionType18Sent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
+    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
     Sentences s = Application.lessonInfo.findSentence(question.focusSentence);
     List<String> enArray = [];
     for (int i = 0; i < s.en.length; i++) {
@@ -23,17 +23,15 @@ class QuestionType18Sent extends StatelessWidget {
     return Column(
       children: [
         Padding(
-            padding:
-                EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
+            padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsVnContentVsEnArray(
-              command: "Hoàn thành bản dịch.",
+              command: "Translate sentences".i18n,
               vnContent: s.vnText,
               enArray: s.en,
               isHiddenWord: true,
               hiddenWord: question.hiddenWord,
             )),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),
-
         FillTextField(
           type: "en",
         )

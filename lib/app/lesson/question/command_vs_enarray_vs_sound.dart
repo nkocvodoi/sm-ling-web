@@ -5,20 +5,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class CommandVsEnArrayVsSound extends StatelessWidget {
+class CommandVsEnArrayVsSound extends StatefulWidget {
   final String command;
   final String soundUrl;
   final List<String> enArray;
-  List<TextSpan> sentences = [];
 
-  CommandVsEnArrayVsSound({Key key, @required this.command, @required this.soundUrl, @required this.enArray})
-      : super(key: key);
+  CommandVsEnArrayVsSound({Key key, @required this.command, @required this.soundUrl, @required this.enArray}) : super(key: key);
+
+  @override
+  _CommandVsEnArrayVsSoundState createState() => _CommandVsEnArrayVsSoundState();
+}
+
+class _CommandVsEnArrayVsSoundState extends State<CommandVsEnArrayVsSound> {
+  List<TextSpan> sentences = [];
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    for (var i = 0; i < enArray.length; i++) {
-      String text = enArray[i];
+    for (var i = 0; i < widget.enArray.length; i++) {
+      String text = widget.enArray[i];
       sentences.add(TextSpan(
         text: text,
         style: TextStyle(
@@ -31,7 +36,7 @@ class CommandVsEnArrayVsSound extends StatelessWidget {
         recognizer: TapGestureRecognizer()..onTap = () => print("OKOKO"),
       ));
       sentences.add(TextSpan(
-        text: i != enArray.length - 1 ? " " : "",
+        text: i != widget.enArray.length - 1 ? " " : "",
       ));
     }
     return Column(
@@ -40,12 +45,8 @@ class CommandVsEnArrayVsSound extends StatelessWidget {
           margin: EdgeInsets.only(top: 10),
           alignment: AlignmentDirectional(-1.0, 1.0),
           child: Text(
-            command,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: TextSize.fontSize18,
-                fontFamily: TextSize.fontFamily,
-                color: Color(0xff43669F)),
+            widget.command,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: TextSize.fontSize18, fontFamily: TextSize.fontFamily, color: Color(0xff43669F)),
           ),
         ),
         Container(
@@ -62,7 +63,7 @@ class CommandVsEnArrayVsSound extends StatelessWidget {
                 child: SoundButton(
                   width: SizeConfig.blockSizeHorizontal * 15,
                   height: SizeConfig.safeBlockHorizontal * 15,
-                  soundUrl: soundUrl,
+                  soundUrl: widget.soundUrl,
                 ),
               ),
               Container(

@@ -16,8 +16,7 @@ class QuestionType1Word extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
+    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     Words w = Application.lessonInfo.findWord(question.focusWord);
 
     // TODO: implement build

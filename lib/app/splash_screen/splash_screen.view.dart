@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:SMLingg/app/loading_screen/loading.view.dart';
-import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/config/config_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(
-        Duration(milliseconds: 2500),
-        () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => LoadingScreen(fetchData: true))));
+    Future.delayed(Duration(milliseconds: 2500),
+        () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoadingScreen(fetchData: true))));
   }
 
   void showError(String msg) {
@@ -48,18 +43,15 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: SizeConfig.screenHeight,
                 width: SizeConfig.screenWidth,
                 child: Column(children: [
-                  Expanded(child: SizedBox()),
-                  Container(
-                          child: Image.asset('assets/lingo.png',
-                              fit: BoxFit.fitHeight),
-                          width: SizeConfig.screenWidth * 0.3),
-                  Expanded(child: SizedBox()),
-                  Container(
-                    width: SizeConfig.screenWidth,
-                    height: SizeConfig.blockSizeVertical * 15,
-                    child: Image.asset("assets/splash/logo.png",
-                        height: SizeConfig.blockSizeVertical * 15)
+                  SizedBox(
+                    height: SizeConfig.blockSizeVertical * 30,
                   ),
+                  Expanded(child: Container(child: SvgPicture.asset('assets/lingo.svg', fit: BoxFit.fill), width: SizeConfig.screenWidth * 0.7)),
+                  Expanded(child: SizedBox()),
+                  Container(
+                      width: SizeConfig.screenWidth,
+                      height: SizeConfig.blockSizeVertical * 15,
+                      child: SvgPicture.asset("assets/splash/logo.svg", height: SizeConfig.blockSizeVertical * 15)),
                   SizedBox(height: SizeConfig.blockSizeVertical * 10),
                 ]))));
   }

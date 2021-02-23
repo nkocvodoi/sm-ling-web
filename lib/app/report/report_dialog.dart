@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
-void reportDialog(context, TextEditingController errorController, String bookID, String unitID, int level, int lesson,
-    Questions question, String questionContent, String questionDescription, String userAnswer, String date) {
+void reportDialog(context, TextEditingController errorController, String bookID, String unitID, int level, int lesson, Questions question,
+    String questionContent, String questionDescription, String userAnswer, String date) {
   Provider.of<ReportModel>(context as BuildContext, listen: false).initError();
   showDialog(
       context: context as BuildContext,
@@ -40,8 +40,7 @@ void reportDialog(context, TextEditingController errorController, String bookID,
                                     },
                                     title: Text(
                                       model.errorText[index],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500, color: AppColor.buttonText, fontSize: 18),
+                                      style: TextStyle(fontWeight: FontWeight.w500, color: AppColor.buttonText, fontSize: 18),
                                     ),
                                   ),
                                 )
@@ -54,8 +53,7 @@ void reportDialog(context, TextEditingController errorController, String bookID,
                                 style: TextStyle(color: AppColor.buttonText, fontWeight: FontWeight.w400, fontSize: 18),
                                 decoration: InputDecoration(
                                     hintText: 'Lỗi khác',
-                                    hintStyle: TextStyle(
-                                        color: AppColor.mainThemesFocus, fontSize: 18, fontWeight: FontWeight.w400)),
+                                    hintStyle: TextStyle(color: AppColor.mainThemesFocus, fontSize: 18, fontWeight: FontWeight.w400)),
                               ),
                               Row(
                                 children: [
@@ -69,8 +67,7 @@ void reportDialog(context, TextEditingController errorController, String bookID,
                                       padding: EdgeInsets.all(10),
                                       child: Text(
                                         'Hủy',
-                                        style: TextStyle(
-                                            fontSize: 20, color: AppColor.buttonText, fontWeight: FontWeight.w700),
+                                        style: TextStyle(fontSize: 20, color: AppColor.buttonText, fontWeight: FontWeight.w700),
                                       ),
                                     ),
                                   ),
@@ -112,8 +109,7 @@ void reportDialog(context, TextEditingController errorController, String bookID,
                                       padding: EdgeInsets.all(10),
                                       child: Text(
                                         'Gửi',
-                                        style: TextStyle(
-                                            fontSize: 20, color: AppColor.buttonText, fontWeight: FontWeight.w700),
+                                        style: TextStyle(fontSize: 20, color: AppColor.buttonText, fontWeight: FontWeight.w700),
                                       ),
                                     ),
                                   ),

@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:SMLingg/resources/i18n.dart';
 import 'package:SMLingg/themes/style.dart';
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 import '../../../config/application.dart';
@@ -27,30 +27,27 @@ class ChooseImage extends StatefulWidget {
 class _ChooseImageState extends State<ChooseImage> {
   var words = Application.lessonInfo.words;
   var sentences = Application.lessonInfo.sentences;
-  AudioPlayer audioPlayer = AudioPlayer();
-  AudioCache audioCache = AudioCache();
+
+  // AudioPlayer audioPlayer = AudioPlayer();
   int currentIndex = 0;
   var question, wordsLength;
   int maxLength = 0;
+  final player = AudioPlayer();
 
   double handleHeight() {
     double wordLength = (10 + TextSize.fontSize16 * 1.25 * maxLength).toDouble();
     return widget.types.contains("image")
         ? SizeConfig.safeBlockVertical * 18
         : SizeConfig.safeBlockVertical * 20 +
-            SizeConfig.safeBlockVertical *
-                8 *
-                (wordLength ~/ (SizeConfig.safeBlockHorizontal * 40 - 10) / 6).toDouble();
+            SizeConfig.safeBlockVertical * 8 * (wordLength ~/ (SizeConfig.safeBlockHorizontal * 40 - 10) / 6).toDouble();
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    audioPlayer.release();
-    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex as int;
-    question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
+    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
+    question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     wordsLength = question.words.length;
     question.words.shuffle();
     if (question.words.length > 0) {
@@ -69,9 +66,6 @@ class _ChooseImageState extends State<ChooseImage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    audioPlayer.stop();
-    audioPlayer.dispose();
-    audioCache.clearCache();
   }
 
   @override
@@ -80,8 +74,8 @@ class _ChooseImageState extends State<ChooseImage> {
     return Consumer<LessonModel>(
       builder: (_, lessonModel, __) {
         if (currentIndex != lessonModel.focusWordIndex) {
-          question = Application
-              .lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
+          question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
+          question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
           wordsLength = question.words.length;
           question.words.shuffle();
           if (question.words.length > 0) {
@@ -90,17 +84,64 @@ class _ChooseImageState extends State<ChooseImage> {
                   ? words[words.indexWhere((element) => element.sId == wordId)].meaning
                   : words[words.indexWhere((element) => element.sId == wordId)].content;
               if (maxLength < word.length) {
-                maxLength = word.length ;
+                maxLength = word.length;
               }
             }
           }
-          currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex as int;
+          currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
         }
         print((SizeConfig.safeBlockHorizontal * 40 - 10) / 8);
         return Container(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text("* In case you need help".i18n,
+                    style: TextStyle(fontWeight: FontWeight.w600, color: AppColor.mainThemesFocus, fontSize: TextSize.fontSize16)),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(180),
+                  ),
+                  height: SizeConfig.screenHeight * 0.04,
+                  width: SizeConfig.safeBlockHorizontal * 23,
+                  alignment: Alignment.center,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                          left: SizeConfig.blockSizeHorizontal * 8,
+                          top: SizeConfig.screenHeight * 0.006,
+                          child: Container(
+                            decoration: BoxDecoration(color: Color(0xFFADD6F3), borderRadius: BorderRadius.circular(180)),
+                            height: SizeConfig.screenHeight * 0.03,
+                            width: SizeConfig.safeBlockHorizontal * 23 / 2,
+                          )),
+                      AnimatedPositioned(
+                          left: Provider.of<LessonModel>(context, listen: false).show
+                              ? SizeConfig.safeBlockHorizontal * 4
+                              : SizeConfig.safeBlockHorizontal * 12,
+                          child: GestureDetector(
+                            onTap: () async => Provider.of<LessonModel>(context, listen: false).setShow(),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white, width: 3),
+                                  color: Provider.of<LessonModel>(context, listen: false).show ? Color(0xFFADD6F3) : Color(0xFF4285F4),
+                                  shape: BoxShape.circle),
+                              height: SizeConfig.screenHeight * 0.04,
+                              width: SizeConfig.safeBlockHorizontal * 13,
+                              alignment: Alignment.center,
+                            ),
+                          ),
+                          duration: Duration(milliseconds: 400)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: SizeConfig.safeBlockHorizontal * 5),
             ...List.generate(
                 (wordsLength % 2 == 1) ? (wordsLength ~/ 2 + 1).toInt() : wordsLength ~/ 2,
                 (index) => (index * 2 + 2 <= wordsLength)
@@ -112,20 +153,16 @@ class _ChooseImageState extends State<ChooseImage> {
                               2,
                               (dex) => _imageTextCustomButton(
                                   text: widget.types.contains("vi")
-                                      ? words[words
-                                              .indexWhere((element) => element.sId == question.words[index * 2 + dex])]
-                                          .meaning
-                                      : words[words
-                                              .indexWhere((element) => element.sId == question.words[index * 2 + dex])]
-                                          .content,
+                                      ? words[words.indexWhere((element) => element.sId == question.words[index * 2 + dex])].meaning
+                                      : words[words.indexWhere((element) => element.sId == question.words[index * 2 + dex])].content,
                                   idAnswer: question.words[index * 2 + dex]))
                         ],
                       )
                     : _imageTextCustomButton(
                         text: widget.types.contains("vi")
-                            ? words[words.indexWhere((element) => element.sId == question.words[index + 1])].meaning
-                            : words[words.indexWhere((element) => element.sId == question.words[index + 1])].content,
-                        idAnswer: question.words[index + 1]))
+                            ? words[words.indexWhere((element) => element.sId == question.words[index * 2])].meaning
+                            : words[words.indexWhere((element) => element.sId == question.words[index * 2])].content,
+                        idAnswer: question.words[index * 2]))
           ],
         ));
       },
@@ -142,15 +179,14 @@ class _ChooseImageState extends State<ChooseImage> {
         padding: EdgeInsets.only(bottom: SizeConfig.safeBlockVertical * 4),
         child: CustomButton(
             deactivate: (Provider.of<LessonModel>(context, listen: false).hasCheckedAnswer != 0),
-            onPressed: () {
-              audioPlayer.stop();
-              audioPlayer.release();
+            onPressed: () async {
               Provider.of<LessonModel>(context, listen: false).setIdAnswer(idAnswer);
               if (widget.types.contains("audio")) {
                 md5.convert(utf8.encode(word.content)).toString();
-                String soundUrl =
-                    'https://s.sachmem.vn/public/audio/dictionary/${md5.convert(utf8.encode(word.content)).toString()}.mp3';
-                audioPlayer.play(soundUrl, isLocal: false);
+                String soundUrl = 'https://s.sachmem.vn/public/audio/dictionary/${md5.convert(utf8.encode(word.content)).toString()}.mp3';
+                // audioPlayer.play(soundUrl, isLocal: false);
+                player.setUrl(soundUrl);
+                player.play();
               }
             },
             padding: EdgeInsets.only(right: 5, left: 5),
@@ -161,21 +197,16 @@ class _ChooseImageState extends State<ChooseImage> {
                   imageUrl,
                   height: SizeConfig.safeBlockVertical * 15,
                 ),
-                !widget.types.contains("image")
+                (!widget.types.contains("image") && !Provider.of<LessonModel>(context, listen: false).show)
                     ? Text(text,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, color: AppColor.buttonText, fontSize: TextSize.fontSize16))
+                        style: TextStyle(fontWeight: FontWeight.w500, color: AppColor.buttonText, fontSize: TextSize.fontSize16))
                     : SizedBox()
               ],
             ),
             width: SizeConfig.safeBlockHorizontal * 40,
             height: handleHeight(),
-            borderColor: (idAnswer == Provider.of<LessonModel>(context, listen: false).idAnswer)
-                ? AppColor.mainThemesFocus
-                : Colors.transparent,
-            shadowColor: (idAnswer == Provider.of<LessonModel>(context, listen: false).idAnswer)
-                ? AppColor.mainThemesFocus
-                : AppColor.mainThemes));
+            borderColor: (idAnswer == Provider.of<LessonModel>(context, listen: false).idAnswer) ? AppColor.mainThemesFocus : Colors.transparent,
+            shadowColor: (idAnswer == Provider.of<LessonModel>(context, listen: false).idAnswer) ? AppColor.mainThemesFocus : AppColor.mainThemes));
   }
 }

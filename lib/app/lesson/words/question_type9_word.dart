@@ -12,11 +12,9 @@ class QuestionType9Word extends StatelessWidget {
     return Column(
       children: [
         Padding(
-            padding:
-                EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
+            padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: Command(command: "Nối cặp từ tương ứng.")),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),
-
         MatchPair(),
         SizedBox(
           height: SizeConfig.safeBlockVertical * 5,

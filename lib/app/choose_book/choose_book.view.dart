@@ -1,8 +1,10 @@
 import 'package:SMLingg/app/choose_book/book.provider.dart';
 import 'package:SMLingg/app/components/custom.class_appbar.component.dart';
 import 'package:SMLingg/app/components/custom_button.component.dart';
+import 'package:SMLingg/app/components/dialog_show_message_and_action.dart';
 import 'package:SMLingg/app/lesson/lesson.provider.dart';
 import 'package:SMLingg/app/unit/unit.view.dart';
+import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/config/config_screen.dart';
 import 'package:SMLingg/config/resouces.dart';
 import 'package:SMLingg/models/book/book_list.dart';
@@ -12,6 +14,7 @@ import 'package:SMLingg/themes/style.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class ChooseBook extends StatefulWidget {
@@ -49,15 +52,17 @@ class _ChooseBookState extends State<ChooseBook> {
               width: SizeConfig.screenWidth,
               child: CarouselSlider.builder(
                 carouselController: carouselController,
-                itemBuilder: (context, index) => listClassImage(index, bookModel.getGrade() as int),
+                itemBuilder: (context, index) =>
+                    listClassImage(index, bookModel.getGrade()),
                 options: CarouselOptions(
                     viewportFraction: 0.8,
-                    initialPage: bookModel.getGrade() as int,
+                    initialPage: bookModel.getGrade(),
                     autoPlay: false,
                     enlargeCenterPage: true,
                     aspectRatio: 2,
                     onPageChanged: (index, reason) {
-                      bookModel.setGrade(index);
+                      bookModel.setGrade(index, context);
+                      Application.sharePreference.putInt("setGrade", index);
                     }),
                 itemCount: ClassImage.classImage.length,
               ),
@@ -73,16 +78,21 @@ class _ChooseBookState extends State<ChooseBook> {
                     height: (bookModel.getGrade() == index)
                         ? SizeConfig.safeBlockHorizontal * 2.25
                         : SizeConfig.safeBlockHorizontal * 1.5,
-                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                    margin:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                     decoration: bookModel.getGrade() == index
-                        ? BoxDecoration(color: Color(0xFF2485F4), borderRadius: BorderRadius.circular(15))
-                        : BoxDecoration(color: Color(0xFFADD6F3), borderRadius: BorderRadius.circular(15)),
+                        ? BoxDecoration(
+                            color: Color(0xFF2485F4),
+                            borderRadius: BorderRadius.circular(15))
+                        : BoxDecoration(
+                            color: Color(0xFFADD6F3),
+                            borderRadius: BorderRadius.circular(15)),
                     duration: Duration(milliseconds: 500));
               }).toList(),
             ),
             SizedBox(height: SizeConfig.safeBlockHorizontal * 2),
             FutureBuilder(
-                future: BookListService().loadBookList(bookModel.getGrade() as int),
+                future: BookListService().loadBookList(bookModel.getGrade()),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) print(snapshot.error);
                   return snapshot.hasData
@@ -101,7 +111,8 @@ class _ChooseBookState extends State<ChooseBook> {
     return Container(
         decoration: BoxDecoration(
             color: (index == _current) ? Color(0xFFFFC639) : Color(0xFFDEF0FD),
-            borderRadius: BorderRadius.circular(SizeConfig.safeBlockVertical * 3)),
+            borderRadius:
+                BorderRadius.circular(SizeConfig.safeBlockVertical * 3)),
         width: SizeConfig.safeBlockHorizontal * 80,
         padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 8),
         child: Image.asset(ClassImage.classImage[index]));
@@ -128,7 +139,10 @@ class BooksList extends StatelessWidget {
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [...List.generate(2, (col) => BookItem(item: books[indexBook++]))],
+                    children: [
+                      ...List.generate(
+                          2, (col) => BookItem(item: books[indexBook++]))
+                    ],
                   )
                 : BookItem(item: books[indexBook++])))
       ],
@@ -144,7 +158,8 @@ class BookItem extends StatelessWidget {
   String checkDownLine() {
     String newString = '';
     List<String> nameList = item.name.split(' ');
-    int index = nameList.indexWhere((element) => element == item.grade.toString());
+    int index =
+        nameList.indexWhere((element) => element == item.grade.toString());
     for (int i = 0; i < nameList.length; i++) {
       newString += '${nameList[i]} ';
       if (i == index) {
@@ -173,7 +188,8 @@ class BookItem extends StatelessWidget {
                     SizedBox(height: SizeConfig.safeBlockHorizontal * 3),
                     (item.cover != null)
                         ? ClipRRect(
-                            borderRadius: BorderRadius.circular(SizeConfig.safeBlockHorizontal * 2),
+                            borderRadius: BorderRadius.circular(
+                                SizeConfig.safeBlockHorizontal * 2),
                             child: Image.network(
                               item.cover,
                               width: SizeConfig.safeBlockHorizontal * 30,
@@ -192,7 +208,10 @@ class BookItem extends StatelessWidget {
                       child: FittedBox(
                         child: Text(checkDownLine(),
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontFamily: "Quicksand", fontWeight: FontWeight.w600, fontSize: 18)),
+                            style: TextStyle(
+                                fontFamily: "Quicksand",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18)),
                       ),
                     ),
                   ],
@@ -201,10 +220,12 @@ class BookItem extends StatelessWidget {
                 width: SizeConfig.blockSizeHorizontal * 43,
                 shadowColor: Color(0xFFADD6F3),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => UnitScreen(grade: item.grade, bookID: item.id)));
+                  if (item.grade <= 5) {
+                    Get.to(UnitScreen(grade: item.grade, bookID: item.id));
+                  } else if (Provider.of<BookModel>(context, listen: false)
+                      .play6To12) {
+                    Get.to(UnitScreen(grade: item.grade, bookID: item.id));
+                  }
                 },
               ),
             ],
@@ -225,7 +246,9 @@ class BookItem extends StatelessWidget {
                           ),
                           AnimatedPositioned(
                             left: -SizeConfig.blockSizeHorizontal * 30 +
-                                (item.doneQuestions / item.totalQuestions) * SizeConfig.blockSizeHorizontal * 30,
+                                (item.doneQuestions / item.totalQuestions) *
+                                    SizeConfig.blockSizeHorizontal *
+                                    30,
                             duration: Duration(milliseconds: 500),
                             child: Container(
                               height: SizeConfig.safeBlockHorizontal * 2.5,

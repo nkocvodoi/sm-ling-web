@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.11"
-  audioplayers:
-    dependency: "direct main"
-    description:
-      name: audioplayers
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.16.2"
   avatar_glow:
     dependency: "direct main"
     description:
@@ -183,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
+  conreality_headset:
+    dependency: "direct main"
+    description:
+      name: conreality_headset
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   convert:
     dependency: transitive
     description:
@@ -288,6 +288,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.1+1"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.0.3"
   fixnum:
     dependency: transitive
     description:
@@ -314,18 +321,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.1"
-  flutter_localizations:
-    dependency: "direct main"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  flutter_svg:
-    dependency: "direct main"
-    description:
-      name: flutter_svg
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.19.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -371,6 +366,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.4"
+  gettext_parser:
+    dependency: transitive
+    description:
+      name: gettext_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0+1"
   glob:
     dependency: transitive
     description:
@@ -440,7 +442,7 @@ packages:
       name: i18n_extension
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.6"
+    version: "2.0.0"
   image:
     dependency: transitive
     description:
@@ -560,6 +562,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  number_to_words:
+    dependency: "direct main"
+    description:
+      name: number_to_words
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   package_config:
     dependency: transitive
     description:
@@ -574,20 +583,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  path_drawing:
-    dependency: transitive
-    description:
-      name: path_drawing
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.1+1"
-  path_parsing:
-    dependency: transitive
-    description:
-      name: path_parsing
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.4"
   path_provider:
     dependency: "direct main"
     description:
@@ -672,13 +667,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.13"
-  progress_hud:
-    dependency: "direct main"
-    description:
-      name: progress_hud
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
   provider:
     dependency: "direct main"
     description:

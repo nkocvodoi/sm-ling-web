@@ -12,9 +12,7 @@ Ranking _$RankingFromJson(Map<String, dynamic> json) {
     tier: json['tier'] as String,
     grade: json['grade'] as int,
     index: json['index'] as int,
-    champions: (json['champions'] as List)
-        ?.map((e) => e == null ? null : Champions.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    champions: (json['champions'] as List)?.map((e) => e == null ? null : Champions.fromJson(e as Map<String, dynamic>))?.toList(),
   );
 }
 

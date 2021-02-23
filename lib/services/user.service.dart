@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/models/user_profile/user.dart';
 import 'package:SMLingg/utils/network_exception.dart';
@@ -10,9 +12,12 @@ class UserServiceGoogle {
     print("22222");
     try {
       if (response.statusCode == 200) {
-        Application.user = User.fromJson(response.data["data"]["user"] as Map<String, dynamic>);
-        Application.sharePreference.putString("token", response.data["data"]["token"] as String);
-        Application.sharePreference.putString("refreshToken", response.data["data"]["refreshToken"] as String);
+        Application.user = User.fromJson(
+            response.data["data"]["user"] as Map<String, dynamic>);
+        Application.sharePreference
+            .putString("token", response.data["data"]["token"] as String);
+        Application.sharePreference.putString(
+            "refreshToken", response.data["data"]["refreshToken"] as String);
       } else {
         print('Fetch User Google Login Error!');
       }
@@ -24,13 +29,20 @@ class UserServiceGoogle {
 
 class UserServiceFacebook {
   Future<bool> loadUserProfile(String accessToken) async {
-    Map<String, dynamic> paramsUser = {"access_token": accessToken, "app_id": 851737475629924};
-    var response = await Application.api.post("/api/login/facebook", paramsUser);
+    Map<String, dynamic> paramsUser = {
+      "access_token": accessToken,
+      "app_id": 851737475629924
+    };
+    var response =
+        await Application.api.post("/api/login/facebook", paramsUser);
     try {
       if (response.statusCode == 200) {
-        Application.user = User.fromJson(response.data["data"]["user"] as Map<String, dynamic>);
-        Application.sharePreference.putString("token", response.data["data"]["token"] as String);
-        Application.sharePreference.putString("refreshToken", response.data["data"]["refreshToken"] as String);
+        Application.user = User.fromJson(
+            response.data["data"]["user"] as Map<String, dynamic>);
+        Application.sharePreference
+            .putString("token", response.data["data"]["token"] as String);
+        Application.sharePreference.putString(
+            "refreshToken", response.data["data"]["refreshToken"] as String);
         return true;
       } else {
         print('Fetch User Facebook Login Error!');
@@ -48,7 +60,9 @@ class UserProfile {
     var response = await Application.api.get("/api/user/profile");
     try {
       if (response.statusCode == 200) {
-        Application.user = User.fromJson(response.data["data"] as Map<String, dynamic>);
+        Application.user =
+            User.fromJson(response.data["data"] as Map<String, dynamic>);
+        log("Application.user: ${Application.user.toJson().toString()}");
       }
     } on NetworkException {
       print('Network Error!');

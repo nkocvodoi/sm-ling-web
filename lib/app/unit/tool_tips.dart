@@ -8,9 +8,10 @@ import 'package:SMLingg/config/config_screen.dart';
 import 'package:SMLingg/models/unit/unit_list.dart';
 import 'package:SMLingg/resources/i18n.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, StreamController stream) {
+Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, StreamController stream, {double offset = 0}) {
   return Container(
     height: SizeConfig.blockSizeHorizontal * 30,
     width: SizeConfig.blockSizeHorizontal * 70,
@@ -38,10 +39,7 @@ Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, 
                     (units[index].doneLessons == units[index].totalLessons)
                         ? '${'Learned'.i18n} ${'${units[index].doneLessons}/${units[index].totalLessons}'}'
                         : '${'Learned'.i18n} ${'${units[index].userLesson}/${units[index].totalLessonsOfLevel}'}',
-                    style: TextStyle(
-                        fontSize: SizeConfig.blockSizeHorizontal * 3,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFFC5DBFF)),
+                    style: TextStyle(fontSize: SizeConfig.blockSizeHorizontal * 3, fontWeight: FontWeight.w700, color: Color(0xFFC5DBFF)),
                   ),
                 ],
               ),
@@ -61,12 +59,9 @@ Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, 
                 radius: SizeConfig.blockSizeHorizontal * 5,
                 onPressed: () {
                   stream.add(1);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TipScreen(
-                                url: units[index].tips,
-                              )));
+                  Get.to(TipScreen(
+                    url: units[index].tips,
+                  ));
                 },
               )
             ],
@@ -77,8 +72,7 @@ Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, 
             elevation: SizeConfig.safeBlockHorizontal * 1.3,
             backgroundColor: Color(0xFFE5F3FD),
             child: Text(
-              (units[index].userLevel == units[index].totalLevels &&
-                      units[index].userLesson == units[index].totalLessonsOfLevel)
+              (units[index].userLevel == units[index].totalLevels && units[index].userLesson == units[index].totalLessonsOfLevel)
                   ? 'PRACTICE'.i18n
                   : 'START'.i18n,
               style: TextStyle(
@@ -92,14 +86,8 @@ Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, 
             shadowColor: Color(0xFFADD6F3),
             radius: SizeConfig.blockSizeHorizontal * 5,
             onPressed: () => {
-              Provider.of<UnitModel>(context,listen: false).save(units[index].userLevel,units[index].userLesson,units[index].sId),
-                  Navigator.pushReplacement(
-                      context as BuildContext,
-                      MaterialPageRoute(
-                          builder: (context) => LessonScreen(
-                              userLevel: units[index].userLevel,
-                              userLesson: units[index].userLesson,
-                              id: units[index].sId))),
+                  Provider.of<UnitModel>(context, listen: false).save(units[index].userLevel, units[index].userLesson, units[index].sId),
+                  Get.off(LessonScreen(userLevel: units[index].userLevel, userLesson: units[index].userLesson, id: units[index].sId, offset: offset)),
                   stream.add(1),
                 }),
         Expanded(child: SizedBox()),

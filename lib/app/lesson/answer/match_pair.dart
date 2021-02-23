@@ -29,9 +29,8 @@ class _MatchPairState extends State<MatchPair> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex as int;
-    question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
+    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
+    question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     if (question.type == "word") {
       if (wordList.isEmpty) {
         question.words.forEach((element) {
@@ -44,10 +43,8 @@ class _MatchPairState extends State<MatchPair> {
       if (wordList.isEmpty) {
         question.sentences.forEach((element) {
           if (element != null) {
-            wordList.add(
-                Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].vnText, idAnswer: element));
-            wordList.add(
-                Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].enText, idAnswer: element));
+            wordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].vnText, idAnswer: element));
+            wordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].enText, idAnswer: element));
           }
         });
         wordList.shuffle();
@@ -59,14 +56,14 @@ class _MatchPairState extends State<MatchPair> {
   Widget build(BuildContext context) {
     return Consumer<MatchPairModel>(builder: (_, matchPairModel, __) {
       if (currentIndex != Provider.of<LessonModel>(context, listen: false).focusWordIndex) {
+        question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
         wordList = <Word>[];
+        print(question.words);
         if (question.type == "word") {
           if (wordList.isEmpty) {
             question.words.forEach((element) {
-              wordList
-                  .add(Word(word: words[words.indexWhere((value) => value.sId == element)].meaning, idAnswer: element));
-              wordList
-                  .add(Word(word: words[words.indexWhere((value) => value.sId == element)].content, idAnswer: element));
+              wordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].meaning, idAnswer: element));
+              wordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].content, idAnswer: element));
             });
             wordList.shuffle();
           }
@@ -74,10 +71,8 @@ class _MatchPairState extends State<MatchPair> {
           if (wordList.isEmpty) {
             question.sentences.forEach((element) {
               if (element != null) {
-                wordList.add(Word(
-                    word: sentences[sentences.indexWhere((value) => value.sId == element)].vnText, idAnswer: element));
-                wordList.add(Word(
-                    word: sentences[sentences.indexWhere((value) => value.sId == element)].enText, idAnswer: element));
+                wordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].vnText, idAnswer: element));
+                wordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].enText, idAnswer: element));
               }
             });
             wordList.shuffle();
@@ -89,9 +84,7 @@ class _MatchPairState extends State<MatchPair> {
           child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         SizedBox(height: SizeConfig.safeBlockVertical * 2),
         ...List.generate(
-            wordList.length,
-            (index) =>
-                _sentenceButton(text: wordList[index].word, idAnswer: wordList[index].idAnswer, context: context)),
+            wordList.length, (index) => _sentenceButton(text: wordList[index].word, idAnswer: wordList[index].idAnswer, context: context)),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),
       ]));
     });
@@ -136,9 +129,7 @@ class _MatchPairState extends State<MatchPair> {
                       : Colors.white,
                   width: SizeConfig.safeBlockHorizontal * 80,
                   height: SizeConfig.blockSizeVertical * 8 +
-                      SizeConfig.blockSizeVertical *
-                          8 *
-                          (wordLength ~/ (SizeConfig.safeBlockHorizontal * 80 - 40) / 8).toDouble(),
+                      SizeConfig.blockSizeVertical * 8 * (wordLength ~/ (SizeConfig.safeBlockHorizontal * 80 - 40) / 8).toDouble(),
                   borderColor: matchPairModel.textFirst == text || matchPairModel.textSecond == text
                       ? matchPairModel.isEqual == null
                           ? AppColor.mainThemesFocus
@@ -160,27 +151,27 @@ class _MatchPairState extends State<MatchPair> {
 class MatchPairModel extends ChangeNotifier {
   List<String> _idAnswerList = <String>[];
 
-  get idAnswerList => _idAnswerList;
+  List<String> get idAnswerList => _idAnswerList;
 
   bool _isEqual;
 
-  get isEqual => _isEqual;
+  bool get isEqual => _isEqual;
 
   String _idAnswerFirst;
 
-  get idAnswerFirst => _idAnswerFirst;
+  String get idAnswerFirst => _idAnswerFirst;
 
   String _textFirst;
 
-  get textFirst => _textFirst;
+  String get textFirst => _textFirst;
 
   String _textSecond;
 
-  get textSecond => _textSecond;
+  String get textSecond => _textSecond;
 
   String _idAnswerSecond;
 
-  get idAnswerSecond => _idAnswerSecond;
+  String get idAnswerSecond => _idAnswerSecond;
 
   void clearAll() {
     _idAnswerList = <String>[];
@@ -223,22 +214,23 @@ class MatchPairModel extends ChangeNotifier {
       _idAnswerList.add(_idAnswerFirst);
     }
     if (_idAnswerList.length ==
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int]
-            .words.length) {
+        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex].words.length) {
       Provider.of<LessonModel>(context, listen: false).setHasCheckedAnswer(1);
       Provider.of<LessonModel>(context, listen: false).startSound();
       Provider.of<LessonModel>(context, listen: false).increaseRightAnswer();
       Future.delayed(Duration(milliseconds: 1000), () {
         Provider.of<LessonModel>(context, listen: false).handleTypeAnswer();
-        Provider.of<LessonModel>(context, listen: false).changeNextQuestion( changeQuestion: false);
+        Provider.of<LessonModel>(context, listen: false).changeNextQuestion(changeQuestion: false);
         setIdAnswerList();
       });
     }
+    _idAnswerFirst = null;
+    _idAnswerSecond = null;
     Future.delayed(Duration(milliseconds: 500), () {
       _textFirst = null;
-      _idAnswerFirst = null;
+
       _textSecond = null;
-      _idAnswerSecond = null;
+
       _isEqual = null;
       notifyListeners();
     });

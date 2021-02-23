@@ -1,12 +1,14 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:SMLingg/app/lesson/lesson.provider.dart';
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 class SoundButton extends StatefulWidget {
@@ -33,37 +35,69 @@ class SoundButton extends StatefulWidget {
 
 class _SoundButtonState extends State<SoundButton> {
   bool onClickBool = false;
-  AudioPlayer audioPlayer = AudioPlayer();
+
+  // AudioPlayer audioPlayer = AudioPlayer();
+  final player = AudioPlayer();
   int currentIndex = 0;
-  AudioCache audioCache = AudioCache();
+  File file;
+  int count = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    audioPlayer.release();
-    if (widget.playBackRate >= 1.0) {
-      onPress();
-    }
-    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex as int;
+    // audioPlayer.release();
+    first();
+    downloadMp3();
+    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
   }
 
-  // ignore: avoid_void_async
-  void onPress() async {
-    audioCache.clearCache();
-    audioPlayer.stop();
-    audioPlayer.release();
-    audioPlayer.play(widget.soundUrl, isLocal: false);
-    audioPlayer.setPlaybackRate(playbackRate: widget.playBackRate);
+  Future<void> first() async {
+    // await audioPlayer.setReleaseMode(ReleaseMode.STOP);
+    // int result = await audioPlayer.setUrl(widget.soundUrl,isLocal: false);
+    var duration = await player.setUrl(widget.soundUrl);
+    if (widget.playBackRate >= 1) {
+      await player.play();
+    } else {
+      player.stop();
+    }
+    // AudioSource.uri(Uri.parse(widget.soundUrl));
+  }
+
+  Future<void> downloadMp3() async {
+    // http.Client client = http.Client();
+    // var req = await client.get(Uri.parse(widget.soundUrl));
+    // var bytes = req.bodyBytes;
+    // String dir = (await getApplicationDocumentsDirectory()).path;
+    // file = File("${"$dir/"}${DateTime.now().millisecondsSinceEpoch}.mp3");
+    // await file.writeAsBytes(bytes);
+    // print("path: ${file.path}");
+    // if(widget.playBackRate >= 1) {
+    //   int result = await audioPlayer.play(file.path, isLocal: true);
+    // }
+  }
+
+  Future<void> onPress() async {
+    print("link sound: ${widget.soundUrl}");
+    print("widget.playBackRate: ${widget.playBackRate}");
+    player.stop();
+    player.setSpeed(widget.playBackRate);
+    var duration = await player.setUrl(widget.soundUrl);
+    await player.play();
+    // audioPlayer.stop();
+    // await audioPlayer.setReleaseMode(ReleaseMode.STOP);
+    // int result = await audioPlayer.play(file.path, isLocal: true);
+    // audioPlayer.setPlaybackRate(playbackRate: widget.playBackRate);
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    audioCache.clearCache();
-    audioPlayer.stop();
-    audioPlayer.dispose();
+    player.stop();
+    player.dispose();
+    // audioPlayer.stop();
+    // audioPlayer.dispose();
   }
 
   @override
@@ -71,10 +105,8 @@ class _SoundButtonState extends State<SoundButton> {
     // ignore: missing_return
     return Consumer<LessonModel>(builder: (_, lessonModel, __) {
       if (currentIndex != lessonModel.focusWordIndex) {
-        lessonModel.startSound;
-        if (widget.playBackRate >= 1.0) {
-          onPress();
-        }
+        first();
+        // downloadMp3();
         currentIndex = lessonModel.focusWordIndex;
       }
       return Container(
@@ -117,8 +149,7 @@ class _SoundButtonState extends State<SoundButton> {
                 height: widget.height,
                 width: widget.width,
                 decoration: BoxDecoration(
-                    color: (widget.playBackRate >= 1.0) ? Color(0xff48CEE0) : Color(0xFFFFAA5C),
-                    borderRadius: BorderRadius.all(Radius.circular(90))),
+                    color: (widget.playBackRate >= 1.0) ? Color(0xff48CEE0) : Color(0xFFFFAA5C), borderRadius: BorderRadius.all(Radius.circular(90))),
                 child: GestureDetector(
                   onTap: () {
                     if (!widget.deactivate) {

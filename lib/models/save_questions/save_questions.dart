@@ -1,5 +1,3 @@
-
-
 class SaveLessonParam {
   dynamic bookId;
   dynamic unitId;
@@ -10,15 +8,7 @@ class SaveLessonParam {
   dynamic timeEnd;
   dynamic doneQuestions;
 
-  SaveLessonParam(
-      {this.bookId,
-      this.unitId,
-      this.levelIndex,
-      this.lessonIndex,
-      this.results,
-      this.timeStart,
-      this.timeEnd,
-      this.doneQuestions});
+  SaveLessonParam({this.bookId, this.unitId, this.levelIndex, this.lessonIndex, this.results, this.timeStart, this.timeEnd, this.doneQuestions});
 
   SaveLessonParam.fromJson(Map<String, dynamic> json) {
     bookId = json['bookId'];
@@ -26,8 +16,8 @@ class SaveLessonParam {
     levelIndex = json['levelIndex'];
     lessonIndex = json['lessonIndex'];
     if (json['results'] != null) {
-      results =  <dynamic>[];
-      json['results'].forEach((Map<String,dynamic> v) {
+      results = <dynamic>[];
+      json['results'].forEach((Map<String, dynamic> v) {
         results.add(ResultHasPrimitiveVariableAnswer.fromJson(v));
       });
     }
@@ -37,7 +27,7 @@ class SaveLessonParam {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['bookId'] = bookId;
     data['unitId'] = unitId;
     data['levelIndex'] = levelIndex;

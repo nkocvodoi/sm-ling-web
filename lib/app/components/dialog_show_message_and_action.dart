@@ -12,7 +12,7 @@ void createDialogShowMessageAndAction(
     void Function() leftAction,
     void Function() rightAction}) {
   showDialog(
-      context: context as BuildContext,
+      context: context,
       builder: (_) => Container(
           width: SizeConfig.blockSizeHorizontal * 100,
           child: Dialog(
@@ -32,7 +32,7 @@ void createDialogShowMessageAndAction(
                     Container(
                       margin: EdgeInsets.only(bottom: 20),
                       child: Text(
-                        (message != null) ?  message : "", 
+                        (message != null) ? message : "",
                         style: TextStyle(color: AppColor.buttonText, fontWeight: FontWeight.w600, fontSize: 18),
                       ),
                     ),

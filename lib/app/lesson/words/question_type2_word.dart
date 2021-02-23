@@ -19,22 +19,18 @@ class QuestionType2Word extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
+    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     Words w = Application.lessonInfo.findWord(question.focusWord);
     if (w == null) {}
     String content = w != null ? w.content : "";
     md5.convert(utf8.encode(content)).toString();
-    String soundUrl =
-        'https://s.sachmem.vn/public/audio/dictionary/${md5.convert(utf8.encode(content)).toString()}.mp3';
+    String soundUrl = 'https://s.sachmem.vn/public/audio/dictionary/${md5.convert(utf8.encode(content)).toString()}.mp3';
     // TODO: implement build
     return Column(
       children: [
         Padding(
-            padding:
-                EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
-            child: CommandVsContentVsSound(
-                command: "Chọn đáp án đúng.", content: content, soundUrl: soundUrl, type: "word")),
+            padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
+            child: CommandVsContentVsSound(command: "Chọn đáp án đúng.", content: content, soundUrl: soundUrl, type: "word")),
         SizedBox(
           height: SizeConfig.safeBlockVertical * 2,
         ),

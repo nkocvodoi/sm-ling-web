@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/utils/network_exception.dart';
 
@@ -25,6 +23,7 @@ class SaveResultService {
       "doneQuestions": doneQuestion ?? 0
     };
     var response = await Application.api.put("/api/user/saveLesson", params);
+    print(params.toString());
     try {
       print(response);
       if (response.statusCode == 200) {

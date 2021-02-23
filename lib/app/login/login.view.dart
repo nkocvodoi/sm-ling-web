@@ -2,6 +2,7 @@ import 'package:SMLingg/app/components/custom_button.component.dart';
 import 'package:SMLingg/app/login/login.provider.dart';
 import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/config/config_screen.dart';
+import 'package:SMLingg/resources/i18n.dart';
 import 'package:SMLingg/services/user.service.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:SMLingg/resources/i18n.dart';
 
 import 'login.service.dart';
 
@@ -28,28 +28,22 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: AppColor.mainBackGround,
       body: Column(
         children: [
-          Expanded(child: SizedBox()),
+          SizedBox(height: SizeConfig.safeBlockVertical * 20),
           Image.asset(
             "assets/login/Lingo.png",
-            height: SizeConfig.safeBlockVertical * 20,
+            width: SizeConfig.safeBlockHorizontal * 60,
           ),
           SizedBox(height: SizeConfig.safeBlockVertical * 2.5),
           Text(
             "Learning English Textbook better\nEnglish 1 - 12".i18n,
             textAlign: TextAlign.center,
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: SizeConfig.safeBlockVertical * 2.5,
-                color: Color(0xFF8EA9D5)),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: SizeConfig.safeBlockVertical * 2.5, color: Color(0xFF8EA9D5)),
           ),
-          SizedBox(height: SizeConfig.blockSizeVertical * 16),
+          SizedBox(height: SizeConfig.blockSizeVertical * 15),
           Text(
             "LOGIN".i18n,
             style: TextStyle(
-                fontFamily: "Quicksand",
-                fontWeight: FontWeight.w500,
-                fontSize: SizeConfig.safeBlockVertical * 2.5,
-                color: Color(0xFF8EA9D5)),
+                fontFamily: "Quicksand", fontWeight: FontWeight.w500, fontSize: SizeConfig.safeBlockVertical * 2.5, color: Color(0xFF8EA9D5)),
           ),
           SizedBox(height: SizeConfig.safeBlockVertical * 3),
           Row(
@@ -78,16 +72,11 @@ class _LoginPageState extends State<LoginPage> {
               (method == 1)
                   ? signInWithGoogle(context).then((result) {
                       if (result != null) {
-                        if (Application.sharePreference
-                                .getString("access_token") ==
-                            null) {
+                        if (Application.sharePreference.getString("access_token") == null) {
                           loginModel.logInAbsorb(false);
                         }
                         Navigator.of(context).pushNamed('/loading');
-                        UserServiceGoogle()
-                            .loadUserProfile(Application.sharePreference
-                                .getString("access_token"))
-                            .then((value) {
+                        UserServiceGoogle().loadUserProfile(Application.sharePreference.getString("access_token")).then((value) {
                           if (Application.user.avatar != null) {
                             Get.offAllNamed("/class");
                             loginModel.logInAbsorb(false);
@@ -100,15 +89,10 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     })
                   : loginWithFacebook(context).then((result) {
-                      if (Application.sharePreference
-                              .getString("access_token") ==
-                          null) {
+                      if (Application.sharePreference.getString("access_token") == null) {
                         loginModel.logInAbsorb(false);
                       }
-                      UserServiceFacebook()
-                          .loadUserProfile(Application.sharePreference
-                              .getString("access_token"))
-                          .then((value) {
+                      UserServiceFacebook().loadUserProfile(Application.sharePreference.getString("access_token")).then((value) {
                         Get.offAllNamed("/loading");
                         if (Application.user.avatar != null) {
                           Get.offAllNamed("/class");
@@ -123,20 +107,20 @@ class _LoginPageState extends State<LoginPage> {
             },
             elevation: 5,
             radius: 30,
-            width: SizeConfig.safeBlockVertical * 16,
-            height: SizeConfig.safeBlockVertical * 7,
+            width: SizeConfig.screenWidth * 0.37,
+            height: SizeConfig.screenHeight * 0.07,
             shadowColor: Color(0xFFADD6F3),
             child: Row(children: [
               Expanded(child: SizedBox()),
               (method == 1)
-                  ? Image.asset("assets/login/Google.png", height: SizeConfig.safeBlockVertical * 3)
-                  : Image.asset("assets/login/facebook.png", height: SizeConfig.safeBlockVertical * 3),
-              SizedBox(width: SizeConfig.safeBlockVertical * 2),
+                  ? SvgPicture.asset("assets/login/Google.svg", height: SizeConfig.safeBlockHorizontal * 5)
+                  : SvgPicture.asset("assets/login/facebook.svg", height: SizeConfig.safeBlockHorizontal * 5),
+              SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
               Text((method == 1) ? "Google" : "Facebook",
                   style: TextStyle(
                     color: Color(0xFF6CA9D3),
                     fontWeight: FontWeight.w500,
-                    fontSize: SizeConfig.safeBlockVertical * 2,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
                   )),
               Expanded(child: SizedBox()),
             ])));

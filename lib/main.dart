@@ -15,11 +15,12 @@ import 'package:SMLingg/models/book/book_list.dart';
 import 'package:SMLingg/models/lesson/lesson_info.dart';
 import 'package:SMLingg/models/unit/unit_list.dart';
 import 'package:SMLingg/utils/api.dart';
+import 'package:SMLingg/utils/check_locale.dart';
+import 'package:SMLingg/utils/push_notification.dart';
 import 'package:SMLingg/utils/shared_preferences.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:i18n_extension/i18n_widget.dart';
 import 'package:provider/provider.dart';
@@ -35,12 +36,12 @@ import 'models/ranking/ranking.dart';
 import 'models/user_profile/user.dart';
 
 Future<void> main() async {
+  // print(NumberToWord().convert('en-in',int.tryParse("100"))); //hundred
+  // print(NumberToWord().convert('en-in',10)); //ten
   WidgetsFlutterBinding.ensureInitialized();
   GestureBinding.instance.resamplingEnabled = true;
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   Application.sharePreference = await SpUtil.getInstance();
   runApp(
     MultiProvider(
@@ -63,7 +64,7 @@ Future<void> main() async {
 
 class MyApp extends StatefulWidget {
   MyApp() {
-    // Application.api = API();
+    Application.api = API();
     Application.user = User();
     Application.bookList = BookList();
     Application.unitList = UnitList();
@@ -77,33 +78,23 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    Application.sharePreference.putInt("setGrade", 0);
+    PushNotificationsManager().pushNotification();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return I18n(
-        initialLocale:
-            Application.sharePreference.getInt("languageIndex") == 0
-                ? Locale('vi', "VN")
-                : Locale('en', "US"),
+        initialLocale: checkLocale(),
         child: GetMaterialApp(
           defaultTransition: Transition.rightToLeftWithFade,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
+
           ],
-          // localeResolutionCallback: (locale, supportedLocales) {
-          //   for (var supportedLocale in supportedLocales) {
-          //     if (supportedLocale.languageCode == locale.languageCode &&
-          //         supportedLocale.countryCode == locale.countryCode) {
-          //       return supportedLocale;
-          //     }
-          //   }
-          //   return supportedLocales.first;
-          // },
-          supportedLocales: [
-            const Locale('en', "US"),
-            const Locale('vi', "VN")
-          ],
+          supportedLocales: [const Locale('en', "US"), const Locale('vi', "VN")],
           title: 'SMLing',
           theme: ThemeData(
             visualDensity: VisualDensity.adaptivePlatformDensity,

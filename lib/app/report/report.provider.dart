@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ReportModel extends ChangeNotifier {
-  List<String> errorText = [
-    "Đáp án sai",
-    "Từ sai chính tả",
-    "Không phát âm thanh",
-    "Đáp án không hiển thị hình ảnh",
-    "Xảy ra lỗi khác"
-  ];
+  List<String> errorText = ["Đáp án sai", "Từ sai chính tả", "Không phát âm thanh", "Đáp án không hiển thị hình ảnh", "Xảy ra lỗi khác"];
 
   List<bool> _isChecked = List.generate(5, (index) => false);
 
