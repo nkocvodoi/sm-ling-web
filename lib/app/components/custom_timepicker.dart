@@ -8,21 +8,21 @@ Future<TimeOfDay> customTimePicker(BuildContext context) {
       context: context,
       initialTime: TimeOfDay(hour: 8, minute: 0),
       builder: (context, _) => AlertDialog(
-        title: Text("SELECT TIME"),
-        content: IntrinsicHeight(
-          child: Column(
-            children: [
-              SizedBox(
-                height: SizeConfig.safeBlockVertical * 25,
-                child: CupertinoDatePicker(
-                  mode: CupertinoDatePickerMode.time,
-                  use24hFormat: true,
-                  initialDateTime: DateTime.now(),
-                  onDateTimeChanged: (dateTime) => _time = dateTime,
-                ),
+            title: Text("SELECT TIME"),
+            content: IntrinsicHeight(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: SizeConfig.safeBlockVertical * 25,
+                    child: CupertinoDatePicker(
+                      mode: CupertinoDatePickerMode.time,
+                      use24hFormat: true,
+                      initialDateTime: DateTime.now(),
+                      onDateTimeChanged: (dateTime) => _time = dateTime,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      )).then((value) => TimeOfDay.fromDateTime(_time));
+            ),
+          )).then((value) => TimeOfDay.fromDateTime(_time));
 }

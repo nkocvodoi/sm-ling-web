@@ -4,12 +4,46 @@ extension Localization on String {
   String get i18n => localize(this, _t);
   static var _t = Translations("en_us") +
       {
+        "en_us":
+            "Grades from 6 to 12 are currently testing, do you still want to play?",
+        "vi_vn":
+            "Hiện lớp 6 đến 12 đang trong giai đoạn thử nghiệm, bạn có muốn chơi không?"
+      } +
+      {
         "en_us": "Are you sure to logout of this account?",
         "vi_vn": "Bạn có chăc chắn muốn đăng xuất không?"
       } +
+      {
+        "en_us": "* In case you need help",
+        "vi_vn": "* Nếu bạn cần sự trợ giúp"
+      } +
+      {
+        "en_us": "Listen and arrange words into sentences correctly.",
+        "vi_vn": "Nghe và sắp xếp từ thành câu cho đúng."
+      } +
+      {"en_us": "Matching pair", "vi_vn": "Nối bản dịch đúng."} +
+      {"en_us": "Listen and write.", "vi_vn": "Nghe và viết lại."} +
+      {
+        "en_us": "Listen and complete the blank.",
+        "vi_vn": "Nghe và điền từ còn thiếu vào chỗ trống."
+      } +
+      {
+        "en_us": "Arrange words into sentences correctly.",
+        "vi_vn": "Sắp xếp các từ thành câu hoàn chỉnh."
+      } +
+      {"en_us": "Choose the correct answer.", "vi_vn": "Chọn bản dịch đúng."} +
+      {"en_us": "Translate this sentence.", "vi_vn": "Dịch câu sau."} +
+      {
+        "en_us": "Listen and complete the blank.",
+        "vi_vn": "Nghe và chọn từ còn thiếu vào chỗ trống."
+      } +
+      {"en_us": "Speak out loud.", "vi_vn": "Nói câu sau."} +
+      {"en_us": "Translate this sentence.", "vi_vn": "Hoàn thành bản dịch."} +
       {"en_us": "Helping", "vi_vn": "Trợ giúp"} +
       {"en_us": "Rating", "vi_vn": "Đánh giá"} +
       {"en_us": "Time reminder", "vi_vn": "Giờ nhắc nhở"} +
+      {"en_us": "Understand!", "vi_vn": "Đã hiểu!"} +
+      {"en_us": "Please plugin headphone for better recorder!", "vi_vn": "Sử dụng tai nghe để ghi âm tốt hơn!"} +
       {"en_us": "Logout", "vi_vn": "Đăng xuất"} +
       {"en_us": "Talk exercises", "vi_vn": "Bài tập nói"} +
       {"en_us": "Listening exercises", "vi_vn": "Bài tập nghe"} +
@@ -42,6 +76,10 @@ extension Localization on String {
       {"en_us": "LEVELUP", "vi_vn": "THĂNG HẠNG"} +
       {"en_us": "CONTINUE", "vi_vn": "TIẾP TỤC"} +
       {"en_us": "START", "vi_vn": "BẮT ĐẦU"} +
+      {
+        "en_us": "Better try next time !",
+        "vi_vn": "Hãy cố gắng hơn ở lần sau !"
+      } +
       {"en_us": "GRADE", "vi_vn": "LỚP"} +
       {"en_us": "TIPS", "vi_vn": "MẸO"} +
       {"en_us": "Lessons", "vi_vn": "Bài đã học"} +

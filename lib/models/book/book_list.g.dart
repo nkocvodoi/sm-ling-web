@@ -8,10 +8,7 @@ part of 'book_list.dart';
 
 BookList _$BookListFromJson(Map<String, dynamic> json) {
   return BookList(
-    books: (json['books'] as List)
-        ?.map(
-            (e) => e == null ? null : Book.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    books: (json['books'] as List)?.map((e) => e == null ? null : Book.fromJson(e as Map<String, dynamic>))?.toList(),
   );
 }
 

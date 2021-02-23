@@ -17,19 +17,15 @@ class ShowMoreExplainItem {
       context,
       child: Container(
         child: ListTile(
-          title: Text(title,
-              style: TextStyle(
-                  color: AppColor.mainBackGround, fontWeight: FontWeight.w700, fontSize: TextSize.fontSize20)),
-          subtitle: Text(description,
-              style: TextStyle(color: Color(0xFFC5DBFF), fontWeight: FontWeight.w700, fontSize: TextSize.fontSize18)),
+          title: Text(title, style: TextStyle(color: AppColor.mainBackGround, fontWeight: FontWeight.w700, fontSize: TextSize.fontSize20)),
+          subtitle: Text(description, style: TextStyle(color: Color(0xFFC5DBFF), fontWeight: FontWeight.w700, fontSize: TextSize.fontSize18)),
           leading: SvgPicture.asset(
             imageSrc,
             height: SizeConfig.blockSizeVertical * 5,
           ),
         ),
       ),
-      height:
-          (SizeConfig.screenWidth * 0.9 < 440) ? SizeConfig.blockSizeVertical * 12.5 : SizeConfig.blockSizeVertical * 9,
+      height: (SizeConfig.screenWidth * 0.9 < 440) ? SizeConfig.blockSizeVertical * 12.5 : SizeConfig.blockSizeVertical * 9,
       width: SizeConfig.screenWidth * 0.9,
       backgroundColor: Color(0xFF4285F4),
       borderRadius: BorderRadius.circular(20),
@@ -42,11 +38,7 @@ class ShowMoreExplainItem {
       child: Container(
         alignment: Alignment.center,
         child: Text(text,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: TextSize.fontSize18,
-                fontFamily: TextSize.fontFamily,
-                color: Color(0xFFFFFFFF))),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: TextSize.fontSize18, fontFamily: TextSize.fontFamily, color: Color(0xFFFFFFFF))),
       ),
       height: SizeConfig.safeBlockHorizontal * 10,
       width: (18 * text.length + 50).toDouble(),

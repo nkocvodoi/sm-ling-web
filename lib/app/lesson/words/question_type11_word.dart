@@ -15,22 +15,18 @@ import '../lesson.provider.dart';
 class QuestionType11Word extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
+    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     Words w = Application.lessonInfo.findWord(question.focusWord);
     md5.convert(utf8.encode(w.content)).toString();
-    String soundUrl =
-        'https://s.sachmem.vn/public/audio/dictionary/${md5.convert(utf8.encode(w.content)).toString()}.mp3';
+    String soundUrl = 'https://s.sachmem.vn/public/audio/dictionary/${md5.convert(utf8.encode(w.content)).toString()}.mp3';
     // Phần câu hỏi vẫn chưa được thiết kế
     // TODO: implement build
     return Column(
       children: [
         Padding(
-            padding:
-                EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
+            padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsSound(command: "Nghe và viết lại.", soundUrl: soundUrl)),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),
-
         FillTextField(type: "en"),
         SizedBox(
           height: SizeConfig.safeBlockVertical * 5,

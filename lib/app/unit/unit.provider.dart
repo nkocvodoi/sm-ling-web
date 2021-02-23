@@ -11,6 +11,14 @@ class UnitModel extends ChangeNotifier {
   int get saveUserLesson => _saveUserLesson;
 
   String get saveId => _saveId;
+  bool _checkContinue = false;
+
+  bool get checkContinue => _checkContinue;
+
+  void setCheckContinue(bool value) {
+    _checkContinue = value;
+    notifyListeners();
+  }
 
   void save(int saveUserLevel, int saveUserLesson, String saveId) {
     _saveUserLevel = saveUserLevel;
@@ -31,7 +39,9 @@ class UnitModel extends ChangeNotifier {
       ..remove("saveId")
       ..remove("count")
       ..remove("saveGrade")
-      ..remove("saveBookId");
+      ..remove("saveBookId")
+      ..remove("chooseBook")
+      ..remove("loadUnitList");
     _saveUserLevel = null;
     _saveUserLesson = null;
     _saveId = "";
@@ -50,10 +60,8 @@ class UnitModel extends ChangeNotifier {
   List<int> _userLesson = [];
 
   void initUser(unitLength) {
-    _userLevel = List.generate(
-        unitLength, (index) => Application.unitList.units[index].userLevel);
-    _userLesson = List.generate(
-        unitLength, (index) => Application.unitList.units[index].userLesson);
+    _userLevel = List.generate(unitLength, (index) => Application.unitList.units[index].userLevel);
+    _userLesson = List.generate(unitLength, (index) => Application.unitList.units[index].userLesson);
   }
 
   userLevel(int index) => _userLevel[index];

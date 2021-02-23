@@ -37,7 +37,7 @@ class LessonInfo {
   }
 
   Sentences findSentence(String idAnswer) {
-    if(idAnswer != null) {
+    if (idAnswer != null) {
       return sentences[sentences.indexWhere((element) => element.sId == idAnswer)];
     }
   }

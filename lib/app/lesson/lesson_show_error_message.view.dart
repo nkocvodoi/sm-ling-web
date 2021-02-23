@@ -56,8 +56,7 @@ class _LessonShowLoadQuestionErrorState extends State<LessonShowLoadQuestionErro
                                         color: Colors.white,
                                       ),
                                       AnimatedPositioned(
-                                        left: (-SizeConfig.blockSizeHorizontal * 80 +
-                                            0 * SizeConfig.blockSizeHorizontal * 80 / 100),
+                                        left: (-SizeConfig.blockSizeHorizontal * 80 + 0 * SizeConfig.blockSizeHorizontal * 80 / 100),
                                         duration: Duration(milliseconds: 500),
                                         child: Container(
                                           height: SizeConfig.safeBlockHorizontal * 6,
@@ -92,10 +91,7 @@ class _LessonShowLoadQuestionErrorState extends State<LessonShowLoadQuestionErro
                     child: Center(
                       child: Text(widget.message,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: TextSize.fontSize18,
-                              fontFamily: TextSize.fontFamily,
-                              color: Color(0xff43669F))),
+                              fontWeight: FontWeight.bold, fontSize: TextSize.fontSize18, fontFamily: TextSize.fontFamily, color: Color(0xff43669F))),
                     ),
                   )
                 ],

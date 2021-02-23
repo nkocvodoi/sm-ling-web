@@ -18,8 +18,7 @@ class QuestionType4Word extends StatelessWidget {
     return Column(
       children: [
         Padding(
-            padding:
-                EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
+            padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsContent(command: "Chọn hình ảnh và âm thanh tương ứng.", content: w.content)),
         SizedBox(height: SizeConfig.safeBlockVertical * 2),
         ChooseImage(

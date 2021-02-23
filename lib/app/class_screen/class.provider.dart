@@ -6,13 +6,13 @@ class ClassModel extends ChangeNotifier {
 
   get show => _show;
 
-    int _hive = Application.user.level;
+  int _hive = Application.user.level;
 
-    get hive => _hive;
+  get hive => _hive;
 
-    int _diamond = Application.user.score;
+  int _diamond = Application.user.score;
 
-    get diamond => _diamond;
+  get diamond => _diamond;
 
   String _face = "face";
 
@@ -29,10 +29,11 @@ class ClassModel extends ChangeNotifier {
   void refreshData() {
     _hive = Application.user.level;
     _diamond = Application.user.score;
+    print("hive: $_hive diamond $_diamond");
     notifyListeners();
   }
 
-  void setShowValue(){
+  void setShowValue() {
     _show = !_show;
     notifyListeners();
   }

@@ -121,8 +121,7 @@ class _AchievementState extends State<Achievement> {
                 Expanded(child: SizedBox()),
                 Text(
                   Application.user.level.toString(),
-                  style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical * 3, fontWeight: FontWeight.bold, color: Colors.red),
+                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical * 3, fontWeight: FontWeight.bold, color: Colors.red),
                 ),
                 SizedBox(
                   width: SizeConfig.blockSizeHorizontal * 3,
@@ -161,8 +160,7 @@ class _AchievementState extends State<Achievement> {
                 Expanded(child: SizedBox()),
                 Text(
                   Application.user.score.toString(),
-                  style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical * 3, fontWeight: FontWeight.bold, color: Colors.red),
+                  style: TextStyle(fontSize: SizeConfig.blockSizeVertical * 3, fontWeight: FontWeight.bold, color: Colors.red),
                 ),
                 SizedBox(
                   width: SizeConfig.blockSizeHorizontal * 3,

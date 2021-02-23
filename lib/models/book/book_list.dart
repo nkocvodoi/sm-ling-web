@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'book_list.g.dart';
@@ -28,7 +27,18 @@ class Book {
   int totalQuestions;
   int doneQuestions;
 
-  Book({this.id, this.name, this.grade, this.cover,this.description, this.totalWords, this.totalUnits, this.totalLessons, this.doneLessons,this.totalQuestions,this.doneQuestions});
+  Book(
+      {this.id,
+      this.name,
+      this.grade,
+      this.cover,
+      this.description,
+      this.totalWords,
+      this.totalUnits,
+      this.totalLessons,
+      this.doneLessons,
+      this.totalQuestions,
+      this.doneQuestions});
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
 

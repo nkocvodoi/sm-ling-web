@@ -12,22 +12,19 @@ import '../lesson.provider.dart';
 class QuestionType8Word extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
+    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     Words w = Application.lessonInfo.findWord(question.focusWord);
     // Phần câu hỏi vẫn chưa được thiết kế
     // TODO: implement build
     return Column(
       children: [
         Padding(
-            padding:
-                EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
+            padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsContent(
               command: "Điền từ tiếng Việt tương ứng.",
               content: w.content,
             )),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),
-
         FillTextField(type: "vi"),
         SizedBox(
           height: SizeConfig.safeBlockVertical * 5,

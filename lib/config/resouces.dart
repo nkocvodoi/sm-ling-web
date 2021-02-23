@@ -29,16 +29,15 @@ class SettingInfo {
     'assets/setting/help.svg',
   ];
 
-  static List<CustomTextField> customTextField= [
-    CustomTextField(title: "Name",display: Application.user.displayName),
+  static List<CustomTextField> customTextField = [
+    CustomTextField(title: "Name", display: Application.user.displayName),
     CustomTextField(title: "Email", display: Application.user.email),
   ];
 }
+
 class CustomTextField {
   String title;
   String display;
 
   CustomTextField({this.title, this.display});
 }
-
-

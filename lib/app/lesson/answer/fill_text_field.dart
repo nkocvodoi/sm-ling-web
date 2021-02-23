@@ -61,10 +61,7 @@ class _FillTextFieldState extends State<FillTextField> {
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                   hintText: widget.hintText ?? "Điền từ ${widget.type == "vi" ? "Tiếng Việt" : "Tiếng Anh"} tương ứng",
-                  hintStyle: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: AppColor.mainThemesFocus,
-                      fontSize: SizeConfig.safeBlockVertical * 2.3),
+                  hintStyle: TextStyle(fontWeight: FontWeight.w600, color: AppColor.mainThemesFocus, fontSize: SizeConfig.safeBlockVertical * 2.3),
                   border: InputBorder.none))),
     );
   }

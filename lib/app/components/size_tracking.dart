@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 class SizeTrackingWidget extends StatefulWidget {
   Widget child;
   ValueNotifier<Size> sizeValueNotifier;
+
   SizeTrackingWidget({Key key, @required this.sizeValueNotifier, @required this.child}) : super(key: key);
+
   @override
   _SizeTrackingWidgetState createState() => _SizeTrackingWidgetState();
 }
@@ -12,7 +14,7 @@ class _SizeTrackingWidgetState extends State<SizeTrackingWidget> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getSize();
     });
   }

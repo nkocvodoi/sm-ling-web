@@ -40,16 +40,17 @@ class _JumpingDots extends State<LoadingDots> with TickerProviderStateMixin {
           return AnimatedBuilder(
             animation: animationController[index],
             builder: (context, child) {
-              return Expanded(child: Opacity(
-                  opacity: _opacityTween.evaluate(animationController[index]),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 2),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Color(0xFF67ABDB)),
-                      height: 10, width: 10,
-                    ),
-                  )));
+              return Expanded(
+                  child: Opacity(
+                      opacity: _opacityTween.evaluate(animationController[index]),
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 2),
+                        child: Container(
+                          decoration: BoxDecoration(shape: BoxShape.circle, color: Color(0xFF67ABDB)),
+                          height: 10,
+                          width: 10,
+                        ),
+                      )));
             },
           );
         }).toList(),
@@ -61,8 +62,7 @@ class _JumpingDots extends State<LoadingDots> with TickerProviderStateMixin {
     animationController = List.generate(
       widget.numberDots,
       (index) {
-        return AnimationController(
-            vsync: this, duration: Duration(milliseconds: animationDuration));
+        return AnimationController(vsync: this, duration: Duration(milliseconds: animationDuration));
       },
     ).toList();
     for (int i = 0; i < widget.numberDots; i++) {

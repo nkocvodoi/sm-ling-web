@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:SMLingg/app/components/custom_button.component.dart';
 import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/config/config_screen.dart';
@@ -21,6 +23,7 @@ class SortWords extends StatefulWidget {
     return _SortWordsState();
   }
 }
+
 enum TtsState { playing, stopped }
 
 class _SortWordsState extends State<SortWords> {
@@ -29,9 +32,9 @@ class _SortWordsState extends State<SortWords> {
   int currentIndex = 0;
   FlutterTts flutterTts;
   String language = "en-US";
-  double volume = 0.7;
+  double volume = 1;
   double pitch = 1.0;
-  double rate = 0.8;
+  double rate = Platform.isIOS ? 0.4 : 0.8;
   TtsState ttsState = TtsState.stopped;
 
   get isPlaying => ttsState == TtsState.playing;
@@ -41,9 +44,8 @@ class _SortWordsState extends State<SortWords> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex as int;
-    var question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
+    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
+    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     var sentence = Application.lessonInfo.findSentence(question.focusSentence);
 
     int i = 0;
@@ -69,9 +71,17 @@ class _SortWordsState extends State<SortWords> {
     initTts();
   }
 
-  initTts() {
+  initTts() async {
     flutterTts = FlutterTts();
-
+    if (Platform.isIOS) {
+      await flutterTts.setSharedInstance(true);
+      await flutterTts.setIosAudioCategory(IosTextToSpeechAudioCategory.playAndRecord, [
+        IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+        IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+        IosTextToSpeechAudioCategoryOptions.mixWithOthers
+      ]);
+      await flutterTts.awaitSpeakCompletion(true);
+    }
     flutterTts.setStartHandler(() {
       setState(() {
         ttsState = TtsState.playing;
@@ -99,9 +109,8 @@ class _SortWordsState extends State<SortWords> {
 
   @override
   Widget build(BuildContext context) {
-    var question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
-    if (currentIndex != Provider.of<LessonModel>(context, listen: false).focusWordIndex as int) {
+    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
+    if (currentIndex != Provider.of<LessonModel>(context, listen: false).focusWordIndex) {
       var sentence = Application.lessonInfo.findSentence(question.focusSentence);
       _wordList = <Word>[];
       int i = 0;
@@ -125,47 +134,39 @@ class _SortWordsState extends State<SortWords> {
       }
       _wordList.shuffle();
       initTts();
-      currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex as int;
+      currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
     }
     return Consumer<SortWordsModel>(builder: (_, sortWordsModel, __) {
       return Container(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-            Container(
-                margin:
-                    EdgeInsets.only(top: SizeConfig.safeBlockVertical * 2, bottom: SizeConfig.safeBlockVertical * 2),
-                width: SizeConfig.safeBlockHorizontal * 96,
-                alignment: Alignment.center,
-                child: Wrap(
-                    spacing: SizeConfig.safeBlockHorizontal * 1,
-                    runSpacing: SizeConfig.safeBlockHorizontal * 2,
-                    alignment: WrapAlignment.start,
-                    children: [
-                      ...List.generate(
-                          sortWordsModel.wordSelected.length,
-                          (index) => _wordButton(
-                              text: sortWordsModel.wordSelected[index].text,
-                              type: "answer",
-                              index: sortWordsModel.wordSelected[index].index))
-                    ])),
-            Image.asset('assets/divider.jpg', width: SizeConfig.safeBlockHorizontal * 90),
-            SizedBox(height: SizeConfig.safeBlockVertical * 3),
-            Container(
-                width: SizeConfig.safeBlockHorizontal * 90,
-                alignment: Alignment.center,
-                child: Wrap(
-                    spacing: SizeConfig.safeBlockHorizontal * 3,
-                    runSpacing: SizeConfig.safeBlockHorizontal * 5,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      ...List.generate(
-                          _wordList.length,
-                          (index) =>
-                              _wordButton(text: _wordList[index].text, type: "option", index: _wordList[index].index))
-                    ])),
-          ]));
+          child: Column(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        Container(
+            margin: EdgeInsets.only(top: SizeConfig.safeBlockVertical * 2, bottom: SizeConfig.safeBlockVertical * 2),
+            width: SizeConfig.safeBlockHorizontal * 96,
+            alignment: Alignment.center,
+            child: Wrap(
+                spacing: SizeConfig.safeBlockHorizontal * 1,
+                runSpacing: SizeConfig.safeBlockHorizontal * 2,
+                alignment: WrapAlignment.start,
+                children: [
+                  ...List.generate(
+                      sortWordsModel.wordSelected.length,
+                      (index) =>
+                          _wordButton(text: sortWordsModel.wordSelected[index].text, type: "answer", index: sortWordsModel.wordSelected[index].index))
+                ])),
+        SvgPicture.asset('assets/divider.svg', width: SizeConfig.safeBlockHorizontal * 90),
+        SizedBox(height: SizeConfig.safeBlockVertical * 3),
+        Container(
+            width: SizeConfig.safeBlockHorizontal * 90,
+            alignment: Alignment.center,
+            child: Wrap(
+                spacing: SizeConfig.safeBlockHorizontal * 3,
+                runSpacing: SizeConfig.safeBlockHorizontal * 5,
+                alignment: WrapAlignment.center,
+                children: [
+                  ...List.generate(
+                      _wordList.length, (index) => _wordButton(text: _wordList[index].text, type: "option", index: _wordList[index].index))
+                ])),
+      ]));
     });
   }
 
@@ -173,16 +174,16 @@ class _SortWordsState extends State<SortWords> {
     return Consumer<SortWordsModel>(builder: (_, sortWordsModel, __) {
       return AnimatedOpacity(
           duration: Duration(milliseconds: 500),
-          opacity:
-              (sortWordsModel.wordSelected.indexWhere((it) => it.index == index) != -1 && type == "option") ? 0 : 1,
+          opacity: (sortWordsModel.wordSelected.indexWhere((it) => it.index == index) != -1 && type == "option") ? 0 : 1,
           child: CustomButton(
               elevation: 4,
-              deactivate:
-                  (sortWordsModel.wordSelected.indexWhere((it) => it.index == index) != -1 && type == "option") ||
-                      Provider.of<LessonModel>(context, listen: false).hasCheckedAnswer != 0,
+              deactivate: (sortWordsModel.wordSelected.indexWhere((it) => it.index == index) != -1 && type == "option") ||
+                  Provider.of<LessonModel>(context, listen: false).hasCheckedAnswer != 0,
               radius: 90,
               onPressed: () {
-                _speak(text);
+                if (widget.type == "en" && !(sortWordsModel.wordSelected.indexWhere((it) => it.index == index) != -1)) {
+                  _speak(text);
+                }
                 Provider.of<SortWordsModel>(context, listen: false).selectWord(text: text, index: index);
               },
               padding: EdgeInsets.only(left: 2, right: 2),
@@ -192,8 +193,8 @@ class _SortWordsState extends State<SortWords> {
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: TextSize.fontSize16, color: AppColor.buttonText),
                   ),
-                  fit: BoxFit.fitWidth),
-              width: (text.length < 6) ?  SizeConfig.blockSizeVertical * 8 : ( SizeConfig.blockSizeVertical * 1.5 * text.length).toDouble(),
+                  fit: BoxFit.fill),
+              width: (text.length < 6) ? SizeConfig.blockSizeVertical * 10 : (SizeConfig.blockSizeVertical * 1.75 * text.length).toDouble(),
               height: SizeConfig.blockSizeVertical * 6,
               shadowColor: AppColor.mainThemesFocus));
     });

@@ -14,11 +14,7 @@ class Command extends StatelessWidget {
       alignment: AlignmentDirectional(-1.0, 1.0),
       margin: EdgeInsets.only(top: SizeConfig.safeBlockVertical * 2, bottom: SizeConfig.safeBlockVertical * 2),
       child: Text(command,
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: TextSize.fontSize18,
-              fontFamily: TextSize.fontFamily,
-              color: Color(0xff43669F))),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: TextSize.fontSize18, fontFamily: TextSize.fontFamily, color: Color(0xff43669F))),
     );
   }
 }

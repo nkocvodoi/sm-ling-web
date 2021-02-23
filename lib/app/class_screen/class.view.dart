@@ -1,10 +1,11 @@
+import 'package:SMLingg/app/choose_book/book.provider.dart';
 import 'package:SMLingg/app/class_screen/class.provider.dart';
+import 'package:SMLingg/app/unit/unit.provider.dart';
 import 'package:SMLingg/app/user_profile/user.view.dart';
 import 'package:SMLingg/config/config_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import 'class.dart';
@@ -14,14 +15,14 @@ class ClassScreen extends StatefulWidget {
   _ClassScreenState createState() => _ClassScreenState();
 }
 
-class _ClassScreenState extends State<ClassScreen>
-    with SingleTickerProviderStateMixin {
+class _ClassScreenState extends State<ClassScreen> with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    Provider.of<BookModel>(context, listen: false).setCount(0);
     _tabController = TabController(length: 2, vsync: this);
   }
 
@@ -35,7 +36,8 @@ class _ClassScreenState extends State<ClassScreen>
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
-    SizeConfig().init(context);
+    // SizeConfig().init(context);
+    Provider.of<UnitModel>(context).setCheckContinue(false);
     return Consumer<ClassModel>(
       builder: (context, icon, child) {
         return WillPopScope(
@@ -47,52 +49,44 @@ class _ClassScreenState extends State<ClassScreen>
                 _tabController.addListener(() async {
                   icon.setIndex(_tabController.index);
                 });
-                return SafeArea(
-                  child: Scaffold(
-                    body: Column(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: TabBarView(
-                            controller: _tabController,
-                            physics: BouncingScrollPhysics(),
-                            children: [
-                              classScreen(context, icon),
-                              userProfile(context, icon)
-                            ],
-                          ),
+                return Scaffold(
+                  body: Column(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: TabBarView(
+                          controller: _tabController,
+                          physics: BouncingScrollPhysics(),
+                          children: [classScreen(context, icon), userProfile(context, icon)],
                         ),
-                        Container(
-                          width: SizeConfig.screenWidth,
-                          height: SizeConfig.safeBlockVertical * 8,
-                          child: TabBar(
-                            controller: _tabController,
-                            unselectedLabelColor: Color(0xFFFFFFF),
-                            onTap: (index) => icon.setIndex(index),
-                            labelColor: Colors.white,
-                            indicatorWeight: 2,
-                            indicatorColor: Color(0xFFADD6F3),
-                            tabs: <Widget>[
-                              Container(
-                                margin: EdgeInsets.all(
-                                    SizeConfig.safeBlockHorizontal * 3),
-                                width: SizeConfig.safeBlockHorizontal * 50,
-                                child: SvgPicture.asset(
-                                    "assets/class/${icon.getDot()}.svg"),
+                      ),
+                      Container(
+                        width: SizeConfig.screenWidth,
+                        height: SizeConfig.safeBlockVertical * 8,
+                        child: TabBar(
+                          controller: _tabController,
+                          unselectedLabelColor: Color(0xFFFFFFF),
+                          onTap: (index) => icon.setIndex(index),
+                          labelColor: Colors.white,
+                          indicatorWeight: 2,
+                          indicatorColor: Color(0xFFADD6F3),
+                          tabs: <Widget>[
+                            Container(
+                              margin: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 3),
+                              width: SizeConfig.safeBlockHorizontal * 50,
+                              child: Image.asset("assets/class/${icon.getDot()}.png"),
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 3),
+                              width: SizeConfig.safeBlockHorizontal * 50,
+                              child: Image.asset(
+                                "assets/class/${icon.getFace()}.png",
                               ),
-                              Container(
-                                margin: EdgeInsets.all(
-                                    SizeConfig.safeBlockHorizontal * 3),
-                                width: SizeConfig.safeBlockHorizontal * 50,
-                                child: SvgPicture.asset(
-                                  "assets/class/${icon.getFace()}.svg",
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 );
               }),

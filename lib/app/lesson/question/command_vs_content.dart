@@ -20,11 +20,8 @@ class CommandVsContent extends StatelessWidget {
           alignment: AlignmentDirectional(-1.0, 1.0),
           margin: EdgeInsets.only(top: SizeConfig.safeBlockVertical * 2, bottom: SizeConfig.safeBlockVertical * 2),
           child: Text(command,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: TextSize.fontSize18,
-                  fontFamily: TextSize.fontFamily,
-                  color: Color(0xff43669F))),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, fontSize: TextSize.fontSize18, fontFamily: TextSize.fontFamily, color: Color(0xff43669F))),
         ),
         Container(
             width: SizeConfig.screenWidth,
@@ -34,8 +31,7 @@ class CommandVsContent extends StatelessWidget {
                   ? Container(
                       margin: EdgeInsets.only(bottom: SizeConfig.safeBlockVertical * 2),
                       alignment: Alignment.center,
-                      padding: EdgeInsets.fromLTRB(
-                          SizeConfig.safeBlockHorizontal * 10, 10, SizeConfig.safeBlockHorizontal * 10, 10),
+                      padding: EdgeInsets.fromLTRB(SizeConfig.safeBlockHorizontal * 10, 10, SizeConfig.safeBlockHorizontal * 10, 10),
                       decoration: BoxDecoration(
                         color: Color(0xffBEF7FF),
                         borderRadius: BorderRadius.all(Radius.circular(37)),
@@ -54,8 +50,7 @@ class CommandVsContent extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: SizeConfig.safeBlockVertical * 2),
                       alignment: Alignment.center,
                       width: SizeConfig.safeBlockHorizontal * 90,
-                      padding: EdgeInsets.fromLTRB(
-                          27, 10, 27, 10),
+                      padding: EdgeInsets.fromLTRB(27, 10, 27, 10),
                       decoration: BoxDecoration(
                         color: Color(0xffBEF7FF),
                         borderRadius: BorderRadius.all(Radius.circular(27)),

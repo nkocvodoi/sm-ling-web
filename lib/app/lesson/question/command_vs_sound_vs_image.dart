@@ -23,11 +23,7 @@ class CommandVsSoundVsImage extends StatelessWidget {
           alignment: AlignmentDirectional(-1.0, 1.0),
           child: Text(
             command,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: TextSize.fontSize18,
-                fontFamily: TextSize.fontFamily,
-                color: Color(0xff43669F)),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: TextSize.fontSize18, fontFamily: TextSize.fontFamily, color: Color(0xff43669F)),
           ),
         ),
         Container(
@@ -65,11 +61,13 @@ class CommandVsSoundVsImage extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.all(Radius.circular(14)),
                           ),
-                          child: imageUrl != null ? Image.network(
-                            imageUrl,
-                            width: SizeConfig.safeBlockHorizontal * 30,
-                            height: SizeConfig.safeBlockVertical * 18,
-                          ) : Image.asset("assets/error_image.png"),
+                          child: imageUrl != null
+                              ? Image.network(
+                                  imageUrl,
+                                  width: SizeConfig.safeBlockHorizontal * 30,
+                                  height: SizeConfig.safeBlockVertical * 18,
+                                )
+                              : Image.asset("assets/error_image.png"),
                         ),
                         Expanded(child: SizedBox()),
                       ],

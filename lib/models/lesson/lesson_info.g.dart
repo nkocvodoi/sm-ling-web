@@ -10,9 +10,7 @@ LessonInfo _$LessonInfoFromJson(Map<String, dynamic> json) {
   return LessonInfo(
     lesson: json['lesson'] == null ? null : Lesson.fromJson(json['lesson'] as Map<String, dynamic>),
     words: (json['words'] as List)?.map((e) => e == null ? null : Words.fromJson(e as Map<String, dynamic>))?.toList(),
-    sentences: (json['sentences'] as List)
-        ?.map((e) => e == null ? null : Sentences.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    sentences: (json['sentences'] as List)?.map((e) => e == null ? null : Sentences.fromJson(e as Map<String, dynamic>))?.toList(),
   );
 }
 
@@ -25,9 +23,7 @@ Map<String, dynamic> _$LessonInfoToJson(LessonInfo instance) => <String, dynamic
 Lesson _$LessonFromJson(Map<String, dynamic> json) {
   return Lesson(
     questionIds: (json['questionIds'] as List)?.map((e) => e as String)?.toList(),
-    questions: (json['questions'] as List)
-        ?.map((e) => e == null ? null : Questions.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    questions: (json['questions'] as List)?.map((e) => e == null ? null : Questions.fromJson(e as Map<String, dynamic>))?.toList(),
     sId: json['_id'] as String,
     lessonIndex: json['lessonIndex'] as int,
     totalQuestions: json['totalQuestions'] as int,
@@ -106,12 +102,8 @@ Sentences _$SentencesFromJson(Map<String, dynamic> json) {
     audio: json['audio'] as String,
     enText: json['enText'] as String,
     vnText: json['vnText'] as String,
-    vn: (json['vn'] as List)
-        ?.map((e) => e == null ? null : TranslateWord.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    en: (json['en'] as List)
-        ?.map((e) => e == null ? null : TranslateWord.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    vn: (json['vn'] as List)?.map((e) => e == null ? null : TranslateWord.fromJson(e as Map<String, dynamic>))?.toList(),
+    en: (json['en'] as List)?.map((e) => e == null ? null : TranslateWord.fromJson(e as Map<String, dynamic>))?.toList(),
   );
 }
 

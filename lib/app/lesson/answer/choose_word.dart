@@ -43,16 +43,16 @@ class _ChooseWordState extends State<ChooseWord> {
         ? SizeConfig.blockSizeVertical * 8
         : hasHiddenWord
             ? SizeConfig.blockSizeVertical * 8
-            : SizeConfig.blockSizeVertical * 8 + SizeConfig.blockSizeVertical * 8 * (wordLength ~/ (SizeConfig.safeBlockHorizontal * 80 - 40) / 8).toDouble();
+            : SizeConfig.blockSizeVertical * 8 +
+                SizeConfig.blockSizeVertical * 8 * (wordLength ~/ (SizeConfig.safeBlockHorizontal * 80 - 40) / 8).toDouble();
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex as int;
-    question =
-        Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
+    currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
+    question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     sentenceAnswerWords = <String>[];
     if (question.type == "sentence") {
       var sentence = Application.lessonInfo.findSentence(question.focusSentence);
@@ -70,10 +70,10 @@ class _ChooseWordState extends State<ChooseWord> {
     } else {
       question.words.forEach((element) {
         if (widget.type == "vi") {
-          int wordLength = words[words.indexWhere((dex) => dex.sId == element)].meaning.length;
+          int wordLength = words.indexWhere((dex) => dex.sId == element)!= -1 ? words[words.indexWhere((dex) => dex.sId == element)].meaning.length : 0;
           if (wordLength > longestWord) longestWord = wordLength;
         } else {
-          int wordLength = words[words.indexWhere((dex) => dex.sId == element)].content.length;
+          int wordLength = words.indexWhere((dex) => dex.sId == element) != -1 ?words[words.indexWhere((dex) => dex.sId == element)].content.length : 0;
           if (wordLength > longestWord) longestWord = wordLength;
         }
       });
@@ -94,7 +94,7 @@ class _ChooseWordState extends State<ChooseWord> {
     return Consumer<LessonModel>(
       builder: (_, lessonModel, __) {
         if (currentIndex != lessonModel.focusWordIndex) {
-          question = Application.lessonInfo.lesson.questions[lessonModel.focusWordIndex as int];
+          question = Application.lessonInfo.lesson.questions[lessonModel.focusWordIndex];
           sentenceAnswerWords = <String>[];
           if (question.type == "sentence") {
             var sentence = Application.lessonInfo.findSentence(question.focusSentence);
@@ -128,7 +128,7 @@ class _ChooseWordState extends State<ChooseWord> {
                   : question.hiddenWord != -1
                       ? question.wrongWords.length + 1
                       : question.wrongWords.length;
-          currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex as int;
+          currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
         }
         return Container(
             child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -145,10 +145,8 @@ class _ChooseWordState extends State<ChooseWord> {
                   : question.sentences.isNotEmpty
                       ? _wordButton(
                           text: widget.type == "vi"
-                              ? sentences[sentences.indexWhere((element) => element.sId == question.sentences[index])]
-                                  .vnText
-                              : sentences[sentences.indexWhere((element) => element.sId == question.sentences[index])]
-                                  .enText,
+                              ? sentences[sentences.indexWhere((element) => element.sId == question.sentences[index])].vnText
+                              : sentences[sentences.indexWhere((element) => element.sId == question.sentences[index])].enText,
                           idAnswer: question.sentences[index],
                           type: question.type)
                       : _wordButton(text: sentenceAnswerWords[index], idAnswer: null, type: question.type)),
@@ -175,17 +173,15 @@ class _ChooseWordState extends State<ChooseWord> {
                   }
                 },
                 child: Text(text,
-                    textAlign: TextAlign.justify,
+                    textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: TextSize.fontSize18, color: AppColor.buttonText)),
                 width: handleWidth(
                     isTypeSentence: type == "sentence",
-                    hasHiddenWord:
-                        Application.lessonInfo.lesson.questions[lessonModel.focusWordIndex].hiddenWord != -1),
+                    hasHiddenWord: Application.lessonInfo.lesson.questions[lessonModel.focusWordIndex].hiddenWord != -1),
                 height: handleHeight(
-                  isTypeSentence: type == "sentence",
-                  hasHiddenWord: Application.lessonInfo.lesson.questions[lessonModel.focusWordIndex].hiddenWord != -1,
-                  textLength: text.length
-                ),
+                    isTypeSentence: type == "sentence",
+                    hasHiddenWord: Application.lessonInfo.lesson.questions[lessonModel.focusWordIndex].hiddenWord != -1,
+                    textLength: text.length),
                 borderColor: idAnswer != null
                     ? idAnswer == lessonModel.idAnswer
                         ? AppColor.mainThemesFocus

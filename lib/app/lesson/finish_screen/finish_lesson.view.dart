@@ -1,6 +1,8 @@
 import 'package:SMLingg/app/class_screen/class.provider.dart';
 import 'package:SMLingg/app/components/custom_button.component.dart';
 import 'package:SMLingg/app/components/water_wave.component.dart';
+import 'package:SMLingg/app/lesson/answer/match_pair.dart';
+import 'package:SMLingg/app/lesson/answer/sort_words.dart';
 import 'package:SMLingg/app/lesson/lesson.provider.dart';
 import 'package:SMLingg/app/unit/unit.provider.dart';
 import 'package:SMLingg/app/unit/unit.view.dart';
@@ -11,8 +13,11 @@ import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+
+import '../../../config/application.dart';
 
 class FinishLessonScreen extends StatefulWidget {
   final int correctAnswer, totalQuestion;
@@ -20,12 +25,12 @@ class FinishLessonScreen extends StatefulWidget {
   final int timeStart;
   final int timeEnd;
   final int focusWordIndex;
+  final double offset;
 
   // type = 1 thể hiện hoàn thành bài học
   // type = 2 thể hiện hoàn thành cấp độ
 
-  FinishLessonScreen(
-      {this.correctAnswer, this.totalQuestion, this.results, this.timeStart, this.timeEnd, this.focusWordIndex});
+  FinishLessonScreen({this.correctAnswer, this.totalQuestion, this.results, this.timeStart, this.timeEnd, this.focusWordIndex, this.offset});
 
   @override
   State<StatefulWidget> createState() {
@@ -111,10 +116,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                                             left: _firstPoint
                                                 ? 0
                                                 : -SizeConfig.blockSizeHorizontal * 80 +
-                                                    (widget.correctAnswer) *
-                                                        SizeConfig.blockSizeHorizontal *
-                                                        80 /
-                                                        widget.totalQuestion,
+                                                    (widget.correctAnswer) * SizeConfig.blockSizeHorizontal * 80 / widget.totalQuestion,
                                             duration: Duration(milliseconds: 500),
                                             child: Container(
                                               height: SizeConfig.safeBlockHorizontal * 6,
@@ -141,8 +143,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                   child: AnimatedOpacity(
                       opacity: _fourthPoint ? 1 : 0,
                       duration: Duration(milliseconds: 2000),
-                      child: Lottie.asset('assets/lottie/fireworks-background.json',
-                          height: SizeConfig.safeBlockVertical * 50))),
+                      child: Lottie.asset('assets/lottie/fireworks-background.json', height: SizeConfig.safeBlockVertical * 50))),
               AnimatedPositioned(
                   top: _secondPoint ? SizeConfig.safeBlockVertical * 20 : SizeConfig.safeBlockVertical * 75,
                   duration: Duration(milliseconds: 2000),
@@ -161,7 +162,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                           Text("CONGRATS".i18n,
                               style: TextStyle(
                                   fontFamily: "Quicksand",
-                                  fontSize: SizeConfig.safeBlockVertical * 4,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 8,
                                   color: Color(0xFF4285F4),
                                   fontWeight: FontWeight.w800)))),
               AnimatedPositioned(
@@ -181,35 +182,35 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                               (Application.currentUnit.userLesson + 1) > Application.currentUnit.totalLessonsOfLevel
                                   ? 'You have completed the practice'.i18n
                                   : 'You have completed the lesson'.i18n,
-                              style: TextStyle(color: Color(0xFF4285F4), fontWeight: FontWeight.w700, fontSize: TextSize.fontSize20)),
+                              style:
+                                  TextStyle(color: Color(0xFF4285F4), fontWeight: FontWeight.w700, fontSize: SizeConfig.safeBlockHorizontal * 5.5)),
                           SizedBox(height: SizeConfig.safeBlockVertical * 2),
                           AnimatedOpacity(
                               opacity: _fourthPoint ? 1 : 0,
                               duration: Duration(milliseconds: 500),
-                              child:
-                                  (Application.currentUnit.userLesson + 1) > Application.currentUnit.totalLessonsOfLevel
-                                      ? SizedBox()
-                                      : type == 1
-                                          ? Row(
-                                              children: [
-                                                Text('+${plusMark.toString()} ',
-                                                    style: TextStyle(
-                                                        color: Color(0xFF4285F4),
-                                                        fontWeight: FontWeight.w700,
-                                                        fontSize: TextSize.fontSize40)),
-                                                SvgPicture.asset('assets/droplets_yellow.svg', width: TextSize.fontSize40)
-                                              ],
-                                            )
-                                          : Row(
-                                              children: [
-                                                Text('+1 ',
-                                                    style: TextStyle(
-                                                        color: Color(0xFF4285F4),
-                                                        fontWeight: FontWeight.w700,
-                                                        fontSize: TextSize.fontSize40)),
-                                                SvgPicture.asset('assets/honey_point.svg', width: TextSize.fontSize40),
-                                              ],
-                                            ))
+                              child: (Application.currentUnit.userLesson + 1) > Application.currentUnit.totalLessonsOfLevel
+                                  ? SizedBox()
+                                  : type == 1
+                                      ? Row(
+                                          children: [
+                                            Text('+${plusMark.toString()} ',
+                                                style: TextStyle(
+                                                    color: Color(0xFF4285F4),
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: SizeConfig.safeBlockHorizontal * 8)),
+                                            SvgPicture.asset('assets/droplets_yellow.svg', width: SizeConfig.safeBlockHorizontal * 8)
+                                          ],
+                                        )
+                                      : Row(
+                                          children: [
+                                            Text('+1 ',
+                                                style: TextStyle(
+                                                    color: Color(0xFF4285F4),
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: SizeConfig.safeBlockHorizontal * 8)),
+                                            SvgPicture.asset('assets/honey_point.svg', width: SizeConfig.safeBlockHorizontal * 8),
+                                          ],
+                                        ))
                         ],
                       ))),
               AnimatedPositioned(
@@ -232,11 +233,9 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                                   backgroundColor: Colors.yellowAccent,
                                   foregroundColor: Colors.yellow,
                                   size: SizeConfig.safeBlockVertical * 28,
-                                  progress: (Application.currentUnit.userLesson + 1) >=
-                                          Application.currentUnit.totalLessonsOfLevel
+                                  progress: (Application.currentUnit.userLesson + 1) >= Application.currentUnit.totalLessonsOfLevel
                                       ? 1
-                                      : (Application.currentUnit.userLesson + 1) /
-                                          Application.currentUnit.totalLessonsOfLevel,
+                                      : (Application.currentUnit.userLesson + 1) / Application.currentUnit.totalLessonsOfLevel,
                                 ),
                                 Image.asset('assets/hive2.jpg', height: SizeConfig.safeBlockVertical * 30)
                               ]))))),
@@ -249,10 +248,8 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                       children: [
                         Image.asset('assets/medal.jpg', height: SizeConfig.safeBlockVertical * 30),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
-                        Text(
-                            Application.currentUnit.userLevel == Application.currentUnit.totalLevels
-                                ? "You have completed the unit".i18n
-                                : "LEVEL ${(Application.currentUnit.userLevel + 1).toString()}",
+                        Text(Application.currentUnit.userLevel == Application.currentUnit.totalLevels ? "You have completed the unit".i18n : "",
+                            // "LEVEL ${(Application.currentUnit.userLevel + 1).toString()}",
                             style: TextStyle(color: Color(0xFF4285F4), fontWeight: FontWeight.w700, fontSize: TextSize.fontSize25)),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
                         Application.currentUnit.userLevel == Application.currentUnit.totalLevels
@@ -336,14 +333,19 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                 backgroundColor: AppColor.mainThemes,
                 shadowColor: AppColor.mainThemesFocus,
                 onPressed: () async {
+                  int index = Application.unitList.units.indexWhere((element) => element.sId == Application.currentUnit.sId);
                   Provider.of<UnitModel>(context, listen: false).clearSave();
                   Provider.of<LessonModel>(context, listen: false).clearAll();
+                  Provider.of<MatchPairModel>(context, listen: false).clearAll();
+                  Provider.of<SortWordsModel>(context, listen: false).clearAll();
                   Provider.of<ClassModel>(context, listen: false).refreshData();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              UnitScreen(grade: Application.currentBook.grade, bookID: Application.currentBook.id)));
+                  !Provider.of<UnitModel>(context, listen: false).checkContinue
+                      ? Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  UnitScreen(grade: Application.currentBook.grade, bookID: Application.currentBook.id, startPosition: widget.offset)))
+                      : Get.offAllNamed("/class");
                 })));
   }
 }

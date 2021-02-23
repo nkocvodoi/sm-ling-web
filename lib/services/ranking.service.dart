@@ -1,4 +1,3 @@
-
 import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/models/ranking/ranking.dart';
 import 'package:SMLingg/utils/network_exception.dart';
