@@ -150,7 +150,7 @@ class _SortWordsState extends State<SortWords> {
                               type: "answer",
                               index: sortWordsModel.wordSelected[index].index))
                     ])),
-            SvgPicture.asset('assets/divider.svg', width: SizeConfig.safeBlockHorizontal * 90),
+            Image.asset('assets/divider.jpg', width: SizeConfig.safeBlockHorizontal * 90),
             SizedBox(height: SizeConfig.safeBlockVertical * 3),
             Container(
                 width: SizeConfig.safeBlockHorizontal * 90,

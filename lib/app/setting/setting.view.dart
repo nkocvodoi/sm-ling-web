@@ -150,7 +150,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          SvgPicture.asset("assets/setting/earth.svg"),
+                          Image.asset("assets/setting/earth.jpg"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Language".i18n,
@@ -240,7 +240,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          SvgPicture.asset("assets/setting/bell.svg"),
+                          Image.asset("assets/setting/bell.jpg"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Training reminder".i18n,
@@ -315,7 +315,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          SvgPicture.asset("assets/setting/clock.svg"),
+                          Image.asset("assets/setting/clock.jpg"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Time reminder".i18n,
@@ -385,7 +385,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          SvgPicture.asset("assets/setting/speak.svg"),
+                          Image.asset("assets/setting/speak.jpg"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Talk exercises".i18n,
@@ -463,7 +463,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          SvgPicture.asset("assets/setting/hear.svg"),
+                          Image.asset("assets/setting/hear.jpg"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Listening exercises".i18n,
@@ -544,7 +544,7 @@ class _SettingState extends State<Setting> {
                         child: Row(
                           children: [
                             SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                            SvgPicture.asset("assets/setting/star.svg"),
+                            Image.asset("assets/setting/star.jpg"),
                             SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                             Text(
                               "Rating".i18n,

@@ -188,7 +188,7 @@ class _RecorderToTextState extends State<RecorderToText> {
                                         decoration: BoxDecoration(
                                             color: Colors.white, borderRadius: BorderRadius.circular(90))))
                               ]))
-                      : SvgPicture.asset("assets/16typh_on_the_mic.svg"),
+                      : Image.asset("assets/16typh_on_the_mic.jpg"),
                   onPressed: () => !_hasSpeech || speech.isListening ? null : startListening())),
           // Padding(
           //   padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 10),

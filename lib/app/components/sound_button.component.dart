@@ -139,8 +139,8 @@ class _SoundButtonState extends State<SoundButton> {
                           size: 40,
                           color: Colors.white,
                         )
-                      : SvgPicture.asset(
-                          "assets/snail.svg",
+                      : Image.asset(
+                          "assets/snail.jpg",
                           height: 20,
                         ),
                 ),

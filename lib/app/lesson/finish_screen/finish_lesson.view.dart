@@ -238,7 +238,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                                       : (Application.currentUnit.userLesson + 1) /
                                           Application.currentUnit.totalLessonsOfLevel,
                                 ),
-                                SvgPicture.asset('assets/hive2.svg', height: SizeConfig.safeBlockVertical * 30)
+                                Image.asset('assets/hive2.jpg', height: SizeConfig.safeBlockVertical * 30)
                               ]))))),
               Positioned(
                   top: SizeConfig.safeBlockVertical * 20 + SizeConfig.safeBlockHorizontal * 28,
@@ -247,7 +247,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                     opacity: _levelup && type == 2 ? 1 : 0,
                     child: Column(
                       children: [
-                        SvgPicture.asset('assets/medal.svg', height: SizeConfig.safeBlockVertical * 30),
+                        Image.asset('assets/medal.jpg', height: SizeConfig.safeBlockVertical * 30),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
                         Text(
                             Application.currentUnit.userLevel == Application.currentUnit.totalLevels

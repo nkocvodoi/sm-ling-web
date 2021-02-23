@@ -60,9 +60,9 @@ Future<String> signInWithGoogle(BuildContext context) async {
             final User currentUser = _auth.currentUser;
             assert(user.uid == currentUser.uid);
 
-            print('signInWithGoogle succeeded: $user');
+            // print('signInWithGoogle succeeded: $user');
             Application.sharePreference.putString("access_token", googleSignInAuthentication.accessToken);
-
+            print('access_token: ${Application.sharePreference.getString("access_token")}');
             return '$user';
           } else {
             Provider.of<LoginModel>(context, listen: false).logInAbsorb(false);
