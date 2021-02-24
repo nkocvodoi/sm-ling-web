@@ -77,14 +77,14 @@ class _ClassScreenState extends State<ClassScreen>
                                     SizeConfig.safeBlockHorizontal * 3),
                                 width: SizeConfig.safeBlockHorizontal * 50,
                                 child: Image.asset(
-                                    "assets/class/${icon.getDot()}.jpg"),
+                                    "assets/class/${icon.getDot()}.png"),
                               ),
                               Container(
                                 margin: EdgeInsets.all(
                                     SizeConfig.safeBlockHorizontal * 3),
                                 width: SizeConfig.safeBlockHorizontal * 50,
                                 child: Image.asset(
-                                  "assets/class/${icon.getFace()}.jpg",
+                                  "assets/class/${icon.getFace()}.png",
                                 ),
                               ),
                             ],

@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../config/config_screen.dart';
+import '../../config/config_screen.dart';
+import '../../config/config_screen.dart';
+
 Widget userProfile(context, ClassModel classModel) {
   return Scaffold(
       backgroundColor: AppColor.mainBackGround,
@@ -75,7 +79,7 @@ Widget userProfile(context, ClassModel classModel) {
                           );
                         },
                         child: Container(
-                          child: Image.asset('assets/profile/setting.jpg',
+                          child: Image.asset('assets/profile/setting.png',
                               width: SizeConfig.safeBlockVertical * 3.5, height: SizeConfig.safeBlockVertical * 3.5),
                         ),
                       )),
@@ -89,13 +93,17 @@ Widget userProfile(context, ClassModel classModel) {
               //   style: TextStyle(color: Color(0xFF5877AA), fontSize: TextSize.fontSize20, fontWeight: FontWeight.w700),
               // ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+            Container(
+              width: double.infinity,
+              alignment: Alignment.center,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // achievement(image: 'assets/honey_point.svg', message: 'Level', userNumber: Application.user.level.toString()),
-                  // achievement(image: 'assets/droplets_yellow.svg', message: 'Lesson', userNumber: Application.user.score.toString())
+                  Expanded(child: SizedBox(),flex: 1),
+                  achievement(image: 'assets/class/bee.png', message: 'Level', userNumber: Application.user.level.toString()),
+                  Expanded(child: SizedBox(),flex: 2),
+                  achievement(image: 'assets/class/droplets.png', message: 'Lesson', userNumber: Application.user.score.toString()),
+                  Expanded(child: SizedBox(),flex: 1),
                 ],
               ),
             ),
@@ -142,8 +150,8 @@ Widget circle({double size, Color color}) {
 
 Widget achievement({String image, String userNumber, String message}) {
   return Container(
-        height: SizeConfig.blockSizeHorizontal * 18,
-        width: SizeConfig.blockSizeHorizontal * 42,
+        height: SizeConfig.safeBlockHorizontal * 20,
+        width: SizeConfig.safeBlockHorizontal * 55,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal * 4),
             border: Border.all(color: Color(0xFFBCE2FF)),
@@ -157,17 +165,17 @@ Widget achievement({String image, String userNumber, String message}) {
         child: Row(
           children: [
             Container(
-                margin: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal),
-                child: Image.asset(image, width: SizeConfig.blockSizeHorizontal * 10),
+                margin: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal),
+                child: Image.asset(image, width: SizeConfig.safeBlockHorizontal * 10),
                 width: SizeConfig.blockSizeHorizontal * 12,
                 alignment: Alignment.center),
             VerticalDivider(
-              width: SizeConfig.blockSizeHorizontal * 2,
+              width: SizeConfig.safeBlockHorizontal * 2,
               color: Color(0xFFBCE2FF),
               thickness: 3,
             ),
             Container(
-              width: SizeConfig.blockSizeHorizontal * 25,
+              width: SizeConfig.safeBlockHorizontal * 35,
               alignment: Alignment.center,
               child: RichText(
                 textAlign: TextAlign.center,
@@ -177,11 +185,7 @@ Widget achievement({String image, String userNumber, String message}) {
                       TextStyle(fontSize: TextSize.fontSize30, color: Color(0xFF4285F4), fontWeight: FontWeight.w700),
                   children: [
                     TextSpan(
-                        text: (userNumber.length * SizeConfig.blockSizeHorizontal * 5 +
-                                    message.length * SizeConfig.blockSizeHorizontal * 3 >
-                                SizeConfig.blockSizeHorizontal * 25)
-                            ? '\n'
-                            : '',
+                        text: '',
                         style: TextStyle(
                             fontSize: TextSize.fontSize15, color: Color(0xFF4285F4), fontWeight: FontWeight.w400)),
                     TextSpan(

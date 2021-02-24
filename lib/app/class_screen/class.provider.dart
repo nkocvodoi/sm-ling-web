@@ -38,7 +38,7 @@ class ClassModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  setIndex(int value) {
+  void setIndex(int value) {
     _index = value;
     notifyListeners();
     if (_index == 0) {

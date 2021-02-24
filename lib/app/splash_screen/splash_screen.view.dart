@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                       Expanded(
                           child: Container(
-                              child: Image.asset('assets/splash/lingo.jpg',
+                              child: Image.asset('assets/splash/lingo.png',
                                   fit: BoxFit.fill),
                               width: SizeConfig.screenWidth * 0.7)),
                       Expanded(child: SizedBox()),

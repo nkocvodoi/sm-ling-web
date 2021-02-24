@@ -149,7 +149,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          Image.asset("assets/setting/earth.jpg"),
+                          Image.asset("assets/setting/earth.png"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Language",
@@ -171,7 +171,7 @@ class _SettingState extends State<Setting> {
                             child: Stack(
                               children: [
                                 Positioned(
-                                    top: SizeConfig.screenHeight * 0.008,
+                                    top: SizeConfig.screenHeight * 0.003,
                                     left: SizeConfig.safeBlockHorizontal * 3,
                                     child: Text("VN",
                                         style: TextStyle(
@@ -180,7 +180,7 @@ class _SettingState extends State<Setting> {
                                             fontFamily: "Quicksand",
                                             color: Color(0xFF71B0DE)))),
                                 Positioned(
-                                    top: SizeConfig.screenHeight * 0.008,
+                                    top: SizeConfig.screenHeight * 0.003,
                                     right: SizeConfig.safeBlockHorizontal * 3,
                                     child: Text("EN",
                                         style: TextStyle(
@@ -239,7 +239,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          Image.asset("assets/setting/bell.jpg"),
+                          Image.asset("assets/setting/bell.png"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Training reminder",
@@ -276,6 +276,7 @@ class _SettingState extends State<Setting> {
                                         : SizeConfig.safeBlockHorizontal * 12,
                                     child: InkWell(
                                       onTap: () async {
+                                        Provider.of<ClassModel>(context,listen: false).setIndex(0);
                                         settingStates.setTrainingIndicator();
                                         // I18n.of(context).locale = await settingStates.trainingIndicator ? Locale("vi","VN"): Locale('en',"US");
                                         Get.offAllNamed("/class");
@@ -314,7 +315,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          Image.asset("assets/setting/clock.jpg"),
+                          Image.asset("assets/setting/clock.png"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Time reminder",
@@ -384,7 +385,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          Image.asset("assets/setting/speak.jpg"),
+                          Image.asset("assets/setting/speak.png"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Talk exercises",
@@ -462,7 +463,7 @@ class _SettingState extends State<Setting> {
                       child: Row(
                         children: [
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                          Image.asset("assets/setting/hear.jpg"),
+                          Image.asset("assets/setting/hear.png"),
                           SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                           Text(
                             "Listening exercises",
@@ -543,7 +544,7 @@ class _SettingState extends State<Setting> {
                         child: Row(
                           children: [
                             SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                            Image.asset("assets/setting/star.jpg"),
+                            Image.asset("assets/setting/star.png"),
                             SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                             Text(
                               "Rating",
@@ -574,7 +575,7 @@ class _SettingState extends State<Setting> {
                         child: Row(
                           children: [
                             SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
-                            Image.asset("assets/setting/help.jpg"),
+                            Image.asset("assets/setting/help.png"),
                             SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                             Text(
                               "Helping",
