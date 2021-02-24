@@ -71,8 +71,8 @@ Widget userProfile(context, ClassModel classModel) {
                           );
                         },
                         child: Container(
-                          child: Icon(Icons.settings,
-                              size: SizeConfig.safeBlockVertical * 3.5),
+                         child: Image.asset('assets/profile/setting.jpg',
+                            width: SizeConfig.safeBlockVertical * 3.5, height: SizeConfig.safeBlockVertical * 3.5),
                         ),
                       )),
                 ],
@@ -80,18 +80,18 @@ Widget userProfile(context, ClassModel classModel) {
             ),
             Padding(
               padding: EdgeInsets.only(top: 20, bottom: 10),
-              child: Text(
-                'Achievement'.i18n,
-                style: TextStyle(color: Color(0xFF5877AA), fontSize: TextSize.fontSize20, fontWeight: FontWeight.w700),
-              ),
+              // child: Text(
+              //   'Achievement',
+              //   style: TextStyle(color: Color(0xFF5877AA), fontSize: TextSize.fontSize20, fontWeight: FontWeight.w700),
+              // ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  achievement(image: 'assets/honey_point.svg', message: 'Level'.i18n, userNumber: Application.user.level.toString()),
-                  achievement(image: 'assets/droplets_yellow.svg', message: 'Lesson'.i18n, userNumber: Application.user.score.toString())
+                  // achievement(image: 'assets/honey_point.svg', message: 'Level', userNumber: Application.user.level.toString()),
+                  // achievement(image: 'assets/droplets_yellow.svg', message: 'Lesson', userNumber: Application.user.score.toString())
                 ],
               ),
             ),
@@ -106,10 +106,10 @@ Widget userProfile(context, ClassModel classModel) {
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 15),
-              child: Text(
-                'More App'.i18n,
-                style: TextStyle(color: Color(0xFF5877AA), fontSize: TextSize.fontSize20, fontWeight: FontWeight.w700),
-              ),
+              // child: Text(
+              //   'More App',
+              //   style: TextStyle(color: Color(0xFF5877AA), fontSize: TextSize.fontSize20, fontWeight: FontWeight.w700),
+              // ),
             ),
             Container(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),

@@ -22,7 +22,7 @@ class QuestionType17Sent extends StatelessWidget {
         Padding(
             padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: Command(
-              command: "Arrange words into sentences correctly.".i18n,
+              command: "Arrange words into sentences correctly.",
             )),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),
         SortWords(type: "en"),

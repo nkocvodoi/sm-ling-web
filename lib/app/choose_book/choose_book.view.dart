@@ -38,7 +38,7 @@ class _ChooseBookState extends State<ChooseBook> {
       backgroundColor: AppColor.mainBackGround,
       appBar: MyCustomAppbar(
         chooseBook: true,
-        title: 'BOOK'.i18n,
+        title: 'BOOK',
         showAvatar: false,
         height: SizeConfig.screenHeight * 0.11,
         width: SizeConfig.screenWidth,

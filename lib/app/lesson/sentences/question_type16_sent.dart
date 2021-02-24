@@ -22,7 +22,7 @@ class QuestionType16Sent extends StatelessWidget {
         Padding(
             padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsContentVsSound(
-              command: "Dịch câu sau.".i18n,
+              command: "Dịch câu sau.",
               content: s.enText,
               soundUrl: s.audio,
             )),

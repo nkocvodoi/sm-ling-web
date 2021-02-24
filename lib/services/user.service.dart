@@ -5,10 +5,12 @@ import 'package:SMLingg/models/user_profile/user.dart';
 import 'package:SMLingg/utils/network_exception.dart';
 
 class UserServiceGoogle {
-  Future<void> loadUserProfile(String accessToken) async {
-    Map<String, dynamic> paramsUser = {"access_token": accessToken};
+  Future<void> loadUserProfile({
+    String email,String avatar,String displayName
+  }) async {
+    Map<String, dynamic> paramsUser = {"email": email,"avatar": avatar,"displayName": displayName};
     print("11111");
-    var response = await Application.api.post("/api/login/google", paramsUser);
+    var response = await Application.api.post("/api/login/googleWeb", paramsUser);
     print("22222");
     try {
       if (response.statusCode == 200) {

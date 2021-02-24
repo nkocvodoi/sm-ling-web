@@ -22,7 +22,7 @@ class QuestionType7Sent extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
           child: CommandVsVnContentVsSound(
-            command: "Listen and complete the blank.".i18n,
+            command: "Listen and complete the blank.",
             enArray: s.en,
             isHiddenWord: true,
             hiddenWord: question.hiddenWord,

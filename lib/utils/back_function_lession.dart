@@ -18,10 +18,10 @@ void backFunction(BuildContext context, LessonModel lessonModel, MatchPairModel 
   createDialogShowMessageAndAction(
       context: context,
       top: SizeConfig.blockSizeVertical * 50,
-      title: "Do you want to quit?".i18n,
-      message: "The previous results will not be saved".i18n,
-      titleLeftButton: "Cancel".i18n,
-      titleRightButton: "Quit".i18n,
+      title: "Do you want to quit?",
+      message: "The previous results will not be saved",
+      titleLeftButton: "Cancel",
+      titleRightButton: "Quit",
       leftAction: () {
         Navigator.pop(context);
       },

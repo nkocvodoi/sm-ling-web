@@ -5,7 +5,6 @@ import 'package:SMLingg/config/config_screen.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ShowMoreExplainItem {
   void showToolTips(ShowMoreModel popup, GlobalKey key) {
@@ -17,9 +16,12 @@ class ShowMoreExplainItem {
       context,
       child: Container(
         child: ListTile(
-          title: Text(title, style: TextStyle(color: AppColor.mainBackGround, fontWeight: FontWeight.w700, fontSize: TextSize.fontSize20)),
-          subtitle: Text(description, style: TextStyle(color: Color(0xFFC5DBFF), fontWeight: FontWeight.w700, fontSize: TextSize.fontSize18)),
-          leading: SvgPicture.asset(
+          title: Text(title,
+              style: TextStyle(
+                  color: AppColor.mainBackGround, fontWeight: FontWeight.w700, fontSize: TextSize.fontSize20)),
+          subtitle: Text(description,
+              style: TextStyle(color: Color(0xFFC5DBFF), fontWeight: FontWeight.w700, fontSize: TextSize.fontSize18)),
+          leading: Image.asset(
             imageSrc,
             height: SizeConfig.blockSizeVertical * 5,
           ),

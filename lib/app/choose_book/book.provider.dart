@@ -38,9 +38,9 @@ class BookModel extends ChangeNotifier {
             top: SizeConfig.blockSizeVertical * 50,
             title:
                 "Grades from 6 to 12 are currently testing, do you still want to play?"
-                    .i18n,
-            titleLeftButton: "No".i18n,
-            titleRightButton: "Yes".i18n,
+                    ,
+            titleLeftButton: "No",
+            titleRightButton: "Yes",
             leftAction: () {
               setCount(0);
               setGrade(4, context);

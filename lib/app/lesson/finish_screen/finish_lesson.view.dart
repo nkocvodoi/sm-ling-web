@@ -12,7 +12,6 @@ import 'package:SMLingg/resources/i18n.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -159,7 +158,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                       duration: Duration(milliseconds: 1000),
                       child:
                           // Image.asset('assets/congrats.png', height: SizeConfig.safeBlockVertical * 15)
-                          Text("CONGRATS".i18n,
+                          Text("CONGRATS",
                               style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontSize: SizeConfig.safeBlockHorizontal * 8,
@@ -180,37 +179,38 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                           SizedBox(height: SizeConfig.safeBlockVertical * 2),
                           Text(
                               (Application.currentUnit.userLesson + 1) > Application.currentUnit.totalLessonsOfLevel
-                                  ? 'You have completed the practice'.i18n
-                                  : 'You have completed the lesson'.i18n,
+                                  ? 'You have completed the practice'
+                                  : 'You have completed the lesson',
                               style:
                                   TextStyle(color: Color(0xFF4285F4), fontWeight: FontWeight.w700, fontSize: SizeConfig.safeBlockHorizontal * 5.5)),
                           SizedBox(height: SizeConfig.safeBlockVertical * 2),
                           AnimatedOpacity(
                               opacity: _fourthPoint ? 1 : 0,
                               duration: Duration(milliseconds: 500),
-                              child: (Application.currentUnit.userLesson + 1) > Application.currentUnit.totalLessonsOfLevel
-                                  ? SizedBox()
-                                  : type == 1
-                                      ? Row(
-                                          children: [
-                                            Text('+${plusMark.toString()} ',
-                                                style: TextStyle(
-                                                    color: Color(0xFF4285F4),
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: SizeConfig.safeBlockHorizontal * 8)),
-                                            SvgPicture.asset('assets/droplets_yellow.svg', width: SizeConfig.safeBlockHorizontal * 8)
-                                          ],
-                                        )
-                                      : Row(
-                                          children: [
-                                            Text('+1 ',
-                                                style: TextStyle(
-                                                    color: Color(0xFF4285F4),
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: SizeConfig.safeBlockHorizontal * 8)),
-                                            SvgPicture.asset('assets/honey_point.svg', width: SizeConfig.safeBlockHorizontal * 8),
-                                          ],
-                                        ))
+                              child:
+                                  (Application.currentUnit.userLesson + 1) > Application.currentUnit.totalLessonsOfLevel
+                                      ? SizedBox()
+                                      : type == 1
+                                          ? Row(
+                                              children: [
+                                                Text('+${plusMark.toString()} ',
+                                                    style: TextStyle(
+                                                        color: Color(0xFF4285F4),
+                                                        fontWeight: FontWeight.w700,
+                                                        fontSize: TextSize.fontSize40)),
+                                                Image.asset('assets/droplets_yellow.jpg', width: TextSize.fontSize40)
+                                              ],
+                                            )
+                                          : Row(
+                                              children: [
+                                                Text('+1 ',
+                                                    style: TextStyle(
+                                                        color: Color(0xFF4285F4),
+                                                        fontWeight: FontWeight.w700,
+                                                        fontSize: TextSize.fontSize40)),
+                                                Image.asset('assets/honey_point.jpg', width: TextSize.fontSize40),
+                                              ],
+                                            ))
                         ],
                       ))),
               AnimatedPositioned(
@@ -248,13 +248,13 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                       children: [
                         Image.asset('assets/medal.jpg', height: SizeConfig.safeBlockVertical * 30),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
-                        Text(Application.currentUnit.userLevel == Application.currentUnit.totalLevels ? "You have completed the unit".i18n : "",
+                        Text(Application.currentUnit.userLevel == Application.currentUnit.totalLevels ? "You have completed the unit" : "",
                             // "LEVEL ${(Application.currentUnit.userLevel + 1).toString()}",
                             style: TextStyle(color: Color(0xFF4285F4), fontWeight: FontWeight.w700, fontSize: TextSize.fontSize25)),
                         SizedBox(height: SizeConfig.safeBlockVertical * 2),
                         Application.currentUnit.userLevel == Application.currentUnit.totalLevels
                             ? SizedBox()
-                            : Text('PROMOTION'.i18n,
+                            : Text('PROMOTION',
                                 style: TextStyle(color: Color(0xFF4285F4), fontSize: TextSize.fontSize40, fontWeight: FontWeight.w700))
                       ],
                     ),
@@ -324,7 +324,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
             child: CustomButton(
                 elevation: 6,
                 child: Text(
-                  "CONTINUE".i18n,
+                  "CONTINUE",
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: TextSize.fontSize18, color: Color(0xff6CA9D3)),
                 ),
                 radius: 90,

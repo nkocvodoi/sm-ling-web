@@ -30,7 +30,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Future<void> fetchContinue() async {
     await Application.api
         .get(Application.sharePreference.getString("chooseBook"))
-        .then((value) => Application.api.get(Application.sharePreference.getString("loadUnitList")));
+        .then((value) => Application.api
+            .get(Application.sharePreference.getString("loadUnitList")));
     Get.off(LessonScreen(
         userLevel: Application.sharePreference.getInt("saveUserLevel"),
         userLesson: Application.sharePreference.getInt("saveUserLesson"),
@@ -61,7 +62,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 }
             });
       } else {
-        Future.delayed(Duration(milliseconds: 2500), () => Get.offAll(LoginPage()));
+        Future.delayed(
+            Duration(milliseconds: 2500), () => Get.offAll(LoginPage()));
       }
     }
     if (widget.continuePlay == true) {
@@ -77,18 +79,25 @@ class _LoadingScreenState extends State<LoadingScreen> {
       Provider.of<UnitModel>(context).setCheckContinue(true);
     }
     return Scaffold(
-        body: Column(children: [
-      Expanded(child: SizedBox(), flex: 2),
-      Center(
-        child: Container(
-          child: Lottie.asset('assets/lottie/bee.json', width: SizeConfig.screenWidth * 0.45),
-        ),
-      ),
-      Container(
-        child: LoadingDots(numberDots: 5),
-      ),
-      //  Lottie.asset('assets/lottie/loading.json', width: SizeConfig.safeBlockHorizontal * 50),
-      Expanded(child: SizedBox(), flex: 3),
-    ]));
+        body: Container(
+            alignment: Alignment.center,
+            width: SizeConfig.screenWidth,
+            height: SizeConfig.screenHeight,
+            child: Container(
+                width: SizeConfig.screenHeight * 2 / 3,
+                child: Column(children: [
+                  Expanded(child: SizedBox(), flex: 2),
+                  Center(
+                    child: Container(
+                      child: Lottie.asset('assets/lottie/bee.json',
+                          width: SizeConfig.screenWidth * 0.45),
+                    ),
+                  ),
+                  Container(
+                    child: LoadingDots(numberDots: 5),
+                  ),
+                  //  Lottie.asset('assets/lottie/loading.json', width: SizeConfig.safeBlockHorizontal * 50),
+                  Expanded(child: SizedBox(), flex: 3),
+                ]))));
   }
 }

@@ -11,7 +11,6 @@ import 'package:conreality_headset/conreality_headset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -99,9 +98,9 @@ class _RecorderToTextState extends State<RecorderToText> {
       createDialogShowMessageAndAction(
           context: context,
           top: SizeConfig.blockSizeVertical * 50,
-          title: "Please plugin headphone for better recorder!".i18n,
-          titleLeftButton: "".i18n,
-          titleRightButton: "Understand!".i18n,
+          title: "Please plugin headphone for better recorder!",
+          titleLeftButton: "",
+          titleRightButton: "Understand!",
           leftAction: () {},
           rightAction: () {
             Get.back();
@@ -129,7 +128,7 @@ class _RecorderToTextState extends State<RecorderToText> {
       if (lastWords.isEmpty) {
         if (currentIndex == Provider.of<LessonModel>(context, listen: false).focusWordIndex) {
           Fluttertoast.showToast(
-            msg: "Please speak louder".i18n,
+            msg: "Please speak louder",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 0.5.toInt(),
@@ -217,7 +216,7 @@ class _RecorderToTextState extends State<RecorderToText> {
                       //                   decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(90))))
                       //         ]))
                       //     :
-                      SvgPicture.asset("assets/16typh_on_the_mic.svg"),
+                      Image.asset("assets/16typh_on_the_mic.jpg"),
                   onPressed: () => !_hasSpeech || speech.isListening ? null : startListening())),
           Padding(
             padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 10),
