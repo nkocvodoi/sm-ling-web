@@ -79,7 +79,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       Provider.of<UnitModel>(context).setCheckContinue(true);
     }
     return Scaffold(
-        body: Container(
+        body: Center(child:Container(
             alignment: Alignment.center,
             width: SizeConfig.screenWidth,
             height: SizeConfig.screenHeight,
@@ -98,6 +98,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   ),
                   //  Lottie.asset('assets/lottie/loading.json', width: SizeConfig.safeBlockHorizontal * 50),
                   Expanded(child: SizedBox(), flex: 3),
-                ]))));
+                ])))));
   }
 }

@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: AppColor.mainBackGround,
-      body: Container(
+      body: Center(child: Container(
           alignment: Alignment.center,
           width: SizeConfig.screenWidth,
           height: SizeConfig.screenHeight,
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Expanded(child: SizedBox()),
                 ],
-              ))),
+              )))),
     );
   }
 

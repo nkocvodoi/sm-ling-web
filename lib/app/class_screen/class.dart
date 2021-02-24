@@ -19,7 +19,8 @@ Widget classScreen(context, ClassModel model) {
       width: SizeConfig.screenWidth,
       showAvatar: true,
     ),
-    body: Container(
+    body: Center(child: Container(
+      width: SizeConfig.screenWidth,
       color: AppColor.mainBackGround,
       child: ScrollConfiguration(
         behavior: ScrollBehavior(),
@@ -35,23 +36,23 @@ Widget classScreen(context, ClassModel model) {
             children: List.generate(12, (index) {
               return Center(
                   child: CustomButton(
-                elevation: SizeConfig.safeBlockVertical * 0.7,
-                radius: SizeConfig.safeBlockVertical * 1.3,
-                onPressed: () {
-                  Provider.of<BookModel>(context as BuildContext, listen: false).setGrade(index,context);
-                  Application.sharePreference.putInt("setGrade", index);
-                  Get.toNamed("/book");
-                },
-                height: SizeConfig.safeBlockHorizontal * 25,
-                child: Image.asset(ClassImage.classImage[index], width: SizeConfig.blockSizeHorizontal * 35),
-                width: SizeConfig.safeBlockHorizontal * 40,
-                backgroundColor: AppColor.mainThemes,
-                shadowColor: Color(0xFFADD6F3),
-              ));
+                    elevation: SizeConfig.safeBlockVertical * 0.7,
+                    radius: SizeConfig.safeBlockVertical * 1.3,
+                    onPressed: () {
+                      Provider.of<BookModel>(context as BuildContext, listen: false).setGrade(index,context);
+                      Application.sharePreference.putInt("setGrade", index);
+                      Get.toNamed("/book");
+                    },
+                    height: SizeConfig.safeBlockHorizontal * 25,
+                    child: Image.asset(ClassImage.classImage[index], width: SizeConfig.blockSizeHorizontal * 35),
+                    width: SizeConfig.safeBlockHorizontal * 40,
+                    backgroundColor: AppColor.mainThemes,
+                    shadowColor: Color(0xFFADD6F3),
+                  ));
             }),
           ),
         ),
       ),
-    ),
+    )),
   );
 }

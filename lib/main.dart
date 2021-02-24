@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:SMLingg/app/choose_book/book.provider.dart';
 import 'package:SMLingg/app/choose_book/choose_book.view.dart';
 import 'package:SMLingg/app/class_screen/class.provider.dart';
@@ -13,14 +11,11 @@ import 'package:SMLingg/app/setting/setting_provider.dart';
 import 'package:SMLingg/app/splash_screen/splash_screen.view.dart';
 import 'package:SMLingg/app/unit/unit.provider.dart';
 import 'package:SMLingg/app/unit/unit.view.dart';
-import 'package:SMLingg/config/config_screen.dart';
 import 'package:SMLingg/models/book/book_list.dart';
 import 'package:SMLingg/models/lesson/lesson_info.dart';
 import 'package:SMLingg/models/unit/unit_list.dart';
 import 'package:SMLingg/utils/api.dart';
-import 'package:SMLingg/utils/push_notification.dart';
 import 'package:SMLingg/utils/shared_preferences.dart';
-import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,10 +36,8 @@ import 'models/user_profile/user.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GestureBinding.instance.resamplingEnabled = true;
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   Application.sharePreference = await SpUtil.getInstance();
   runApp(
     MultiProvider(
@@ -105,11 +98,7 @@ class _MyAppState extends State<MyApp> {
         accentColor: Colors.redAccent,
         fontFamily: "Quicksand",
       ),
-      home: LayoutBuilder(
-        builder: (context,constraints){
-          if(constraints.)
-        },
-      ),
+      home: SplashScreen(),
       getPages: [
         GetPage(name: "login", page: () => LoginPage()),
         GetPage(name: "class", page: () => ClassScreen()),

@@ -92,96 +92,96 @@ class _UnitState extends State<UnitScreen> {
                       child: GlowingOverscrollIndicator(
                         axisDirection: AxisDirection.down,
                         color: Colors.lightBlueAccent,
-                        child: SingleChildScrollView(
+                        child: Center(child: Container(width: SizeConfig.screenWidth,child: SingleChildScrollView(
                           controller: _controller,
                           child: Column(children: [
                             ...List.generate(
                               (unitCount % 3 == 0)
                                   ? (unitCount ~/ 3 * 2)
                                   : (unitCount ~/ 3 * 2 + 1),
-                              (index) => ((index) % 2 == 1)
+                                  (index) => ((index) % 2 == 1)
                                   ? Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 5, bottom: 10),
-                                      child: Column(
+                                padding: const EdgeInsets.only(
+                                    top: 5, bottom: 10),
+                                child: Column(
+                                  children: [
+                                    _hexagon(index ~/ 2 * 3 + 3, listKeys,
+                                        index, unitModel),
+                                    _unitName(
+                                        unitList[index ~/ 2 * 3 + 2].name)
+                                  ],
+                                ),
+                              )
+                                  : Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 25, bottom: 10),
+                                child: Container(
+                                  height: (unitList[index ~/ 2 * 3]
+                                      .name
+                                      .length >
+                                      unitList[index ~/ 2 * 3 + 1]
+                                          .name
+                                          .length)
+                                      ? SizeConfig.blockSizeHorizontal *
+                                      35 +
+                                      (unitList[index ~/ 2 * 3]
+                                          .name
+                                          .length ~/
+                                          10 +
+                                          3) *
+                                          SizeConfig
+                                              .blockSizeHorizontal *
+                                          4
+                                      : SizeConfig.blockSizeHorizontal *
+                                      35 +
+                                      (unitList[index ~/ 2 * 3 + 1]
+                                          .name
+                                          .length ~/
+                                          10 +
+                                          3) *
+                                          SizeConfig
+                                              .blockSizeHorizontal *
+                                          4,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
                                         children: [
-                                          _hexagon(index ~/ 2 * 3 + 3, listKeys,
-                                              index, unitModel),
+                                          _hexagon(index ~/ 2 * 3 + 1,
+                                              listKeys, index, unitModel),
                                           _unitName(
-                                              unitList[index ~/ 2 * 3 + 2].name)
+                                              unitList[index ~/ 2 * 3]
+                                                  .name),
                                         ],
                                       ),
-                                    )
-                                  : Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 25, bottom: 10),
-                                      child: Container(
-                                        height: (unitList[index ~/ 2 * 3]
-                                                    .name
-                                                    .length >
-                                                unitList[index ~/ 2 * 3 + 1]
-                                                    .name
-                                                    .length)
-                                            ? SizeConfig.blockSizeHorizontal *
-                                                    35 +
-                                                (unitList[index ~/ 2 * 3]
-                                                                .name
-                                                                .length ~/
-                                                            10 +
-                                                        3) *
-                                                    SizeConfig
-                                                        .blockSizeHorizontal *
-                                                    4
-                                            : SizeConfig.blockSizeHorizontal *
-                                                    35 +
-                                                (unitList[index ~/ 2 * 3 + 1]
-                                                                .name
-                                                                .length ~/
-                                                            10 +
-                                                        3) *
-                                                    SizeConfig
-                                                        .blockSizeHorizontal *
-                                                    4,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                _hexagon(index ~/ 2 * 3 + 1,
-                                                    listKeys, index, unitModel),
-                                                _unitName(
-                                                    unitList[index ~/ 2 * 3]
-                                                        .name),
-                                              ],
-                                            ),
-                                            (index > unitCount ~/ 2 &&
-                                                    unitCount % 3 == 1)
-                                                ? SizedBox(
-                                                    width: SizeConfig
-                                                            .blockSizeHorizontal *
-                                                        35,
-                                                  )
-                                                : Column(
-                                                    children: [
-                                                      _hexagon(
-                                                          index ~/ 2 * 3 + 2,
-                                                          listKeys,
-                                                          index,
-                                                          unitModel),
-                                                      _unitName(unitList[
-                                                              index ~/ 2 * 3 +
-                                                                  1]
-                                                          .name),
-                                                    ],
-                                                  ),
-                                          ],
-                                        ),
+                                      (index > unitCount ~/ 2 &&
+                                          unitCount % 3 == 1)
+                                          ? SizedBox(
+                                        width: SizeConfig
+                                            .blockSizeHorizontal *
+                                            35,
+                                      )
+                                          : Column(
+                                        children: [
+                                          _hexagon(
+                                              index ~/ 2 * 3 + 2,
+                                              listKeys,
+                                              index,
+                                              unitModel),
+                                          _unitName(unitList[
+                                          index ~/ 2 * 3 +
+                                              1]
+                                              .name),
+                                        ],
                                       ),
-                                    ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             )
                           ]),
-                        ),
+                        ))),
                       ));
                 }));
           } else {
@@ -340,7 +340,7 @@ class _UnitState extends State<UnitScreen> {
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
                             color: Color(0xFFD7EBFA),
-                            fontSize: TextSize.fontSize51,
+                            fontSize: SizeConfig.blockSizeHorizontal * 15,
                             shadows: [
                               BoxShadow(
                                 color: Color(0xFF76B9E8),

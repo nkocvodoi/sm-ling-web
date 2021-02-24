@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
         backgroundColor: Color(0xFF4285F4),
         body: SafeArea(
-            child: Container(
+            child: Center(child:Container(
                 alignment: Alignment.center,
                 width: SizeConfig.screenWidth,
                 height: SizeConfig.screenHeight,
@@ -64,6 +64,6 @@ class _SplashScreenState extends State<SplashScreen> {
                           child: Image.asset("assets/splash/logoApp.png",
                               height: SizeConfig.blockSizeVertical * 15)),
                       SizedBox(height: SizeConfig.blockSizeVertical * 10),
-                    ])))));
+                    ]))))));
   }
 }

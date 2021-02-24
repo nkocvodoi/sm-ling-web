@@ -80,131 +80,132 @@ class _MyCustomAppbarState extends State<MyCustomAppbar> {
     final save = Provider.of<UnitModel>(context, listen: false);
     return Consumer<ClassModel>(builder: (context, icon, child) {
       return Container(
-          height: widget.height,
-          width: widget.width,
-          color: AppColor.mainThemes,
-          child: Row(children: [
-            SizedBox(width: SizeConfig.safeBlockHorizontal * 5),
-            (widget.showAvatar)
-                ? ClipRRect(
-                    borderRadius: BorderRadius.circular(180),
-                    child: Application.user.avatar != null
-                        ? Image.network(Application.user.avatar, height: widget.height / 3 * 2, fit: BoxFit.fill)
-                        : Image.asset('assets/class/picture.png', height: widget.height / 3 * 2))
-                : IconButton(
-                    onPressed: () {
-                      Get.back();
-                      if (widget.unitScreen) {
-                        Provider.of<LessonModel>(context, listen: false).setOffset(0);
-                        Application.currentUnit = Unit();
-                        Application.unitList = UnitList();
-                        Application.currentBook = Book();
-                        //   // print("widget.classIndex: ${widget.classIndex}");
-                        //   // Provider.of<BookModel>(context, listen: false).setGrade(widget.classIndex - 1);
-                        //   // Get.off(ChooseBook(), transition: Transition.rightToLeftWithFade, preventDuplicates: true);
-                      }
-                      if (widget.chooseBook) {
-                        //   // Get.off(ClassScreen(), transition: Transition.rightToLeftWithFade, preventDuplicates: true);
-                        Application.bookList = BookList();
-                      }
-                    },
-                    icon: Icon(Icons.arrow_back_ios),
-                    color: AppColor.backButton,
-                  ),
-            SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
-            (widget.showAvatar)
-                ? Container(width: SizeConfig.blockSizeHorizontal * 8)
-                : Container(
-                    child: Text(widget.title,
-                        style: TextStyle(fontSize: SizeConfig.safeBlockVertical * 3, fontWeight: FontWeight.bold, color: Color(0xFF5877AA))),
-                  ),
-            Expanded(child: SizedBox()),
-            Stack(
-              children: [
-                Row(children: [
-                  SizedBox(width: SizeConfig.blockSizeVertical * 2),
-                  Container(
-                    height: SizeConfig.blockSizeVertical * 4,
-                    width: SizeConfig.blockSizeVertical * 7,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFC9E5F8), borderRadius: BorderRadius.only(topRight: Radius.circular(10), bottomRight: Radius.circular(10))),
-                  )
-                ]),
-                Row(children: [
-                  GestureDetector(
-                    key: listKeys[0],
-                    child: InkWell(
-                      onTap: () {
-                        icon.setShowValue();
-                        emit = StreamController();
-                        aPopup = ShowMoreExplainItem().createToolTips(
-                            'assets/honey_point.jpg',
-                            "Level",
-                            "Số level bạn đã hoàn thành là ${(!widget.unitScreen) ? "${Provider.of<ClassModel>(context, listen: false).diamond}" : Application.unitList.level.toString()}.",
-                            context);
-                        emit.stream.listen((a) => {
-                              aPopup.dismiss(),
-                              emit.close(),
-                            });
-                        ShowMoreExplainItem().showToolTips(aPopup, listKeys[0]);
-                      },
-                      child: Image.asset(
-                        'assets/honey_point.jpg',
-                        height: SizeConfig.blockSizeVertical * 4,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
-                  Container(
-                      child: Text(
-                          (!widget.unitScreen) ? "${Provider.of<ClassModel>(context, listen: false).hive}" : Application.unitList.level.toString(),
-                          style: TextStyle(fontSize: SizeConfig.safeBlockVertical * 3, fontWeight: FontWeight.bold, color: Color(0xFF5877AA)))),
-                ])
-              ],
-            ),
-            SizedBox(width: SizeConfig.safeBlockHorizontal * 5),
-            Stack(children: [
-              Row(children: [
-                SizedBox(width: SizeConfig.blockSizeVertical * 2),
-                Container(
-                  height: SizeConfig.blockSizeVertical * 4,
-                  width: SizeConfig.blockSizeVertical * 7,
-                  decoration: BoxDecoration(
-                      color: Color(0xFFC9E5F8), borderRadius: BorderRadius.only(topRight: Radius.circular(10), bottomRight: Radius.circular(10))),
-                )
-              ]),
-              Row(children: [
-                GestureDetector(
-                  key: listKeys[1],
-                  child: InkWell(
-                    onTap: () {
-                      icon.setShowValue();
-                      emit = StreamController();
-                      aPopup = ShowMoreExplainItem().createToolTips(
-                          'assets/droplets_yellow.jpg',
-                          "Số điểm",
-                          "Số điểm bạn đã đạt được là ${(!widget.unitScreen) ? "${icon.diamond}" : Application.unitList.score.toString()}.",
-                          context);
-                      emit.stream.listen((a) => {
-                            aPopup.dismiss(),
-                            emit.close(),
-                          });
-                      ShowMoreExplainItem().showToolTips(aPopup, listKeys[1]);
-                    },
-                    child: Image.asset(
-                      'assets/droplets_yellow.jpg',
-                      height: SizeConfig.blockSizeVertical * 4,
-                    ),
-                  ),
-                ),
-                SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
-                Container(
-                    child: Text((!widget.unitScreen) ? "${icon.diamond}" : Application.unitList.score.toString(),
-                        style: TextStyle(fontSize: SizeConfig.safeBlockVertical * 3, fontWeight: FontWeight.bold, color: Color(0xFF5877AA))))
-              ])
-            ]),
-            SizedBox(width: SizeConfig.safeBlockHorizontal * 5)
-          ]));
+                                     height: widget.height,
+                                     width: double.infinity,
+                                     color: AppColor.mainThemes,
+                                     alignment: Alignment.center,
+                                     child: SizedBox(width: SizeConfig.screenWidth,child: Row(children: [
+                                                                                                                                 SizedBox(width: SizeConfig.safeBlockHorizontal * 5),
+                                                                                                                                 (widget.showAvatar)
+                                                                                                                                     ? ClipRRect(
+                                                                                                                                         borderRadius: BorderRadius.circular(180),
+                                                                                                                                         child: Application.user.avatar != null
+                                                                                                                                             ? Image.network(Application.user.avatar, height: widget.height / 3 * 2, fit: BoxFit.fill)
+                                                                                                                                             : Image.asset('assets/class/picture.png', height: widget.height / 3 * 2))
+                                                                                                                                     : IconButton(
+                                                                                                                                         onPressed: () {
+                                                                                                                                           Get.back();
+                                                                                                                                           if (widget.unitScreen) {
+                                                                                                                                             Provider.of<LessonModel>(context, listen: false).setOffset(0);
+                                                                                                                                             Application.currentUnit = Unit();
+                                                                                                                                             Application.unitList = UnitList();
+                                                                                                                                             Application.currentBook = Book();
+                                                                                                                                             //   // print("widget.classIndex: ${widget.classIndex}");
+                                                                                                                                             //   // Provider.of<BookModel>(context, listen: false).setGrade(widget.classIndex - 1);
+                                                                                                                                             //   // Get.off(ChooseBook(), transition: Transition.rightToLeftWithFade, preventDuplicates: true);
+                                                                                                                                           }
+                                                                                                                                           if (widget.chooseBook) {
+                                                                                                                                             //   // Get.off(ClassScreen(), transition: Transition.rightToLeftWithFade, preventDuplicates: true);
+                                                                                                                                             Application.bookList = BookList();
+                                                                                                                                           }
+                                                                                                                                         },
+                                                                                                                                         icon: Icon(Icons.arrow_back_ios),
+                                                                                                                                         color: AppColor.backButton,
+                                                                                                                                       ),
+                                                                                                                                 SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
+                                                                                                                                 (widget.showAvatar)
+                                                                                                                                     ? Container(width: SizeConfig.blockSizeHorizontal * 8)
+                                                                                                                                     : Container(
+                                                                                                                                         child: Text(widget.title,
+                                                                                                                                             style: TextStyle(fontSize: SizeConfig.safeBlockVertical * 3, fontWeight: FontWeight.bold, color: Color(0xFF5877AA))),
+                                                                                                                                       ),
+                                                                                                                                 SizedBox(width: SizeConfig.safeBlockHorizontal * 35),
+                                                                                                                                 Stack(
+                                                                                                                                   children: [
+                                                                                                                                     Row(children: [
+                                                                                                                                       SizedBox(width: SizeConfig.blockSizeVertical * 2),
+                                                                                                                                       Container(
+                                                                                                                                         height: SizeConfig.blockSizeVertical * 4,
+                                                                                                                                         width: SizeConfig.blockSizeVertical * 7,
+                                                                                                                                         decoration: BoxDecoration(
+                                                                                                                                             color: Color(0xFFC9E5F8), borderRadius: BorderRadius.only(topRight: Radius.circular(10), bottomRight: Radius.circular(10))),
+                                                                                                                                       )
+                                                                                                                                     ]),
+                                                                                                                                     Row(children: [
+                                                                                                                                       GestureDetector(
+                                                                                                                                         key: listKeys[0],
+                                                                                                                                         child: InkWell(
+                                                                                                                                           onTap: () {
+                                                                                                                                             icon.setShowValue();
+                                                                                                                                             emit = StreamController();
+                                                                                                                                             aPopup = ShowMoreExplainItem().createToolTips(
+                                                                                                                                                 'assets/honey_point.jpg',
+                                                                                                                                                 "Level",
+                                                                                                                                                 "Số level bạn đã hoàn thành là ${(!widget.unitScreen) ? "${Provider.of<ClassModel>(context, listen: false).diamond}" : Application.unitList.level.toString()}.",
+                                                                                                                                                 context);
+                                                                                                                                             emit.stream.listen((a) => {
+                                                                                                                                                   aPopup.dismiss(),
+                                                                                                                                                   emit.close(),
+                                                                                                                                                 });
+                                                                                                                                             ShowMoreExplainItem().showToolTips(aPopup, listKeys[0]);
+                                                                                                                                           },
+                                                                                                                                           child: Image.asset(
+                                                                                                                                             'assets/honey_point.jpg',
+                                                                                                                                             height: SizeConfig.blockSizeVertical * 4,
+                                                                                                                                           ),
+                                                                                                                                         ),
+                                                                                                                                       ),
+                                                                                                                                       SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
+                                                                                                                                       Container(
+                                                                                                                                           child: Text(
+                                                                                                                                               (!widget.unitScreen) ? "${Provider.of<ClassModel>(context, listen: false).hive}" : Application.unitList.level.toString(),
+                                                                                                                                               style: TextStyle(fontSize: SizeConfig.safeBlockVertical * 3, fontWeight: FontWeight.bold, color: Color(0xFF5877AA)))),
+                                                                                                                                     ])
+                                                                                                                                   ],
+                                                                                                                                 ),
+                                                                                                                                 SizedBox(width: SizeConfig.safeBlockHorizontal * 5),
+                                                                                                                                 Stack(children: [
+                                                                                                                                   Row(children: [
+                                                                                                                                     SizedBox(width: SizeConfig.blockSizeVertical * 2),
+                                                                                                                                     Container(
+                                                                                                                                       height: SizeConfig.blockSizeVertical * 4,
+                                                                                                                                       width: SizeConfig.blockSizeVertical * 7,
+                                                                                                                                       decoration: BoxDecoration(
+                                                                                                                                           color: Color(0xFFC9E5F8), borderRadius: BorderRadius.only(topRight: Radius.circular(10), bottomRight: Radius.circular(10))),
+                                                                                                                                     )
+                                                                                                                                   ]),
+                                                                                                                                   Row(children: [
+                                                                                                                                     GestureDetector(
+                                                                                                                                       key: listKeys[1],
+                                                                                                                                       child: InkWell(
+                                                                                                                                         onTap: () {
+                                                                                                                                           icon.setShowValue();
+                                                                                                                                           emit = StreamController();
+                                                                                                                                           aPopup = ShowMoreExplainItem().createToolTips(
+                                                                                                                                               'assets/droplets_yellow.jpg',
+                                                                                                                                               "Số điểm",
+                                                                                                                                               "Số điểm bạn đã đạt được là ${(!widget.unitScreen) ? "${icon.diamond}" : Application.unitList.score.toString()}.",
+                                                                                                                                               context);
+                                                                                                                                           emit.stream.listen((a) => {
+                                                                                                                                                 aPopup.dismiss(),
+                                                                                                                                                 emit.close(),
+                                                                                                                                               });
+                                                                                                                                           ShowMoreExplainItem().showToolTips(aPopup, listKeys[1]);
+                                                                                                                                         },
+                                                                                                                                         child: Image.asset(
+                                                                                                                                           'assets/droplets_yellow.jpg',
+                                                                                                                                           height: SizeConfig.blockSizeVertical * 4,
+                                                                                                                                         ),
+                                                                                                                                       ),
+                                                                                                                                     ),
+                                                                                                                                     SizedBox(width: SizeConfig.safeBlockHorizontal * 2),
+                                                                                                                                     Container(
+                                                                                                                                         child: Text((!widget.unitScreen) ? "${icon.diamond}" : Application.unitList.score.toString(),
+                                                                                                                                             style: TextStyle(fontSize: SizeConfig.safeBlockVertical * 3, fontWeight: FontWeight.bold, color: Color(0xFF5877AA))))
+                                                                                                                                   ])
+                                                                                                                                 ]),
+                                                                                                                                 SizedBox(width: SizeConfig.safeBlockHorizontal * 5)
+                                                                                                                               ])));
     });
   }
 }
