@@ -88,7 +88,8 @@ class _SettingState extends State<Setting> {
           child: Container(
             color: AppColor.mainThemes,
             height: SizeConfig.screenHeight * 0.11,
-            child: Row(
+            alignment: Alignment.center,
+            child: SizedBox(width: SizeConfig.screenWidth,child: Row(
               children: [
                 SizedBox(width: SizeConfig.safeBlockHorizontal * 4),
                 IconButton(
@@ -105,7 +106,7 @@ class _SettingState extends State<Setting> {
                       color: Color(0xFF5877AA)),
                 ),
               ],
-            ),
+            )),
           ),
         ),
         backgroundColor: AppColor.mainBackGround,

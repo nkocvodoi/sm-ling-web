@@ -3,7 +3,6 @@ import 'package:SMLingg/app/components/custom_button.component.dart';
 import 'package:SMLingg/app/setting/setting.view.dart';
 import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/config/config_screen.dart';
-import 'package:SMLingg/resources/i18n.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,11 @@ Widget userProfile(context, ClassModel classModel) {
           color: Colors.lightBlueAccent,
           child: SingleChildScrollView(
               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Container(
+                  Container(
+                  color: Color(0xFF4285F4),
+              alignment: Alignment.center,
+              width: double.infinity,
+              child: Container(
               width: SizeConfig.screenWidth,
               height: SizeConfig.blockSizeHorizontal * 90,
               color: Color(0xFF4285F4),
@@ -47,7 +50,8 @@ Widget userProfile(context, ClassModel classModel) {
                           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                           child: Text(
                             Application.user.displayName,
-                            style: TextStyle(fontSize: TextSize.fontSize20, fontWeight: FontWeight.w700, color: Color(0xFF4285F4)),
+                            style: TextStyle(
+                                fontSize: TextSize.fontSize20, fontWeight: FontWeight.w700, color: Color(0xFF4285F4)),
                           ),
                         ),
                       ),
@@ -71,13 +75,13 @@ Widget userProfile(context, ClassModel classModel) {
                           );
                         },
                         child: Container(
-                         child: Image.asset('assets/profile/setting.jpg',
-                            width: SizeConfig.safeBlockVertical * 3.5, height: SizeConfig.safeBlockVertical * 3.5),
+                          child: Image.asset('assets/profile/setting.jpg',
+                              width: SizeConfig.safeBlockVertical * 3.5, height: SizeConfig.safeBlockVertical * 3.5),
                         ),
                       )),
                 ],
               ),
-            ),
+            )),
             Padding(
               padding: EdgeInsets.only(top: 20, bottom: 10),
               // child: Text(
@@ -115,9 +119,11 @@ Widget userProfile(context, ClassModel classModel) {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 margin: EdgeInsets.only(bottom: 20),
                 width: SizeConfig.blockSizeHorizontal * 80,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal * 5), color: Color(0xFFE5F3FD)),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal * 5), color: Color(0xFFE5F3FD)),
                 child: Column(children: [
-                  relativeApp(appIcon: 'assets/profile/1.png', name: 'Từ vựng tiếng Anh - Sách Mềm', top: 0, bottom: 15),
+                  relativeApp(
+                      appIcon: 'assets/profile/1.png', name: 'Từ vựng tiếng Anh - Sách Mềm', top: 0, bottom: 15),
                   relativeApp(appIcon: 'assets/profile/2.png', name: 'SM Song - Sách Mềm', top: 0, bottom: 15),
                   relativeApp(appIcon: 'assets/profile/3.png', name: 'Nghe nói tiếng anh - Sách Mềm', top: 0, bottom: 0)
                 ]))
@@ -136,60 +142,67 @@ Widget circle({double size, Color color}) {
 
 Widget achievement({String image, String userNumber, String message}) {
   return Container(
-    height: SizeConfig.blockSizeHorizontal * 18,
-    width: SizeConfig.blockSizeHorizontal * 42,
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal * 4),
-        border: Border.all(color: Color(0xFFBCE2FF)),
-        boxShadow: [
-          BoxShadow(color: Color(0xFF97CFF5)),
-          BoxShadow(
-              color: Colors.white, // background color
-              spreadRadius: 1,
-              blurRadius: 14.0)
-        ]),
-    child: Row(
-      children: [
-        Container(
-            margin: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal),
-            child: Image.asset(image, width: SizeConfig.blockSizeHorizontal * 10),
-            width: SizeConfig.blockSizeHorizontal * 12,
-            alignment: Alignment.center),
-        VerticalDivider(
-          width: SizeConfig.blockSizeHorizontal * 2,
-          color: Color(0xFFBCE2FF),
-          thickness: 3,
-        ),
-        Container(
-          width: SizeConfig.blockSizeHorizontal * 25,
-          alignment: Alignment.center,
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              text: '$userNumber ',
-              style: TextStyle(fontSize: TextSize.fontSize30, color: Color(0xFF4285F4), fontWeight: FontWeight.w700),
-              children: [
-                TextSpan(
-                    text: (userNumber.length * SizeConfig.blockSizeHorizontal * 5 + message.length * SizeConfig.blockSizeHorizontal * 3 >
-                            SizeConfig.blockSizeHorizontal * 25)
-                        ? '\n'
-                        : '',
-                    style: TextStyle(fontSize: TextSize.fontSize15, color: Color(0xFF4285F4), fontWeight: FontWeight.w400)),
-                TextSpan(text: '$message', style: TextStyle(fontSize: TextSize.fontSize15, color: Color(0xFF4285F4), fontWeight: FontWeight.w400)),
-              ],
+        height: SizeConfig.blockSizeHorizontal * 18,
+        width: SizeConfig.blockSizeHorizontal * 42,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal * 4),
+            border: Border.all(color: Color(0xFFBCE2FF)),
+            boxShadow: [
+              BoxShadow(color: Color(0xFF97CFF5)),
+              BoxShadow(
+                  color: Colors.white, // background color
+                  spreadRadius: 1,
+                  blurRadius: 14.0)
+            ]),
+        child: Row(
+          children: [
+            Container(
+                margin: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal),
+                child: Image.asset(image, width: SizeConfig.blockSizeHorizontal * 10),
+                width: SizeConfig.blockSizeHorizontal * 12,
+                alignment: Alignment.center),
+            VerticalDivider(
+              width: SizeConfig.blockSizeHorizontal * 2,
+              color: Color(0xFFBCE2FF),
+              thickness: 3,
             ),
-          ),
-        )
-      ],
-    ),
-  );
+            Container(
+              width: SizeConfig.blockSizeHorizontal * 25,
+              alignment: Alignment.center,
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: '$userNumber ',
+                  style:
+                      TextStyle(fontSize: TextSize.fontSize30, color: Color(0xFF4285F4), fontWeight: FontWeight.w700),
+                  children: [
+                    TextSpan(
+                        text: (userNumber.length * SizeConfig.blockSizeHorizontal * 5 +
+                                    message.length * SizeConfig.blockSizeHorizontal * 3 >
+                                SizeConfig.blockSizeHorizontal * 25)
+                            ? '\n'
+                            : '',
+                        style: TextStyle(
+                            fontSize: TextSize.fontSize15, color: Color(0xFF4285F4), fontWeight: FontWeight.w400)),
+                    TextSpan(
+                        text: '$message',
+                        style: TextStyle(
+                            fontSize: TextSize.fontSize15, color: Color(0xFF4285F4), fontWeight: FontWeight.w400)),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      );
 }
 
 Widget relativeApp({String name, String appIcon, double bottom, double top}) {
   return Padding(
     padding: EdgeInsets.only(bottom: bottom, top: top),
     child: ListTile(
-      title: Text(name, style: TextStyle(color: Color(0xFF5877AA), fontWeight: FontWeight.w500, fontSize: TextSize.fontSize18)),
+      title: Text(name,
+          style: TextStyle(color: Color(0xFF5877AA), fontWeight: FontWeight.w500, fontSize: TextSize.fontSize18)),
       leading: Image.asset(appIcon, height: SizeConfig.blockSizeVertical * 7),
     ),
   );

@@ -44,9 +44,9 @@ class TextSize {
       Application.sharePreference.getInt("setGrade") >= 5 ? SizeConfig.safeBlockHorizontal * 5 : SizeConfig.safeBlockVertical * 3.5;
   static double fontSize40 =
       Application.sharePreference.getInt("setGrade") >= 5 ? SizeConfig.safeBlockHorizontal * 5 : SizeConfig.safeBlockVertical * 6;
-  static double fontSize51 = SizeConfig.safeBlockHorizontal * 15;
-  static double fontSize30 = SizeConfig.safeBlockHorizontal * 8;
-  static double fontSize15 = SizeConfig.safeBlockHorizontal * 4;
+  static double fontSize51 = SizeConfig.safeBlockVertical * 13;
+  static double fontSize30 = SizeConfig.safeBlockVertical * 6;
+  static double fontSize15 = SizeConfig.safeBlockVertical * 4;
   static String fontFamily = "Quicksand";
 }
 
