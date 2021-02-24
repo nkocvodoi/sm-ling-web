@@ -27,7 +27,7 @@ Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, 
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${'Level'.i18n} ${units[index].userLevel}/${units[index].totalLevels}',
+                    '${'Level'} ${units[index].userLevel}/${units[index].totalLevels}',
                     style: TextStyle(
                       fontSize: SizeConfig.blockSizeHorizontal * 5,
                       fontWeight: FontWeight.w700,
@@ -37,8 +37,8 @@ Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, 
                   SizedBox(height: SizeConfig.blockSizeVertical),
                   Text(
                     (units[index].doneLessons == units[index].totalLessons)
-                        ? '${'Learned'.i18n} ${'${units[index].doneLessons}/${units[index].totalLessons}'}'
-                        : '${'Learned'.i18n} ${'${units[index].userLesson}/${units[index].totalLessonsOfLevel}'}',
+                        ? '${'Learned'} ${'${units[index].doneLessons}/${units[index].totalLessons}'}'
+                        : '${'Learned'} ${'${units[index].userLesson}/${units[index].totalLessonsOfLevel}'}',
                     style: TextStyle(fontSize: SizeConfig.blockSizeHorizontal * 3, fontWeight: FontWeight.w700, color: Color(0xFFC5DBFF)),
                   ),
                 ],
@@ -46,7 +46,7 @@ Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, 
               CustomButton(
                 backgroundColor: Color(0xFF6EA5FF),
                 child: Text(
-                  'TIPS'.i18n,
+                  'TIPS',
                   style: TextStyle(
                     fontSize: SizeConfig.blockSizeHorizontal * 4,
                     fontWeight: FontWeight.w700,
@@ -73,8 +73,8 @@ Widget tooltips(context, int grade, String bookID, List<Unit> units, int index, 
             backgroundColor: Color(0xFFE5F3FD),
             child: Text(
               (units[index].userLevel == units[index].totalLevels && units[index].userLesson == units[index].totalLessonsOfLevel)
-                  ? 'PRACTICE'.i18n
-                  : 'START'.i18n,
+                  ? 'PRACTICE'
+                  : 'START',
               style: TextStyle(
                 fontSize: SizeConfig.blockSizeHorizontal * 4,
                 fontWeight: FontWeight.w700,

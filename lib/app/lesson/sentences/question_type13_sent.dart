@@ -14,7 +14,7 @@ class QuestionType13Sent extends StatelessWidget {
         Padding(
             padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: Command(
-              command: "Matching pair.".i18n,
+              command: "Matching pair.",
             )),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),
         MatchPair(),

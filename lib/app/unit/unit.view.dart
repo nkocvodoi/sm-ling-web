@@ -15,7 +15,6 @@ import 'package:SMLingg/services/unit_list.service.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/material.dart';
 import 'package:SMLingg/app/class_screen/class.provider.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:polygon_clipper/polygon_clipper.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +81,7 @@ class _UnitState extends State<UnitScreen> {
                   classIndex: widget.grade,
                   unitScreen: true,
                   showAvatar: false,
-                  title: '${'GRADE'.i18n} ${'${widget.grade}'}',
+                  title: '${'GRADE'} ${'${widget.grade}'}',
                   height: SizeConfig.screenHeight * 0.11,
                   width: SizeConfig.screenWidth,
                 ),
@@ -320,14 +319,14 @@ class _UnitState extends State<UnitScreen> {
                         children: [
                           Positioned(
                             bottom: -3,
-                            child: SvgPicture.asset(
-                              'assets/star.svg',
+                            child: Image.asset(
+                              'assets/star.jpg',
                               width: SizeConfig.blockSizeHorizontal * 12,
                               color: LevelColor.coreShadowColor[index % 7],
                             ),
                           ),
-                          SvgPicture.asset(
-                            'assets/star.svg',
+                          Image.asset(
+                            'assets/star.jpg',
                             width: SizeConfig.blockSizeHorizontal * 12,
                             color: LevelColor.coreColor[index % 7],
                           ),
@@ -363,9 +362,9 @@ class _UnitState extends State<UnitScreen> {
                           unitModel.userLesson(unit - 1) ==
                               Application
                                   .unitList.units[unit - 1].totalLessonsOfLevel)
-                      ? SvgPicture.asset('assets/unit/lucigacfinish.svg',
+                      ? Image.asset('assets/unit/lucigacfinish.jpg',
                           height: SizeConfig.blockSizeVertical * 5)
-                      : SvgPicture.asset('assets/unit/lucgiac.svg',
+                      : Image.asset('assets/unit/lucgiac.jpg',
                           height: SizeConfig.blockSizeVertical * 5),
                   Text(
                     (unitModel.userLevel(unit - 1)).toString(),

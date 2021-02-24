@@ -200,8 +200,8 @@ class _LessonScreenState extends State<LessonScreen> {
                                                       SizedBox(width: SizeConfig.safeBlockHorizontal * 5),
                                                       Text(
                                                           (lessonModel.score >= 0.5 && lessonModel.score < 0.9)
-                                                              ? "Almost Correct.".i18n
-                                                              : "Correct.".i18n,
+                                                              ? "Almost Correct."
+                                                              : "Correct.",
                                                           style: TextStyle(
                                                               color: AppColor.correctButtonShadow,
                                                               fontWeight: FontWeight.w700,
@@ -219,7 +219,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                                         ? Row(
                                                             children: [
                                                               SizedBox(width: SizeConfig.safeBlockHorizontal * 5),
-                                                              Text("Better try next time !".i18n,
+                                                              Text("Better try next time !",
                                                                   style: TextStyle(
                                                                       color: AppColor.wrongButtonShadow,
                                                                       fontWeight: FontWeight.w700,
@@ -233,7 +233,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                                             ],
                                                           )
                                                         : ListTile(
-                                                            title: Text("The correct answer:".i18n,
+                                                            title: Text("The correct answer:",
                                                                 style: TextStyle(
                                                                     fontFamily: TextSize.fontFamily,
                                                                     color: AppColor.wrongButtonShadow,
@@ -252,13 +252,13 @@ class _LessonScreenState extends State<LessonScreen> {
                                                                 saveCurrentBookId: saveCurrentBookId),
                                                           )
                                                     : ListTile(
-                                                        title: Text("Hmmm... something not right".i18n,
+                                                        title: Text("Hmmm... something not right",
                                                             style: TextStyle(
                                                                 fontFamily: TextSize.fontFamily,
                                                                 color: Color(0xFFEF8F00),
                                                                 fontWeight: FontWeight.w700,
                                                                 fontSize: TextSize.fontSize18)),
-                                                        subtitle: Text("Please try again".i18n,
+                                                        subtitle: Text("Please try again",
                                                             textAlign: TextAlign.left,
                                                             style: TextStyle(
                                                                 fontFamily: TextSize.fontFamily,
@@ -274,7 +274,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                             CustomButton(
                                                 deactivate: lessonModel.onSubmitted,
                                                 elevation: 6,
-                                                child: Text("CONTINUE".i18n,
+                                                child: Text("CONTINUE",
                                                     style:
                                                         TextStyle(fontWeight: FontWeight.w700, fontSize: TextSize.fontSize18, color: Colors.white)),
                                                 radius: 90,
@@ -306,7 +306,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                                       matchPairModel.setIdAnswerList();
                                                       lessonModel.changeNextQuestion();
                                                     },
-                                                    child: Text("CANNOT TALK RIGHT NOW".i18n,
+                                                    child: Text("CANNOT TALK RIGHT NOW",
                                                         style: TextStyle(
                                                             fontWeight: FontWeight.w700,
                                                             fontSize: TextSize.fontSize18,
@@ -320,7 +320,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                                 elevation: 6,
                                                 deactivate: !lessonModel.hasPicked(context: context),
                                                 child: Text(
-                                                  "CHECK".i18n,
+                                                  "CHECK",
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.w700,
                                                       fontSize: TextSize.fontSize18,
@@ -349,7 +349,7 @@ class _LessonScreenState extends State<LessonScreen> {
                 ),
               );
             } else {
-              return LessonShowLoadQuestionError(message: "Upcoming soon".i18n);
+              return LessonShowLoadQuestionError(message: "Upcoming soon");
             }
           } else if (snapshot.hasError) {
             print("snapshot.error: ${snapshot.error}");

@@ -6,7 +6,6 @@ import 'package:SMLingg/config/config_screen.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 
@@ -153,7 +152,7 @@ class _SortWordsState extends State<SortWords> {
                       (index) =>
                           _wordButton(text: sortWordsModel.wordSelected[index].text, type: "answer", index: sortWordsModel.wordSelected[index].index))
                 ])),
-        SvgPicture.asset('assets/divider.svg', width: SizeConfig.safeBlockHorizontal * 90),
+        Image.asset('assets/divider.jpg', width: SizeConfig.safeBlockHorizontal * 90),
         SizedBox(height: SizeConfig.safeBlockVertical * 3),
         Container(
             width: SizeConfig.safeBlockHorizontal * 90,

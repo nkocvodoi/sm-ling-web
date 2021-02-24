@@ -218,6 +218,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.9"
+  desktop_window:
+    dependency: "direct main"
+    description:
+      name: desktop_window
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   dio:
     dependency: "direct main"
     description:
@@ -321,6 +328,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.1"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -366,13 +378,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.4"
-  gettext_parser:
-    dependency: transitive
-    description:
-      name: gettext_parser
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0+1"
   glob:
     dependency: transitive
     description:
@@ -436,13 +441,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.4"
-  i18n_extension:
-    dependency: "direct main"
-    description:
-      name: i18n_extension
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   image:
     dependency: transitive
     description:
@@ -798,13 +796,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.2"
-  sprintf:
-    dependency: transitive
-    description:
-      name: sprintf
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.0"
   stack_trace:
     dependency: transitive
     description:

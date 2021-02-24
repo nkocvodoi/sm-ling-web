@@ -21,7 +21,7 @@ class QuestionType10Sent extends StatelessWidget {
         Padding(
             padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsContent(
-              command: "Choose the correct answer.".i18n,
+              command: "Choose the correct answer.",
               content: s.vnText,
             )),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),

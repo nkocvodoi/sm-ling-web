@@ -21,7 +21,7 @@ class QuestionType2Sent extends StatelessWidget {
         Padding(
             padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsContent(
-              command: "Translate this sentence.".i18n,
+              command: "Translate this sentence.",
               content: s.vnText,
             )),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),

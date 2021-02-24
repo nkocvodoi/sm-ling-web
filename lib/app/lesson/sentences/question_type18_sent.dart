@@ -25,7 +25,7 @@ class QuestionType18Sent extends StatelessWidget {
         Padding(
             padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsVnContentVsEnArray(
-              command: "Translate sentences".i18n,
+              command: "Translate sentences",
               vnContent: s.vnText,
               enArray: s.en,
               isHiddenWord: true,

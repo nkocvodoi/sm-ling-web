@@ -26,7 +26,7 @@ class QuestionType1Sent extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
                 child: CommandVsSound(
-                  command: "Listen and arrange words into sentences correctly.".i18n,
+                  command: "Listen and arrange words into sentences correctly.",
                   soundUrl: s.audio,
                 )),
             SizedBox(height: SizeConfig.safeBlockVertical * 5),

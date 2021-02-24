@@ -20,7 +20,7 @@ class QuestionType4Sent extends StatelessWidget {
       children: [
         Padding(
             padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
-            child: CommandVsContentVsSound(command: "Speak out loud.".i18n, content: s.enText, soundUrl: s.audio, type: "sentence")),
+            child: CommandVsContentVsSound(command: "Speak out loud.", content: s.enText, soundUrl: s.audio, type: "sentence")),
         SizedBox(
           height: SizeConfig.safeBlockVertical * 5,
         ),

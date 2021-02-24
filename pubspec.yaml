@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   conreality_headset: ^0.2.0
   flutter_launcher_icons: ^0.8.1
@@ -40,7 +42,7 @@ dependencies:
   animations: ^1.1.2
   flutter_tts: ^1.0.0
   path_provider: ^1.6.24
-  i18n_extension: ^2.0.0
+#  i18n_extension: ^1.5.1
   fluttertoast: ^7.1.1
   dio: ^3.0.10
   json_annotation: ^3.1.0
@@ -58,8 +60,7 @@ dependencies:
   audio_session: ^0.0.11
   number_to_words: ^0.0.3
   firebase_messaging: ^7.0.3
-
-
+  desktop_window: ^0.3.0
 
 
 dev_dependencies:

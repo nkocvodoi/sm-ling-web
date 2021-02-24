@@ -57,6 +57,9 @@ Future<String> signInWithGoogle(BuildContext context) async {
             assert(user.uid == currentUser.uid);
 
             // print('signInWithGoogle succeeded: $user');
+            name = currentUser.displayName;
+            email= currentUser.email;
+            imageUrl = currentUser.photoURL;
             Application.sharePreference.putString("access_token", googleSignInAuthentication.accessToken);
             print('access_token: ${Application.sharePreference.getString("access_token")}');
             return '$user';

@@ -99,7 +99,7 @@ class _ChooseImageState extends State<ChooseImage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("* In case you need help".i18n,
+                Text("* In case you need help",
                     style: TextStyle(fontWeight: FontWeight.w600, color: AppColor.mainThemesFocus, fontSize: TextSize.fontSize16)),
                 Container(
                   decoration: BoxDecoration(

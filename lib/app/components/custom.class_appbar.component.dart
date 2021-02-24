@@ -50,9 +50,9 @@ class _MyCustomAppbarState extends State<MyCustomAppbar> {
     //     createDialogShowMessageAndAction(
     //         context: context,
     //         top: SizeConfig.blockSizeVertical * 50,
-    //         title: "Do you want to continue the last lesson?".i18n,
-    //         titleLeftButton: "No".i18n,
-    //         titleRightButton: "Yes".i18n,
+    //         title: "Do you want to continue the last lesson?",
+    //         titleLeftButton: "No",
+    //         titleRightButton: "Yes",
     //         leftAction: () {
     //           Provider.of<UnitModel>(context, listen: false).clearSave();
     //           Navigator.pop(context);
@@ -138,7 +138,7 @@ class _MyCustomAppbarState extends State<MyCustomAppbar> {
                         icon.setShowValue();
                         emit = StreamController();
                         aPopup = ShowMoreExplainItem().createToolTips(
-                            'assets/honey_point.svg',
+                            'assets/honey_point.jpg',
                             "Level",
                             "Số level bạn đã hoàn thành là ${(!widget.unitScreen) ? "${Provider.of<ClassModel>(context, listen: false).diamond}" : Application.unitList.level.toString()}.",
                             context);
@@ -148,8 +148,8 @@ class _MyCustomAppbarState extends State<MyCustomAppbar> {
                             });
                         ShowMoreExplainItem().showToolTips(aPopup, listKeys[0]);
                       },
-                      child: SvgPicture.asset(
-                        'assets/honey_point.svg',
+                      child: Image.asset(
+                        'assets/honey_point.jpg',
                         height: SizeConfig.blockSizeVertical * 4,
                       ),
                     ),
@@ -180,16 +180,19 @@ class _MyCustomAppbarState extends State<MyCustomAppbar> {
                     onTap: () {
                       icon.setShowValue();
                       emit = StreamController();
-                      aPopup = ShowMoreExplainItem().createToolTips('assets/droplets_yellow.svg', "Số điểm",
-                          "Số điểm bạn đã đạt được là ${(!widget.unitScreen) ? "${icon.diamond}" : Application.unitList.score.toString()}.", context);
+                      aPopup = ShowMoreExplainItem().createToolTips(
+                          'assets/droplets_yellow.jpg',
+                          "Số điểm",
+                          "Số điểm bạn đã đạt được là ${(!widget.unitScreen) ? "${icon.diamond}" : Application.unitList.score.toString()}.",
+                          context);
                       emit.stream.listen((a) => {
                             aPopup.dismiss(),
                             emit.close(),
                           });
                       ShowMoreExplainItem().showToolTips(aPopup, listKeys[1]);
                     },
-                    child: SvgPicture.asset(
-                      'assets/droplets_yellow.svg',
+                    child: Image.asset(
+                      'assets/droplets_yellow.jpg',
                       height: SizeConfig.blockSizeVertical * 4,
                     ),
                   ),

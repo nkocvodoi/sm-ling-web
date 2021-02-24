@@ -22,7 +22,7 @@ class QuestionType15Sent extends StatelessWidget {
         Padding(
             padding: EdgeInsets.only(left: SizeConfig.safeBlockHorizontal * 5, right: SizeConfig.safeBlockHorizontal * 5),
             child: CommandVsContentVsSound(
-                command: "Listen and complete the blank.".i18n, content: content, soundUrl: s.audio, blank: true, type: "sentence")),
+                command: "Listen and complete the blank.", content: content, soundUrl: s.audio, blank: true, type: "sentence")),
         SizedBox(height: SizeConfig.safeBlockVertical * 5),
         FillTextField()
       ],
