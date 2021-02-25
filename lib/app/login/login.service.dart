@@ -3,7 +3,7 @@ import 'package:SMLingg/config/application.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ String imageUrl;
 //Todo: handle Sign in with Google
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
-final FacebookLogin facebookSignIn = FacebookLogin();
+// final FacebookLogin facebookSignIn = FacebookLogin();
 
 //Todo: Sign in Google
 Future<String> signInWithGoogle(BuildContext context) async {
@@ -60,8 +60,9 @@ Future<String> signInWithGoogle(BuildContext context) async {
             name = currentUser.displayName;
             email= currentUser.email;
             imageUrl = currentUser.photoURL;
-            Application.sharePreference.putString("access_token", googleSignInAuthentication.accessToken);
-            print('access_token: ${Application.sharePreference.getString("access_token")}');
+            print("$name ----- $email ------ $imageUrl");
+            // Application.sharePreference.putString("access_token", googleSignInAuthentication.accessToken);
+            // print('access_token: ${Application.sharePreference.getString("access_token")}');
             return '$user';
           } else {
             Provider.of<LoginModel>(context, listen: false).logInAbsorb(false);
@@ -91,40 +92,56 @@ Future<void> signOutGoogle() async {
   print("User Signed Out");
 }
 
+Map<String, dynamic> _userData;
+AccessToken _accessToken;
 //Todo: Sign in Facebook
 Future loginWithFacebook(BuildContext context) async {
-  final facebookLogin = FacebookLogin();
-  final FacebookLoginResult result = await facebookLogin.logIn(['email']);
-  print(result.status);
-  switch (result.status) {
-    case FacebookLoginStatus.loggedIn:
-      final FacebookAccessToken accessToken = result.accessToken;
-      Application.sharePreference.putString("access_token", result.accessToken.token);
-      print(Application.sharePreference.getString("access_token"));
-      print('''
-         Logged in!
-         Token: ${accessToken.token}
-         User id: ${accessToken.userId}
-         Expires: ${accessToken.expires}
-         Permissions: ${accessToken.permissions}
-         Declined permissions: ${accessToken.declinedPermissions}
-         ''');
-      break;
-    case FacebookLoginStatus.cancelledByUser:
-      Provider.of<LoginModel>(context, listen: false).logInAbsorb(false);
-      print('Login cancelled by the user.');
-      break;
-    case FacebookLoginStatus.error:
-      Provider.of<LoginModel>(context, listen: false).logInAbsorb(false);
-      print('Something went wrong with the login process.\n'
-          'Here\'s the error Facebook gave us: ${result.errorMessage}');
-      break;
+  try {
+    // show a circular progress indicator
+    _accessToken = await FacebookAuth.instance.login(); // by the fault we request the email and the public profile
+    // loginBehavior is only supported for Android devices, for ios it will be ignored
+    // _accessToken = await FacebookAuth.instance.login(
+    //   permissions: ['email', 'public_profile', 'user_birthday', 'user_friends', 'user_gender', 'user_link'],
+    //   loginBehavior:
+    //       LoginBehavior.DIALOG_ONLY, // (only android) show an authentication dialog instead of redirecting to facebook app
+    // );
+    // get the user data
+    // by default we get the userId, email,name and picture
+    final userData = await FacebookAuth.instance.getUserData();
+    // final userData = await FacebookAuth.instance.getUserData(fields: "email,birthday,friends,gender,link");
+    _userData = userData;
+
+    print("userData: $userData");
+    print("accessToken: ${_accessToken.toJson()}");
+  } on FacebookAuthException catch (e) {
+    // if the facebook login fails
+    print(e.message); // print the error message in console
+    // check the error type
+    switch (e.errorCode) {
+      case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
+        print("You have a previous login operation in progress");
+        break;
+      case FacebookAuthErrorCode.CANCELLED:
+        print("login cancelled");
+        break;
+      case FacebookAuthErrorCode.FAILED:
+        print("login failed");
+        break;
+    }
+  } catch (e, s) {
+    // print in the logs the unknown errors
+    print(e);
+    print(s);
+  } finally {
+    // update the view
   }
 }
 
 Future logout() async {
   await _auth.signOut();
-  await facebookSignIn.logOut();
+  await FacebookAuth.instance.logOut();
+  _accessToken = null;
+  _userData = null;
 }
 
 Future checkLogin() async {
