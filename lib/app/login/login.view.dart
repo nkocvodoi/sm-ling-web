@@ -88,14 +88,11 @@ class _LoginPageState extends State<LoginPage> {
               (method == 1)
                   ? signInWithGoogle(context).then((result) {
                       if (result != null) {
-                        if (Application.sharePreference
-                                .getString("access_token") ==
-                            null) {
+                        if (Application.sharePreference.getString("access_token") == null) {
                           loginModel.logInAbsorb(false);
                         }
                         Navigator.of(context).pushNamed('/loading');
-                        UserServiceGoogle()
-                            .loadUserProfile(
+                        UserServiceGoogle().loadUserProfile(
                                 email: email,
                                 avatar: imageUrl,
                                 displayName: name)
@@ -112,9 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     })
                   : loginWithFacebook(context).then((result) {
-                      if (Application.sharePreference
-                              .getString("access_token") ==
-                          null) {
+                      if (Application.sharePreference.getString("access_token") == null) {
                         loginModel.logInAbsorb(false);
                       }
                       UserServiceFacebook()
