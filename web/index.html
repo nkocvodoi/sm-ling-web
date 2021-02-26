@@ -64,26 +64,23 @@
 
 </script>
 <script>
-      var FACEBOOK_APP_ID = "851737475629924";
-      window.fbAsyncInit = function () {
-        FB.init({
-          appId: 851737475629924,
-          cookie: true,
-          xfbml: true,
-          version: "v9.0",
-        });
-        FB.AppEvents.logPageView();
-      };
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '851737475629924',
+      xfbml      : true,
+      version    : 'v10.0'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 </script>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script src="flutter_facebook_auth.js" type="application/javascript"></script>
-<script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("flutter-first-frame", function () {
-          navigator.serviceWorker.register("flutter_service_worker.js");
-        });
-      }
-    </script>
 <script src="flutter_facebook_auth.js" type="application/javascript" ></script>
 <script src="main.dart.js" type="application/javascript"></script>
 </body>
