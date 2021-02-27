@@ -180,7 +180,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                       alignment: Alignment.bottomCenter,
                                       width: SizeConfig.safeBlockHorizontal * 90,
                                       height: lessonModel.hasCheckedAnswer == 1
-                                          ? SizeConfig.safeBlockHorizontal * 40
+                                          ? SizeConfig.safeBlockHorizontal * 50
                                           : handleHeight(textLength: lessonModel.handleAnswerWhenWrong().length),
                                       decoration: BoxDecoration(
                                           color: lessonModel.hasCheckedAnswer == 1
@@ -300,6 +300,15 @@ class _LessonScreenState extends State<LessonScreen> {
                                       : Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
+                                      lessonModel.isChooseImageAnswer() && lessonModel.pressed ?
+                                      GestureDetector(
+                                        onTap: () => lessonModel..setShow()..setPressed(),
+                                        child: Text("SHOW THE MEANING",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: TextSize.fontSize18,
+                                                color: AppColor.mainThemesFocus)),
+                                      )  : Container(),
                                       lessonModel.isRecorderToText()
                                           ? GestureDetector(
                                         onTap: () async {
@@ -335,13 +344,15 @@ class _LessonScreenState extends State<LessonScreen> {
                                           shadowColor:
                                           lessonModel.hasPicked(context: context) ? AppColor.correctButtonShadow : AppColor.mainThemesFocus,
                                           onPressed: () async {
-                                            await lessonModel.handleTypeAnswer();
-                                            await lessonModel.checkRightAnswer(
+                                            if(!lessonModel.show){
+                                              lessonModel.setShow();
+                                            }
+                                            lessonModel..chooseImageState(false)..setPressed();
+                                            await lessonModel..handleTypeAnswer()..checkRightAnswer(
                                               listStringWord: matchPairModel.idAnswerList,
                                               selectedStringSentence: sortWordsModel.wordSelectedString,
                                             );
-                                            player.pause();
-                                            player.stop();
+                                            player..pause()..stop();
                                           })
                                     ],
                                   ))

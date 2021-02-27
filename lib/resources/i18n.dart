@@ -5,9 +5,15 @@
 //   static var _t = Translations("en_us") +
 //       {
 //         "en_us":
-//             "Grades from 6 to 12 are currently testing, do you still want to play?",
+//         "Grades from 6 to 12 are currently testing, do you still want to play?",
 //         "vi_vn":
-//             "Hiện lớp 6 đến 12 đang trong giai đoạn thử nghiệm, bạn có muốn chơi không?"
+//         "Hiện lớp 6 đến 12 đang trong giai đoạn thử nghiệm, bạn có muốn chơi không?"
+//       } +
+//       {
+//         "en_us":
+//         "SHOW THE MEANING",
+//         "vi_vn":
+//         "HIỆN NGHĨA CỦA ĐÁP ÁN"
 //       } +
 //       {
 //         "en_us": "Are you sure to logout of this account?",
