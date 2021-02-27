@@ -225,6 +225,7 @@ class BookItem extends StatelessWidget {
                     child: Container(
                         height: SizeConfig.safeBlockHorizontal * 2.5,
                         width: SizeConfig.safeBlockHorizontal * 30,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
                         child: Stack(alignment: Alignment.center, children: [
                           Container(
                             width: SizeConfig.blockSizeHorizontal * 30,

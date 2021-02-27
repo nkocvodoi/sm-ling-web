@@ -4,17 +4,18 @@ import 'package:flutter/cupertino.dart';
 
 class SettingStates extends ChangeNotifier {
   // String _languageIndex = checkLocale().languageCode == "vi" ? "vi_vn" : "en_us";
-  //
-  // String get languageIndex => _languageIndex;
-  //
-  // void setCurrentSegment() {
-  //   if (_languageIndex == "vi_vn") {
-  //     _languageIndex = "en_us";
-  //   } else {
-  //     _languageIndex = "vi_vn";
-  //   }
-  //   notifyListeners();
-  // }
+  String _languageIndex = "vi_vn";
+
+  String get languageIndex => _languageIndex;
+
+  void setCurrentSegment() {
+    // if (_languageIndex == "vi_vn") {
+    //   _languageIndex = "en_us";
+    // } else {
+    //   _languageIndex = "vi_vn";
+    // }
+    notifyListeners();
+  }
 
   bool _trainingIndicator = Application.sharePreference.getBool("trainingIndicator") ?? false;
 

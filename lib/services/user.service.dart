@@ -10,10 +10,11 @@ class UserServiceGoogle {
   }) async {
     Map<String, dynamic> paramsUser = {"email": email,"avatar": avatar,"displayName": displayName};
     print("11111");
-    var response = await Application.api.post("/api/login/googleWeb", paramsUser);
+    var response = await Application.api.post("/api/login/googleWeb", paramsUser); // hair dangwr capas
     print("22222");
     try {
       if (response.statusCode == 200) {
+        print(" : ${response.data["data"]["user"]} ");
         Application.user = User.fromJson(response.data["data"]["user"] as Map<String, dynamic>);
         Application.sharePreference.putString("token", response.data["data"]["token"] as String);
         Application.sharePreference.putString("refreshToken", response.data["data"]["refreshToken"] as String);

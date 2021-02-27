@@ -60,7 +60,6 @@ Future<String> signInWithGoogle(BuildContext context) async {
             name = currentUser.displayName;
             email= currentUser.email;
             imageUrl = currentUser.photoURL;
-            print("$name ----- $email ------ $imageUrl");
             // Application.sharePreference.putString("access_token", googleSignInAuthentication.accessToken);
             // print('access_token: ${Application.sharePreference.getString("access_token")}');
             return '$user';
