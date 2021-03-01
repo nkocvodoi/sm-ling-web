@@ -10,7 +10,6 @@ import 'package:SMLingg/config/config_screen.dart';
 import 'package:SMLingg/models/unit/unit_list.dart';
 import 'package:SMLingg/services/save_result.service.dart';
 import 'package:SMLingg/services/user.service.dart';
-import 'package:SMLingg/resources/i18n.dart';
 import 'package:SMLingg/services/unit_list.service.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/material.dart';
@@ -278,12 +277,8 @@ class _UnitState extends State<UnitScreen> {
                     child: Stack(
                       children: [
                         Container(
-                          color: (unitModel.userLevel(unit - 1) ==
-                                      Application.unitList.units[unit - 1]
-                                          .totalLevels &&
-                                  unitModel.userLesson(unit - 1) ==
-                                      Application.unitList.units[unit - 1]
-                                          .totalLessonsOfLevel)
+                          color: (unitModel.userLevel(unit - 1) == Application.unitList.units[unit - 1].totalLevels &&
+                                  unitModel.userLesson(unit - 1) == Application.unitList.units[unit - 1].totalLessonsOfLevel)
                               ? LevelColor.levelDarkColor[index % 7]
                               : LevelColor.defaultDarkColor,
                         ),
@@ -352,19 +347,15 @@ class _UnitState extends State<UnitScreen> {
             ],
           ),
           Positioned(
-              top: -3,
+              top: 1,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  (unitModel.userLevel(unit - 1) ==
-                              Application
-                                  .unitList.units[unit - 1].totalLevels &&
-                          unitModel.userLesson(unit - 1) ==
-                              Application
-                                  .unitList.units[unit - 1].totalLessonsOfLevel)
-                      ? Image.asset('assets/unit/lucigacfinish.jpg',
+                  (unitModel.userLevel(unit - 1) == Application.unitList.units[unit - 1].totalLevels &&
+                      unitModel.userLesson(unit - 1) == Application.unitList.units[unit - 1].totalLessonsOfLevel)
+                     ? Image.asset('assets/unit/lucigacfinish.png',
                           height: SizeConfig.blockSizeVertical * 5)
-                      : Image.asset('assets/unit/lucgiac.jpg',
+                      : Image.asset('assets/unit/lucgiac.png',
                           height: SizeConfig.blockSizeVertical * 5),
                   Text(
                     (unitModel.userLevel(unit - 1)).toString(),

@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: ^0.16.0
 
   conreality_headset: ^0.2.0
   flutter_launcher_icons: ^0.8.1
@@ -61,6 +62,7 @@ dependencies:
   number_to_words: ^0.0.3
   firebase_messaging: ^7.0.3
   desktop_window: ^0.3.0
+  audioplayers: ^0.17.4
 
 
 dev_dependencies:
@@ -100,6 +102,7 @@ flutter:
     - assets/login/
     - assets/profile/
     - assets/setting/
+    - assets/unit/
     - assets/sounds/correct_answer.mp3
     - assets/sounds/wrong.mp3
 

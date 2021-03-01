@@ -64,6 +64,7 @@ class _CommandVsEnArrayVsSoundState extends State<CommandVsEnArrayVsSound> {
                   width: SizeConfig.blockSizeHorizontal * 15,
                   height: SizeConfig.safeBlockHorizontal * 15,
                   soundUrl: widget.soundUrl,
+                  playBackRate: 1,
                 ),
               ),
               Container(

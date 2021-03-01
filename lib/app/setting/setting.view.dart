@@ -10,7 +10,6 @@ import 'package:SMLingg/models/book/book_list.dart';
 import 'package:SMLingg/models/lesson/lesson_info.dart';
 import 'package:SMLingg/models/unit/unit_list.dart';
 import 'package:SMLingg/models/user_profile/user.dart';
-import 'package:SMLingg/resources/i18n.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:SMLingg/utils/api.dart';
 import 'package:date_format/date_format.dart' hide Locale;

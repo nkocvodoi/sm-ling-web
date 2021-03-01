@@ -1,4 +1,4 @@
-package com.example.SMLingg
+package com.saokhuee.lingo
 
 import io.flutter.embedding.android.FlutterActivity
 

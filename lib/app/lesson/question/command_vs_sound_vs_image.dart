@@ -43,6 +43,7 @@ class CommandVsSoundVsImage extends StatelessWidget {
                   width: SizeConfig.safeBlockHorizontal * 15,
                   height: SizeConfig.safeBlockHorizontal * 15,
                   soundUrl: soundUrl,
+                  playBackRate: 1,
                 ),
               ),
               Positioned(

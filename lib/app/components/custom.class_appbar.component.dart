@@ -99,17 +99,16 @@ class _MyCustomAppbarState extends State<MyCustomAppbar> {
                 (widget.showAvatar)
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(180),
-                        child: Application.user.avatar != null
-                            ? Image.network(Application.user.avatar,
-                                height: widget.height / 3 * 2, fit: BoxFit.fill)
-                            : Image.asset('assets/class/picture.png',
+                        child: 
+                        // Application.user.avatar != null ? Image.network(Application.user.avatar,
+                        //         height: widget.height / 3 * 2, fit: BoxFit.fill) : 
+                            Image.asset('assets/class/picture.png', color: Colors.transparent,
                                 height: widget.height / 3 * 2))
                     : IconButton(
                         onPressed: () {
                           Get.back();
                           if (widget.unitScreen) {
-                            Provider.of<LessonModel>(context, listen: false)
-                                .setOffset(0);
+                            Provider.of<LessonModel>(context, listen: false).setOffset(0);
                             Application.currentUnit = Unit();
                             Application.unitList = UnitList();
                             Application.currentBook = Book();
@@ -135,7 +134,7 @@ class _MyCustomAppbarState extends State<MyCustomAppbar> {
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF5877AA))),
                       ),
-                SizedBox(width: SizeConfig.safeBlockHorizontal * 35),
+                SizedBox(width: SizeConfig.safeBlockHorizontal * 33),
                 Stack(
                   children: [
                     Row(children: [

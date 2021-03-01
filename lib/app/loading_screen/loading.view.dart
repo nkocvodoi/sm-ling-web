@@ -1,3 +1,4 @@
+import 'package:SMLingg/app/class_screen/class.provider.dart';
 import 'package:SMLingg/app/class_screen/class.view.dart';
 import 'package:SMLingg/app/components/waittingdots_component.dart';
 import 'package:SMLingg/app/lesson/lesson.view.dart';
@@ -45,8 +46,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
     if (widget.fetchData == true) {
       if (Application.sharePreference.getString("token") != null) {
         UserProfile().loadUserProfile().then((value) => {
-              if (Application.user.avatar != null)
+        print("dit me m tại loading screen"),
+              if (Application.user.avatar != null){
+                Provider.of<ClassModel>(context, listen: false).refreshData(),
                 Get.offAll(ClassScreen())
+              }
               else
                 {
                   Fluttertoast.showToast(

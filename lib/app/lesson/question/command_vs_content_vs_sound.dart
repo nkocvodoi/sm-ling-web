@@ -75,6 +75,7 @@ class CommandVsContentVsSound extends StatelessWidget {
                                   width: SizeConfig.blockSizeHorizontal * 15,
                                   height: SizeConfig.safeBlockHorizontal * 15,
                                   soundUrl: soundUrl,
+                                  playBackRate: 1
                                 ),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(180), color: Color(0xffBEF7FF)))
                           ],
