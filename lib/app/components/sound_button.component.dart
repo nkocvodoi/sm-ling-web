@@ -20,7 +20,7 @@ class SoundButton extends StatefulWidget {
   SoundButton({
     @required this.height,
     @required this.width,
-    this.playBackRate = 1,
+    @required this.playBackRate,
     this.deactivate = false,
     this.soundUrl,
   });
@@ -55,7 +55,7 @@ class _SoundButtonState extends State<SoundButton> {
     // await audioPlayer.setReleaseMode(ReleaseMode.STOP);
     // int result = await audioPlayer.setUrl(widget.soundUrl,isLocal: false);
     var duration = await player.setUrl(widget.soundUrl);
-    if (widget.playBackRate >= 1) {
+    if (widget.playBackRate == 1) {
       await player.play();
     } else {
       player.stop();
@@ -80,9 +80,9 @@ class _SoundButtonState extends State<SoundButton> {
     print("link sound: ${widget.soundUrl}");
     print("widget.playBackRate: ${widget.playBackRate}");
     player.stop();
-    player.setSpeed(widget.playBackRate);
     var duration = await player.setUrl(widget.soundUrl);
-    await player.play();
+    player.setSpeed(widget.playBackRate);
+    var play = await player.play();
     // audioPlayer.stop();
     // await audioPlayer.setReleaseMode(ReleaseMode.STOP);
     // int result = await audioPlayer.play(file.path, isLocal: true);
@@ -143,38 +143,30 @@ class _SoundButtonState extends State<SoundButton> {
               ),
             ),
             AnimatedPositioned(
-              child: Container(
-                alignment: Alignment.center,
-                height: widget.height,
-                width: widget.width,
-                decoration: BoxDecoration(
-                    color: (widget.playBackRate >= 1.0) ? Color(0xff48CEE0) : Color(0xFFFFAA5C), borderRadius: BorderRadius.all(Radius.circular(90))),
-                child: GestureDetector(
-                  onTap: () {
-                    if (!widget.deactivate) {
-                      setState(() {
-                        onClickBool = true;
-                      });
-                      Future.delayed(const Duration(milliseconds: 100), () {
-                        setState(() {
-                          onClickBool = false;
-                        });
-                        onPress();
-                      });
-                    }
-                  },
-                  child: (widget.playBackRate >= 1.0)
-                      ? FaIcon(
-                          FontAwesomeIcons.volumeUp,
-                          size: 40,
-                          color: Colors.white,
-                        )
-                      : Image.asset(
-                          "assets/snail.jpg",
-                          height: 20,
-                        ),
+              child: GestureDetector(
+               onTap: () {
+                 if (!widget.deactivate) {
+                   setState(() {
+                     onClickBool = true;
+                   });
+                   Future.delayed(const Duration(milliseconds: 100), () {
+                     setState(() {
+                       onClickBool = false;
+                     });
+                     onPress();
+                   });
+                 }
+               },
+               child: Container(
+                 alignment: Alignment.center,
+                 height: widget.height,
+                 width: widget.width,
+                 decoration: BoxDecoration(
+                     color: (widget.playBackRate >= 1.0) ? Color(0xff48CEE0) : Color(0xFFFFAA5C), borderRadius: BorderRadius.all(Radius.circular(90))),
+                 child: (widget.playBackRate >= 1.0) ?
+                 FaIcon(FontAwesomeIcons.volumeUp, size: 40, color: Colors.white) : Image.asset( "assets/snail.png", height: 40),
+               ),
                 ),
-              ),
               duration: Duration(milliseconds: 100),
               bottom: onClickBool ? 0 : 4,
             )

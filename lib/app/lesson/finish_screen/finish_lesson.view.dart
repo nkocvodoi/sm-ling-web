@@ -89,6 +89,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                 width: SizeConfig.screenWidth,
                 height: SizeConfig.screenHeight,
                 child: Stack(alignment: Alignment.center, children: [
+                  Container(),
                   Positioned(
                       child: AnimatedOpacity(
                           opacity: _secondPoint ? 0 : 1,
@@ -310,6 +311,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                               ? SizeConfig.safeBlockVertical * 25
                               : SizeConfig.safeBlockVertical * 3,
                       child: AnimatedContainer(
+                        height: SizeConfig.safeBlockHorizontal * 15,
                           width: _thirdPoint
                               ? SizeConfig.safeBlockHorizontal * 15
                               : _secondPoint

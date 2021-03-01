@@ -12,9 +12,10 @@ class UserServiceGoogle {
     print("11111");
     var response = await Application.api.post("/api/login/googleWeb", paramsUser); // hair dangwr capas
     print("22222");
+    print("response: $response:");
+    print("response.statusCode: ${response.statusCode}");
     try {
       if (response.statusCode == 200) {
-        print(" : ${response.data["data"]["user"]} ");
         Application.user = User.fromJson(response.data["data"]["user"] as Map<String, dynamic>);
         Application.sharePreference.putString("token", response.data["data"]["token"] as String);
         Application.sharePreference.putString("refreshToken", response.data["data"]["refreshToken"] as String);
@@ -55,10 +56,11 @@ class UserServiceFacebook {
 class UserProfile {
   Future<void> loadUserProfile() async {
     var response = await Application.api.get("/api/user/profile");
+    print("response: $response:");
+    print("response.statusCode: ${response.statusCode}");
     try {
       if (response.statusCode == 200) {
-        Application.user =
-            User.fromJson(response.data["data"] as Map<String, dynamic>);
+        Application.user = User.fromJson(response.data["data"] as Map<String, dynamic>);
         log("Application.user: ${Application.user.toJson().toString()}");
       }
     } on NetworkException {

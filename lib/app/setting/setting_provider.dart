@@ -1,5 +1,4 @@
 import 'package:SMLingg/config/application.dart';
-import 'package:SMLingg/utils/check_locale.dart';
 import 'package:flutter/cupertino.dart';
 
 class SettingStates extends ChangeNotifier {

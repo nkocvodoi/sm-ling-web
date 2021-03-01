@@ -161,6 +161,7 @@ class _CommandVsVnContentVsSoundState extends State<CommandVsVnContentVsSound> {
                     width: SizeConfig.blockSizeHorizontal * 15,
                     height: SizeConfig.safeBlockHorizontal * 15,
                     soundUrl: widget.soundUrl,
+                    playBackRate: 1,
                   ),
                 ),
                 Container(
