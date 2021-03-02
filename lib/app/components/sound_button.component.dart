@@ -164,7 +164,7 @@ class _SoundButtonState extends State<SoundButton> {
                  decoration: BoxDecoration(
                      color: (widget.playBackRate >= 1.0) ? Color(0xff48CEE0) : Color(0xFFFFAA5C), borderRadius: BorderRadius.all(Radius.circular(90))),
                  child: (widget.playBackRate >= 1.0) ?
-                 FaIcon(FontAwesomeIcons.volumeUp, size: 40, color: Colors.white) : Image.asset( "assets/snail.png", height: 40),
+                 FaIcon(FontAwesomeIcons.volumeUp, size: 40, color: Colors.white) : Image.asset( "assets/snail.png", height: 30),
                ),
                 ),
               duration: Duration(milliseconds: 100),

@@ -88,70 +88,70 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
             child: SizedBox(
                 width: SizeConfig.screenWidth,
                 height: SizeConfig.screenHeight,
-                child: Stack(alignment: Alignment.center, children: [
+                child: Stack(alignment: Alignment.topCenter, children: [
                   Container(),
-                  Positioned(
-                      child: AnimatedOpacity(
-                          opacity: _secondPoint ? 0 : 1,
-                          duration: Duration(milliseconds: 500),
-                          child: Container(
-                              height: SizeConfig.safeBlockVertical * 10,
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              color: AppColor.mainThemes,
-                              child: SizedBox(
-                                width: SizeConfig.screenWidth,
-                                child: Stack(alignment: Alignment.center, children: [
-                                  Positioned(
-                                      left: SizeConfig.safeBlockHorizontal * 0.5,
-                                      child: IconButton(
-                                          icon: Icon(
-                                            Icons.close,
-                                            color: AppColor.mainThemesFocus,
-                                          ),
-                                          onPressed: () {})),
-                                  Positioned(
-                                      left: SizeConfig.safeBlockHorizontal * 12,
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(90),
-                                          child: Container(
+                  AnimatedOpacity(
+                      opacity: _secondPoint ? 0 : 1,
+                      duration: Duration(milliseconds: 500),
+                      child: Container(
+                          height: SizeConfig.safeBlockVertical * 10,
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          color: AppColor.mainThemes,
+                          child:  SizedBox(
+                            width: SizeConfig.screenWidth,
+                            child: Stack(alignment: Alignment.center, children: [
+                              Positioned(
+                                  left: SizeConfig.safeBlockHorizontal * 0.5,
+                                  child: IconButton(
+                                      icon: Icon(
+                                        Icons.close,
+                                        color: AppColor.mainThemesFocus,
+                                      ),
+                                      onPressed: () {})),
+                              Positioned(
+                                  left: SizeConfig.safeBlockHorizontal * 12,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(90),
+                                      child: Container(
+                                          height: SizeConfig.safeBlockHorizontal * 4.8,
+                                          width: SizeConfig.safeBlockHorizontal * 80,
+                                          child: Stack(alignment: Alignment.center, children: [
+                                            Container(
+                                              width: SizeConfig.blockSizeHorizontal * 80,
+                                              color: Colors.white,
+                                            ),
+                                            AnimatedPositioned(
+                                              left: _firstPoint
+                                                  ? 0
+                                                  : -SizeConfig.blockSizeHorizontal * 80 +
+                                                      (widget.correctAnswer) *
+                                                          SizeConfig.blockSizeHorizontal *
+                                                          80 /
+                                                          widget.totalQuestion,
+                                              duration: Duration(milliseconds: 500),
+                                              child: Container(
+                                                height: SizeConfig.safeBlockHorizontal * 6,
+                                                width: SizeConfig.safeBlockHorizontal * 80,
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xFFFDDD45),
+                                                    border: Border.all(color: Colors.white),
+                                                    borderRadius: BorderRadius.circular(90)),
+                                              ),
+                                            ),
+                                            Container(
                                               height: SizeConfig.safeBlockHorizontal * 4.8,
                                               width: SizeConfig.safeBlockHorizontal * 80,
-                                              child: Stack(alignment: Alignment.center, children: [
-                                                Container(
-                                                  width: SizeConfig.blockSizeHorizontal * 80,
-                                                  color: Colors.white,
-                                                ),
-                                                AnimatedPositioned(
-                                                  left: _firstPoint
-                                                      ? 0
-                                                      : -SizeConfig.blockSizeHorizontal * 80 +
-                                                          (widget.correctAnswer) *
-                                                              SizeConfig.blockSizeHorizontal *
-                                                              80 /
-                                                              widget.totalQuestion,
-                                                  duration: Duration(milliseconds: 500),
-                                                  child: Container(
-                                                    height: SizeConfig.safeBlockHorizontal * 6,
-                                                    width: SizeConfig.safeBlockHorizontal * 80,
-                                                    decoration: BoxDecoration(
-                                                        color: Color(0xFFFDDD45),
-                                                        border: Border.all(color: Colors.white),
-                                                        borderRadius: BorderRadius.circular(90)),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  height: SizeConfig.safeBlockHorizontal * 4.8,
-                                                  width: SizeConfig.safeBlockHorizontal * 80,
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.transparent,
-                                                      border: Border.all(color: Colors.white, width: 1.5),
-                                                      borderRadius: BorderRadius.circular(90)),
-                                                )
-                                              ]))))
-                                ]),
-                              ))),
-                      top: 0),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.transparent,
+                                                  border: Border.all(color: Colors.white, width: 1.5),
+                                                  borderRadius: BorderRadius.circular(90)),
+                                            )
+                                          ]))))
+                            ]),
+                          )
+                      )
+                  ),
                   Positioned(
                       top: 0,
                       child: AnimatedOpacity(
@@ -216,7 +216,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                                                         color: Color(0xFF4285F4),
                                                         fontWeight: FontWeight.w700,
                                                         fontSize: TextSize.fontSize40)),
-                                                Image.asset('assets/droplets_yellow.jpg', width: TextSize.fontSize40)
+                                                Image.asset('assets/class/droplets.png', height: SizeConfig.safeBlockHorizontal * 4, fit: BoxFit.fitWidth)
                                               ],
                                             )
                                           : Row(
@@ -226,7 +226,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                                                         color: Color(0xFF4285F4),
                                                         fontWeight: FontWeight.w700,
                                                         fontSize: TextSize.fontSize40)),
-                                                Image.asset('assets/honey_point.jpg', width: TextSize.fontSize40),
+                                                Image.asset('assets/class/bee.png', width: TextSize.fontSize40),
                                               ],
                                             ))
                             ],
@@ -257,7 +257,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                                           : (Application.currentUnit.userLesson + 1) /
                                               Application.currentUnit.totalLessonsOfLevel,
                                     ),
-                                    Image.asset('assets/hive2.jpg', height: SizeConfig.safeBlockVertical * 30)
+                                    Image.asset('assets/hive2.png', height: SizeConfig.safeBlockVertical * 30)
                                   ]))))),
                   Positioned(
                       top: SizeConfig.safeBlockVertical * 20 + SizeConfig.safeBlockHorizontal * 28,
@@ -266,7 +266,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                         opacity: _levelup && type == 2 ? 1 : 0,
                         child: Column(
                           children: [
-                            Image.asset('assets/medal.jpg', height: SizeConfig.safeBlockVertical * 30),
+                            Image.asset('assets/medal.png', height: SizeConfig.safeBlockVertical * 30),
                             SizedBox(height: SizeConfig.safeBlockVertical * 2),
                             Text(
                                 Application.currentUnit.userLevel == Application.currentUnit.totalLevels
@@ -321,32 +321,7 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                           child: AnimatedOpacity(
                               duration: Duration(milliseconds: 500),
                               opacity: _fourthPoint ? 0 : 1,
-                              child: Image.asset("assets/class/droplets.png", fit: BoxFit.fitWidth)))),
-                  // Positioned(
-                  //     bottom: SizeConfig.safeBlockVertical * 1.5,
-                  //     child: AnimatedOpacity(
-                  //       opacity: _fourthPoint ? 0 : 1,
-                  //       duration: Duration(milliseconds: 500),
-                  //       child: CustomButton(
-                  //           elevation: 6,
-                  //           child: Text(
-                  //             "TIẾP TỤC",
-                  //             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18, color: Color(0xff6CA9D3)),
-                  //           ),
-                  //           radius: 90,
-                  //           height: SizeConfig.safeBlockVertical * 7,
-                  //           width: SizeConfig.safeBlockHorizontal * 80,
-                  //           backgroundColor: AppColor.mainThemes,
-                  //           shadowColor: AppColor.mainThemesFocus,
-                  //           onPressed: () async {
-                  //             // Provider.of<LessonModel>(context, listen: false).clearAll();
-                  //             // Provider.of<ClassModel>(context, listen: false).refreshData();
-                  //             // Navigator.pushReplacement(
-                  //             //     context,
-                  //             //     MaterialPageRoute(
-                  //             //         builder: (context) => UnitScreen(grade: grade, bookID: bookID)));
-                  //           }),
-                  //     ))
+                              child: Image.asset("assets/class/droplets.png", fit: BoxFit.fitHeight)))),
                 ]))),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: AnimatedOpacity(
