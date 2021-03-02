@@ -300,8 +300,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                       : Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      lessonModel.isChooseImageAnswer()  && !lessonModel.pressed
-                                          ?
+                                      lessonModel.isChooseImageAnswer() && lessonModel.pressed ?
                                       GestureDetector(
                                         onTap: () => lessonModel..setShow()..setPressed(),
                                         child: Text("SHOW THE MEANING",
@@ -345,10 +344,9 @@ class _LessonScreenState extends State<LessonScreen> {
                                           shadowColor:
                                           lessonModel.hasPicked(context: context) ? AppColor.correctButtonShadow : AppColor.mainThemesFocus,
                                           onPressed: () async {
-                                            if(lessonModel.pressed){
+                                            if(!lessonModel.show){
                                               lessonModel..setShow()..setPressed();
                                             }
-                                            lessonModel.chooseImageState(false);
                                             await lessonModel..handleTypeAnswer()..checkRightAnswer(
                                               listStringWord: matchPairModel.idAnswerList,
                                               selectedStringSentence: sortWordsModel.wordSelectedString,

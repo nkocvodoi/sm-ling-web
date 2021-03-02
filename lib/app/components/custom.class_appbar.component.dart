@@ -85,7 +85,6 @@ class _MyCustomAppbarState extends State<MyCustomAppbar> {
 
   @override
   Widget build(BuildContext context) {
-    final save = Provider.of<UnitModel>(context, listen: false);
     return Consumer<ClassModel>(builder: (context, icon, child) {
       return Container(
           height: widget.height,

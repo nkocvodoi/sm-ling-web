@@ -23,7 +23,8 @@ class _MatchPairState extends State<MatchPair> {
   var sentences = Application.lessonInfo.sentences;
   int currentIndex = 0;
   var question, wordsLength;
-  List<Word> wordList = <Word>[];
+  List<Word> enWordList = <Word>[];
+  List<Word> vnWordList = <Word>[];
 
   @override
   void initState() {
@@ -32,22 +33,24 @@ class _MatchPairState extends State<MatchPair> {
     currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
     question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     if (question.type == "word") {
-      if (wordList.isEmpty) {
+      if (enWordList.isEmpty && vnWordList.isEmpty) {
         question.words.forEach((element) {
-          wordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].meaning, idAnswer: element));
-          wordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].content, idAnswer: element));
+          vnWordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].meaning, idAnswer: element));
+          enWordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].content, idAnswer: element));
         });
-        wordList.shuffle();
+        enWordList.shuffle();
+        vnWordList.shuffle();
       }
     } else if (question.type == "sentence") {
-      if (wordList.isEmpty) {
+      if (enWordList.isEmpty && vnWordList.isEmpty) {
         question.sentences.forEach((element) {
           if (element != null) {
-            wordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].vnText, idAnswer: element));
-            wordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].enText, idAnswer: element));
+            vnWordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].vnText, idAnswer: element));
+            enWordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].enText, idAnswer: element));
           }
         });
-        wordList.shuffle();
+        enWordList.shuffle();
+        vnWordList.shuffle();
       }
     }
   }
@@ -57,36 +60,50 @@ class _MatchPairState extends State<MatchPair> {
     return Consumer<MatchPairModel>(builder: (_, matchPairModel, __) {
       if (currentIndex != Provider.of<LessonModel>(context, listen: false).focusWordIndex) {
         question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
-        wordList = <Word>[];
+        enWordList = <Word>[];
+        vnWordList = <Word>[];
         print(question.words);
         if (question.type == "word") {
-          if (wordList.isEmpty) {
+          if (enWordList.isEmpty && vnWordList.isEmpty) {
             question.words.forEach((element) {
-              wordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].meaning, idAnswer: element));
-              wordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].content, idAnswer: element));
+              vnWordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].meaning, idAnswer: element));
+              enWordList.add(Word(word: words[words.indexWhere((value) => value.sId == element)].content, idAnswer: element));
             });
-            wordList.shuffle();
+            enWordList.shuffle();
+            vnWordList.shuffle();
           }
         } else if (question.type == "sentence") {
-          if (wordList.isEmpty) {
+          if (enWordList.isEmpty && vnWordList.isEmpty) {
             question.sentences.forEach((element) {
               if (element != null) {
-                wordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].vnText, idAnswer: element));
-                wordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].enText, idAnswer: element));
+                vnWordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].vnText, idAnswer: element));
+                enWordList.add(Word(word: sentences[sentences.indexWhere((value) => value.sId == element)].enText, idAnswer: element));
               }
             });
-            wordList.shuffle();
+            enWordList.shuffle();
+            vnWordList.shuffle();
           }
         }
         currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
       }
       return Container(
-          child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        SizedBox(height: SizeConfig.safeBlockVertical * 2),
-        ...List.generate(
-            wordList.length, (index) => _sentenceButton(text: wordList[index].word, idAnswer: wordList[index].idAnswer, context: context)),
-        SizedBox(height: SizeConfig.safeBlockVertical * 5),
-      ]));
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                SizedBox(height: SizeConfig.safeBlockVertical * 2),
+                ...List.generate(
+                    vnWordList.length, (index) => _sentenceButton(text: vnWordList[index].word, idAnswer: vnWordList[index].idAnswer, context: context)),
+                SizedBox(height: SizeConfig.safeBlockVertical * 5),
+              ]),
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                SizedBox(height: SizeConfig.safeBlockVertical * 2),
+                ...List.generate(
+                    enWordList.length, (index) => _sentenceButton(text: enWordList[index].word, idAnswer: enWordList[index].idAnswer, context: context)),
+                SizedBox(height: SizeConfig.safeBlockVertical * 5),
+              ])
+            ],
+          ));
     });
   }
 
@@ -114,35 +131,35 @@ class _MatchPairState extends State<MatchPair> {
                         fontSize: TextSize.fontSize16,
                         color: matchPairModel.textFirst == text || matchPairModel.textSecond == text
                             ? matchPairModel.isEqual == null
-                                ? AppColor.buttonText
-                                : matchPairModel.isEqual
-                                    ? AppColor.buttonCorrectText
-                                    : AppColor.buttonWrongText
+                            ? AppColor.buttonText
+                            : matchPairModel.isEqual
+                            ? AppColor.buttonCorrectText
+                            : AppColor.buttonWrongText
                             : AppColor.buttonText),
                   ),
                   backgroundColor: matchPairModel.textFirst == text || matchPairModel.textSecond == text
                       ? matchPairModel.isEqual == null
-                          ? Colors.white
-                          : matchPairModel.isEqual
-                              ? AppColor.correctLightButtonBackground
-                              : AppColor.wrongLightButtonBackground
+                      ? Colors.white
+                      : matchPairModel.isEqual
+                      ? AppColor.correctLightButtonBackground
+                      : AppColor.wrongLightButtonBackground
                       : Colors.white,
-                  width: SizeConfig.safeBlockHorizontal * 80,
+                  width: SizeConfig.safeBlockHorizontal * 45,
                   height: SizeConfig.blockSizeVertical * 8 +
                       SizeConfig.blockSizeVertical * 8 * (wordLength ~/ (SizeConfig.safeBlockHorizontal * 80 - 40) / 8).toDouble(),
                   borderColor: matchPairModel.textFirst == text || matchPairModel.textSecond == text
                       ? matchPairModel.isEqual == null
-                          ? AppColor.mainThemesFocus
-                          : matchPairModel.isEqual
-                              ? AppColor.correctButtonBackground
-                              : AppColor.wrongButtonBackground
+                      ? AppColor.mainThemesFocus
+                      : matchPairModel.isEqual
+                      ? AppColor.correctButtonBackground
+                      : AppColor.wrongButtonBackground
                       : Colors.transparent,
                   shadowColor: matchPairModel.textFirst == text || matchPairModel.textSecond == text
                       ? matchPairModel.isEqual == null
-                          ? AppColor.mainThemesFocus
-                          : matchPairModel.isEqual
-                              ? AppColor.correctButtonShadow
-                              : AppColor.wrongButtonShadow
+                      ? AppColor.mainThemesFocus
+                      : matchPairModel.isEqual
+                      ? AppColor.correctButtonShadow
+                      : AppColor.wrongButtonShadow
                       : AppColor.mainThemes)));
     });
   }
@@ -224,11 +241,11 @@ class MatchPairModel extends ChangeNotifier {
         setIdAnswerList();
       });
     }
-    _idAnswerFirst = null;
-    _idAnswerSecond = null;
+
     Future.delayed(Duration(milliseconds: 500), () {
       _textFirst = null;
-
+      _idAnswerFirst = null;
+      _idAnswerSecond = null;
       _textSecond = null;
 
       _isEqual = null;

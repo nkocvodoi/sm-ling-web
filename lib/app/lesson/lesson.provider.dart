@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:number_to_words/number_to_words.dart';
 import 'package:provider/provider.dart';
+
 import 'finish_screen/finish_lesson.view.dart';
 
 class LessonModel extends ChangeNotifier {
@@ -22,8 +23,7 @@ class LessonModel extends ChangeNotifier {
   List<int> questionTypeSentencesEN = [10, 1, 2, 17, 14, 7, 15, 18, 4];
   List<int> questionTypeSentencesVI = [12, 13, 16];
   List<int> matchPairType = [9];
-  List<AnswerForMatchPairType> answerForMatchPairType =
-  <AnswerForMatchPairType>[];
+  List<AnswerForMatchPairType> answerForMatchPairType = <AnswerForMatchPairType>[];
   List<dynamic> results = [];
   int timeStart;
   int timeEnd;
@@ -64,7 +64,6 @@ class LessonModel extends ChangeNotifier {
 
   bool _isChooseImage = false;
 
-  bool get isChooseImage => _isChooseImage;
 
   bool _show = true;
 
@@ -82,26 +81,24 @@ class LessonModel extends ChangeNotifier {
 
   String get idAnswer => _idAnswer;
 
-  bool _pressed = false;
+  bool _pressed = true;
 
   bool get pressed => _pressed;
 
-  void setPressed(){
+  void setPressed() {
     _pressed = !_pressed;
     notifyListeners();
   }
 
-  void chooseImageState(bool val){
-    _isChooseImage = val;
-    notifyListeners();
-  }
 
   List<int> chooseImageAnswerList = [1,2,3,4];
-  bool isChooseImageAnswer(){
+  bool isChooseImageAnswer() {
     var question = Application.lessonInfo.lesson.questions[_focusWordIndex];
     if (question.type == "word" && chooseImageAnswerList.contains(question.questionType)) return true;
+
     return false;
   }
+
   void cancelSound() {
     _startSound = !_startSound;
     notifyListeners();
@@ -191,26 +188,22 @@ class LessonModel extends ChangeNotifier {
     return false;
   }
 
-
   // ignore: avoid_void_async
   void _playSound() async {
     final player = AudioPlayer();
     switch (_hasCheckedAnswer) {
       case 1:
-        var duration = await player.setAsset('assets/sounds/correct_answer.mp3',
-            preload: true);
+        var duration = await player.setAsset('assets/sounds/correct_answer.mp3', preload: true);
         player.play();
         break;
       case 2:
-        var duration =
-        await player.setAsset('assets/sounds/wrong.mp3', preload: true);
+        var duration = await player.setAsset('assets/sounds/wrong.mp3', preload: true);
         player.play();
         break;
     }
   }
 
-  Future<void> checkString(Questions question,
-      {bool addFalseQuestionToList = true, numberOfRecorderToText = 3}) async {
+  Future<void> checkString(Questions question, {bool addFalseQuestionToList = true, numberOfRecorderToText = 3}) async {
     List<String> inputStrings = formatWord(_inputValue).split(" ");
     inputStrings.forEach((element) {
       if (double.tryParse(element) != null) {
@@ -225,31 +218,26 @@ class LessonModel extends ChangeNotifier {
         List<int> typeEn = [7, 11, 12, 14];
         if (typeEn.contains(question.questionType)) {
           _score = await RecheckQuestionService()
-              .callApiCompareInputValueVsResultText(
-              inputValue: _inputValue, text: word.content, language: "en");
+              .callApiCompareInputValueVsResultText(inputValue: _inputValue, text: word.content, language: "en");
         } else {
           _score = await RecheckQuestionService()
-              .callApiCompareInputValueVsResultText(
-              inputValue: _inputValue, text: word.meaning, language: "vi");
+              .callApiCompareInputValueVsResultText(inputValue: _inputValue, text: word.meaning, language: "vi");
         }
       }
     } else {
       List<int> typeCanBeCheck = [14, 15, 16, 4, 18];
       if (typeCanBeCheck.contains(question.questionType)) {
-        Sentences sentence =
-        Application.lessonInfo.findSentence(question.focusSentence);
+        Sentences sentence = Application.lessonInfo.findSentence(question.focusSentence);
         List<int> typeEn = [14, 15, 4, 18];
         if (question.hiddenWord != -1) {
           if (typeEn.contains(question.questionType)) {
             String enText = sentence.en[question.hiddenWord].text;
             _score = await RecheckQuestionService()
-                .callApiCompareInputValueVsResultText(
-                inputValue: _inputValue, text: enText, language: "en");
+                .callApiCompareInputValueVsResultText(inputValue: _inputValue, text: enText, language: "en");
           } else {
             String vnText = sentence.vn[question.hiddenWord].text;
             _score = await RecheckQuestionService()
-                .callApiCompareInputValueVsResultText(
-                inputValue: _inputValue, text: vnText, language: "vi");
+                .callApiCompareInputValueVsResultText(inputValue: _inputValue, text: vnText, language: "vi");
           }
         } else {
           if (typeEn.contains(question.questionType)) {
@@ -258,11 +246,8 @@ class LessonModel extends ChangeNotifier {
               if (inputStrings.contains(answerString[i])) {
                 _score += 1;
               } else if (i < inputStrings.length) {
-                _score += await RecheckQuestionService()
-                    .callApiCompareInputValueVsResultText(
-                    inputValue: inputStrings[i],
-                    text: answerString[i],
-                    language: "en");
+                _score += await RecheckQuestionService().callApiCompareInputValueVsResultText(
+                    inputValue: inputStrings[i], text: answerString[i], language: "en");
               }
             }
             _score /= answerString.length;
@@ -272,11 +257,8 @@ class LessonModel extends ChangeNotifier {
               if (inputStrings.contains(answerString[i])) {
                 _score += 1;
               } else if (i < inputStrings.length) {
-                _score += await RecheckQuestionService()
-                    .callApiCompareInputValueVsResultText(
-                    inputValue: inputStrings[i],
-                    text: answerString[i],
-                    language: "vi");
+                _score += await RecheckQuestionService().callApiCompareInputValueVsResultText(
+                    inputValue: inputStrings[i], text: answerString[i], language: "vi");
               }
             }
             _score /= answerString.length;
@@ -320,8 +302,7 @@ class LessonModel extends ChangeNotifier {
         List<String> selectedStringSentence,
         bool addFalseQuestionToList = true,
         int numberOfRecorderToText = 3}) {
-    Questions question =
-    Application.lessonInfo.lesson.questions[_focusWordIndex];
+    Questions question = Application.lessonInfo.lesson.questions[_focusWordIndex];
     bool result;
     if (question.type == "word") {
       Words word = Application.lessonInfo.findWord(question.focusWord);
@@ -337,16 +318,13 @@ class LessonModel extends ChangeNotifier {
         }
       } else {
         if (_type == "VIWord") {
-          result = (_idAnswer == question.focusWord ||
-              formatWord(_inputValue) == formatWord(word.meaning));
+          result = (_idAnswer == question.focusWord || formatWord(_inputValue) == formatWord(word.meaning));
         } else {
-          result = (_idAnswer == question.focusWord ||
-              formatWord(_inputValue) == formatWord(word.content));
+          result = (_idAnswer == question.focusWord || formatWord(_inputValue) == formatWord(word.content));
         }
       }
     } else if (question.type == "sentence") {
-      var sentences =
-      Application.lessonInfo.findSentence(question.focusSentence);
+      var sentences = Application.lessonInfo.findSentence(question.focusSentence);
       String sentence = "";
       if (selectedStringSentence.isNotEmpty) {
         selectedStringSentence.forEach((element) {
@@ -363,16 +341,14 @@ class LessonModel extends ChangeNotifier {
           result = _idAnswer == question.focusSentence ||
               _wordAnswer == sentences.vn[question.hiddenWord].text ||
               formatWord(sentences.vnText) == sentence ||
-              formatWord(_inputValue) ==
-                  formatWord(sentences.vn[question.hiddenWord].text);
+              formatWord(_inputValue) == formatWord(sentences.vn[question.hiddenWord].text);
         } else {
           print(
               "question.hiddenWord: ${question.hiddenWord} sentences.vn[question.hiddenWord].text: ${sentences.vnText}");
           result = _idAnswer == question.focusSentence ||
               _wordAnswer == sentences.en[question.hiddenWord].text ||
               formatWord(sentences.enText) == sentence ||
-              formatWord(_inputValue) ==
-                  formatWord(sentences.en[question.hiddenWord].text);
+              formatWord(_inputValue) == formatWord(sentences.en[question.hiddenWord].text);
         }
         print("result $result");
       } else {
@@ -387,25 +363,21 @@ class LessonModel extends ChangeNotifier {
         }
         print("result $result");
         print("result ${_idAnswer == question.focusSentence}");
-        print(
-            "${formatWord(sentences.enText)}== $sentence = ${formatWord(sentences.enText) == sentence}");
-        print(
-            "${formatWord(sentences.vnText)}== $sentence = ${formatWord(sentences.vnText) == sentence}");
-        print(
-            "result ${formatWord(_inputValue) == formatWord(sentences.enText)}");
+        print("${formatWord(sentences.enText)}== $sentence = ${formatWord(sentences.enText) == sentence}");
+        print("${formatWord(sentences.vnText)}== $sentence = ${formatWord(sentences.vnText) == sentence}");
+        print("result ${formatWord(_inputValue) == formatWord(sentences.enText)}");
       }
     }
     if (_inputValue.isNotEmpty && !result) {
       print("_inputValue $_inputValue");
       checkString(question,
-          numberOfRecorderToText: numberOfRecorderToText,
-          addFalseQuestionToList: addFalseQuestionToList);
+          numberOfRecorderToText: numberOfRecorderToText, addFalseQuestionToList: addFalseQuestionToList);
     } else {
       _hasCheckedAnswer = result ? 1 : 2;
     }
     if (_hasCheckedAnswer == 1 || _hasCheckedAnswer == 2) {
       _playSound();
-      if (addFalseQuestionToList) {
+      if (addFalseQuestionToList && _hasCheckedAnswer == 2) {
         addFalseQuestionToEndList(question);
       }
       addElementForQuestionToSave(question, selectedStringSentence);
@@ -425,16 +397,12 @@ class LessonModel extends ChangeNotifier {
 
   Future<void> changeNextQuestion({bool changeQuestion = true}) async {
     var question = Application.lessonInfo.lesson.questions[_focusWordIndex];
-    if (!(changeQuestion &&
-        matchPairType.contains(question.questionType) &&
-        question.type == "word") ||
+    if (!(changeQuestion && matchPairType.contains(question.questionType) && question.type == "word") ||
         isRecorderToText()) {
-      if (_focusWordIndex <
-          Application.lessonInfo.lesson.questions.length - 1) {
+      if (_focusWordIndex < Application.lessonInfo.lesson.questions.length - 1) {
         _focusWordIndex++;
         answerForMatchPairType = <AnswerForMatchPairType>[];
-      } else if (_focusWordIndex ==
-          Application.lessonInfo.lesson.questions.length - 1) {
+      } else if (_focusWordIndex == Application.lessonInfo.lesson.questions.length - 1) {
         setOnSubmitted(true);
         finishLesson();
         Get.off(FinishLessonScreen(
@@ -445,7 +413,7 @@ class LessonModel extends ChangeNotifier {
           correctAnswer: rightAnswer,
           offset: offset,
           totalQuestion: Application.lessonInfo.lesson.totalQuestions,
-        ));
+        ),transition: Transition.noTransition);
         SaveResultService().saveResult(
             bookId: Application.currentBook.id,
             lessonIndex: Application.currentUnit.userLesson,
@@ -474,28 +442,20 @@ class LessonModel extends ChangeNotifier {
   bool hasPicked({BuildContext context}) {
     bool pick = false;
     var question = Application.lessonInfo.lesson.questions[_focusWordIndex];
-    var selectedStringSentence =
-        Provider.of<SortWordsModel>(context).wordSelectedString;
+    var selectedStringSentence = Provider.of<SortWordsModel>(context).wordSelectedString;
     var words = question.words;
     var sentences = question.sentences;
     var pickAll;
     if (words != null) {
-      pickAll = Provider.of<MatchPairModel>(context).idAnswerList.length >=
-          words.length &&
-          words.isNotEmpty;
+      pickAll = Provider.of<MatchPairModel>(context).idAnswerList.length >= words.length && words.isNotEmpty;
     } else {
-      pickAll = Provider.of<MatchPairModel>(context).idAnswerList.length >=
-          sentences.length &&
-          sentences.isNotEmpty;
+      pickAll = Provider.of<MatchPairModel>(context).idAnswerList.length >= sentences.length && sentences.isNotEmpty;
     }
     if (question.type == "word") {
       if (question.words != null && question.words.isNotEmpty) {
-        pick = _idAnswer != null ||
-            _inputValue.isNotEmpty ||
-            pickAll && !isRecorderToText();
+        pick = _idAnswer != null || _inputValue.isNotEmpty || pickAll && !isRecorderToText();
       } else {
-        pick =
-            _idAnswer != null || _inputValue.isNotEmpty && !isRecorderToText();
+        pick = _idAnswer != null || _inputValue.isNotEmpty && !isRecorderToText();
       }
     } else if (question.type == "sentence") {
       pick = selectedStringSentence.isNotEmpty ||
@@ -530,8 +490,7 @@ class LessonModel extends ChangeNotifier {
     return word.replaceAll(RegExp(r'[^\w\s]+'), "").toLowerCase();
   }
 
-  void addElementForQuestionToSave(
-      Questions currentQuestion, List<String> selectedStringSentence) {
+  void addElementForQuestionToSave(Questions currentQuestion, List<String> selectedStringSentence) {
     String type = currentQuestion.type;
     int questionType = currentQuestion.questionType;
     if (type == 'word') {
@@ -541,88 +500,65 @@ class LessonModel extends ChangeNotifier {
           questionType == 4 ||
           questionType == 6 ||
           questionType == 13) {
-        ResultHasPrimitiveVariableAnswer r = ResultHasPrimitiveVariableAnswer(
-            sId: currentQuestion.sId, answer: _idAnswer);
+        ResultHasPrimitiveVariableAnswer r =
+        ResultHasPrimitiveVariableAnswer(sId: currentQuestion.sId, answer: _idAnswer);
         results.add(r);
-      } else if (questionType == 7 ||
-          questionType == 14 ||
-          questionType == 8 ||
-          questionType == 11) {
-        ResultHasPrimitiveVariableAnswer r = ResultHasPrimitiveVariableAnswer(
-            sId: currentQuestion.sId, answer: _inputValue);
+      } else if (questionType == 7 || questionType == 14 || questionType == 8 || questionType == 11) {
+        ResultHasPrimitiveVariableAnswer r =
+        ResultHasPrimitiveVariableAnswer(sId: currentQuestion.sId, answer: _inputValue);
         results.add(r);
       } else if (questionType == 9) {
-        ResultHasListAnswer r = ResultHasListAnswer(
-            sId: currentQuestion.sId, answers: answerForMatchPairType);
+        ResultHasListAnswer r = ResultHasListAnswer(sId: currentQuestion.sId, answers: answerForMatchPairType);
         results.add(r);
       } else if (questionType == 12) {
-        ResultHasPrimitiveVariableAnswer r = ResultHasPrimitiveVariableAnswer(
-            sId: currentQuestion.sId, answer: _hasCheckedAnswer == 1 ? 1 : 0);
+        ResultHasPrimitiveVariableAnswer r =
+        ResultHasPrimitiveVariableAnswer(sId: currentQuestion.sId, answer: _hasCheckedAnswer == 1 ? 1 : 0);
         results.add(r);
       }
     } else {
-      if (questionType == 1 ||
-          questionType == 2 ||
-          questionType == 12 ||
-          questionType == 17) {
-        ResultHasListAnswer r = ResultHasListAnswer(
-            sId: currentQuestion.sId, answers: selectedStringSentence);
+      if (questionType == 1 || questionType == 2 || questionType == 12 || questionType == 17) {
+        ResultHasListAnswer r = ResultHasListAnswer(sId: currentQuestion.sId, answers: selectedStringSentence);
         results.add(r);
-      } else if (questionType == 7 ||
-          questionType == 15 ||
-          questionType == 14 ||
-          questionType == 18) {
-        ResultHasPrimitiveVariableAnswer r = ResultHasPrimitiveVariableAnswer(
-            sId: currentQuestion.sId, answer: _wordAnswer);
+      } else if (questionType == 7 || questionType == 15 || questionType == 14 || questionType == 18) {
+        ResultHasPrimitiveVariableAnswer r =
+        ResultHasPrimitiveVariableAnswer(sId: currentQuestion.sId, answer: _wordAnswer);
         results.add(r);
       } else if (questionType == 10) {
-        ResultHasPrimitiveVariableAnswer r = ResultHasPrimitiveVariableAnswer(
-            sId: currentQuestion.sId, answer: _idAnswer);
+        ResultHasPrimitiveVariableAnswer r =
+        ResultHasPrimitiveVariableAnswer(sId: currentQuestion.sId, answer: _idAnswer);
         results.add(r);
       } else if (questionType == 4) {
-        ResultHasPrimitiveVariableAnswer r = ResultHasPrimitiveVariableAnswer(
-            sId: currentQuestion.sId, answer: _hasCheckedAnswer == 1 ? 1 : 0);
+        ResultHasPrimitiveVariableAnswer r =
+        ResultHasPrimitiveVariableAnswer(sId: currentQuestion.sId, answer: _hasCheckedAnswer == 1 ? 1 : 0);
         results.add(r);
       } else if (questionType == 16) {
-        ResultHasPrimitiveVariableAnswer r = ResultHasPrimitiveVariableAnswer(
-            sId: currentQuestion.sId, answer: _hasCheckedAnswer == 1 ? 1 : 0);
+        ResultHasPrimitiveVariableAnswer r =
+        ResultHasPrimitiveVariableAnswer(sId: currentQuestion.sId, answer: _hasCheckedAnswer == 1 ? 1 : 0);
         results.add(r);
       }
     }
   }
 
   String handleAnswerWhenWrong() {
-    if ((Application.lessonInfo.lesson.questions[_focusWordIndex].focusWord !=
-        null &&
-        Application.lessonInfo.lesson.questions[_focusWordIndex].focusWord
-            .isNotEmpty) ||
-        (Application.lessonInfo.lesson.questions[_focusWordIndex]
-            .focusSentence !=
-            null &&
-            Application.lessonInfo.lesson.questions[_focusWordIndex]
-                .focusSentence.isNotEmpty)) {
+    if ((Application.lessonInfo.lesson.questions[_focusWordIndex].focusWord != null &&
+        Application.lessonInfo.lesson.questions[_focusWordIndex].focusWord.isNotEmpty) ||
+        (Application.lessonInfo.lesson.questions[_focusWordIndex].focusSentence != null &&
+            Application.lessonInfo.lesson.questions[_focusWordIndex].focusSentence.isNotEmpty)) {
       return _type == "ENWord"
-          ? Application.lessonInfo
-          .findWord(Application
-          .lessonInfo.lesson.questions[_focusWordIndex].focusWord)
-          .content
+          ? Application.lessonInfo.findWord(Application.lessonInfo.lesson.questions[_focusWordIndex].focusWord).content
           : _type == "VIWord" || _type == "imageWord"
           ? Application.lessonInfo
-          .findWord(Application
-          .lessonInfo.lesson.questions[_focusWordIndex].focusWord)
+          .findWord(Application.lessonInfo.lesson.questions[_focusWordIndex].focusWord)
           .meaning
           : _type == "VISentence"
           ? Application.lessonInfo
-          .findSentence(Application.lessonInfo.lesson
-          .questions[_focusWordIndex].focusSentence)
+          .findSentence(Application.lessonInfo.lesson.questions[_focusWordIndex].focusSentence)
           .vnText
           : Application.lessonInfo
-          .findSentence(Application.lessonInfo.lesson
-          .questions[_focusWordIndex].focusSentence)
+          .findSentence(Application.lessonInfo.lesson.questions[_focusWordIndex].focusSentence)
           .enText;
     } else {
       return "";
     }
   }
-
 }

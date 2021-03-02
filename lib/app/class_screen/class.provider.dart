@@ -6,11 +6,11 @@ class ClassModel extends ChangeNotifier {
 
   get show => _show;
 
-  int _hive = Application.user.level;
+  int _hive = Application.user?.level ?? 0;
 
   get hive => _hive;
 
-  int _diamond = Application.user.score;
+  int _diamond = Application.user?.score ?? 0;
 
   get diamond => _diamond;
 
