@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -204,20 +205,21 @@ class _RecorderToTextState extends State<RecorderToText> {
                   shadowColor: Color(0xFFD965F4),
                   radius: 360,
                   child:
-                      // !_hasSpeech || speech.isListening
-                      //     ? Container(
-                      //         width: SizeConfig.safeBlockHorizontal * 30,
-                      //         child: Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                      //           ...List.generate(
-                      //               soundWaveList.length,
-                      //               (index) => Container(
-                      //                   height: SizeConfig.safeBlockHorizontal * 5 + soundWaveList[index] * SizeConfig.safeBlockHorizontal * 1,
-                      //                   width: SizeConfig.safeBlockHorizontal * 2.5,
-                      //                   decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(90))))
-                      //         ]))
-                      //     :
-                      Image.asset("assets/16typh_on_the_mic.jpg"),
-                  onPressed: () => !_hasSpeech || speech.isListening ? null : startListening())),
+                  speech.isListening
+                          ? Container(
+                              width: SizeConfig.safeBlockHorizontal * 30,
+                              child: Lottie.asset("assets/lottie/waves.json")
+                              // Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                              //   ...List.generate(
+                              //       soundWaveList.length,
+                              //       (index) => Container(
+                              //           height: SizeConfig.safeBlockHorizontal * 5 + soundWaveList[index] * SizeConfig.safeBlockHorizontal * 1,
+                              //           width: SizeConfig.safeBlockHorizontal * 2.5,
+                              //           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(90))))])
+                      )
+                          :
+                      Image.asset("assets/16typh_on_the_mic.png",width: SizeConfig.safeBlockHorizontal * 15,fit: BoxFit.fitWidth),
+                  onPressed: () => speech.isListening ?  startListening() : false)),
           Padding(
             padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 10),
             child: RichText(

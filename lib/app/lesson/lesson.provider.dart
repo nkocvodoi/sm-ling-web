@@ -82,7 +82,7 @@ class LessonModel extends ChangeNotifier {
 
   String get idAnswer => _idAnswer;
 
-  bool _pressed = true;
+  bool _pressed = false;
 
   bool get pressed => _pressed;
 
@@ -95,12 +95,11 @@ class LessonModel extends ChangeNotifier {
     _isChooseImage = val;
     notifyListeners();
   }
+
+  List<int> chooseImageAnswerList = [1,2,3,4];
   bool isChooseImageAnswer(){
     var question = Application.lessonInfo.lesson.questions[_focusWordIndex];
-    if (question.type == "word" && question.questionType == 2) return true;
-    if (question.type == "word" && question.questionType == 3) return true;
-    if (question.type == "word" && question.questionType == 4) return true;
-
+    if (question.type == "word" && chooseImageAnswerList.contains(question.questionType)) return true;
     return false;
   }
   void cancelSound() {

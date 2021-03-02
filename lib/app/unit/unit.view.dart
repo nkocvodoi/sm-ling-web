@@ -234,13 +234,15 @@ class _UnitState extends State<UnitScreen> {
               Provider.of<ClassModel>(context, listen: false).refreshData();
             }
             UnitListService().loadUnitList(Application.currentBook.id);
-          }).then((value) => Navigator.pushReplacement(
+          }).then((value) =>
+              Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                       builder: (context) => UnitScreen(
                           grade: Application.currentBook.grade,
                           bookID: Application.currentBook.id,
-                          startPosition: _controller.offset))));
+                          startPosition: _controller.offset)))
+          );
 
           pressTime = 0;
         }
