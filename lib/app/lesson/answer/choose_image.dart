@@ -47,7 +47,6 @@ class _ChooseImageState extends State<ChooseImage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<LessonModel>(context,listen: false).chooseImageState(true);
     currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
     question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     wordsLength = question.words.length;
@@ -76,7 +75,6 @@ class _ChooseImageState extends State<ChooseImage> {
     return Consumer<LessonModel>(
       builder: (_, lessonModel, __) {
         if (currentIndex != lessonModel.focusWordIndex) {
-          lessonModel.chooseImageState(true);
           question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
           question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
           wordsLength = question.words.length;

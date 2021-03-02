@@ -12,13 +12,15 @@ class UserServiceGoogle {
     print("11111");
     var response = await Application.api.post("/api/login/googleWeb", paramsUser); // hair dangwr capas
     print("22222");
-    print("response: $response:");
-    print("response.statusCode: ${response.statusCode}");
     try {
       if (response.statusCode == 200) {
+        print(" : ${response} ");
         Application.user = User.fromJson(response.data["data"]["user"] as Map<String, dynamic>);
         Application.sharePreference.putString("token", response.data["data"]["token"] as String);
         Application.sharePreference.putString("refreshToken", response.data["data"]["refreshToken"] as String);
+        print("token: ${Application.sharePreference.get("token")}");
+        print("refreshToken: ${Application.sharePreference.get("refreshToken")}");
+        print(Application.user.toJson());
       } else {
         print('Fetch User Google Login Error!');
       }
@@ -56,11 +58,11 @@ class UserServiceFacebook {
 class UserProfile {
   Future<void> loadUserProfile() async {
     var response = await Application.api.get("/api/user/profile");
-    print("response: $response:");
-    print("response.statusCode: ${response.statusCode}");
+    print("loadUserProfile $response");
     try {
       if (response.statusCode == 200) {
-        Application.user = User.fromJson(response.data["data"] as Map<String, dynamic>);
+        Application.user =
+            User.fromJson(response.data["data"] as Map<String, dynamic>);
         log("Application.user: ${Application.user.toJson().toString()}");
       }
     } on NetworkException {
