@@ -62,7 +62,7 @@ class _RecorderToTextState extends State<RecorderToText> {
   @override
   void initState() {
     super.initState();
-    checkForHeadphoneConnection();
+    // checkForHeadphoneConnection();
     if (!_hasSpeech) initSpeechState();
     currentIndex = Provider.of<LessonModel>(context, listen: false).focusWordIndex;
     question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
@@ -89,25 +89,25 @@ class _RecorderToTextState extends State<RecorderToText> {
   }
 
   // ignore: avoid_void_async
-  void checkForHeadphoneConnection() async {
-    try {
-      headphonesConnected = await await Headset.isConnected;
-    } on PlatformException {
-      headphonesConnected = false;
-    }
-    if (!headphonesConnected) {
-      createDialogShowMessageAndAction(
-          context: context,
-          top: SizeConfig.blockSizeVertical * 50,
-          title: "Please plugin headphone for better recorder!",
-          titleLeftButton: "",
-          titleRightButton: "Understand!",
-          leftAction: () {},
-          rightAction: () {
-            Get.back();
-          });
-    }
-  }
+  // void checkForHeadphoneConnection() async {
+  //   try {
+  //     headphonesConnected = await await Headset.isConnected;
+  //   } on PlatformException {
+  //     headphonesConnected = false;
+  //   }
+  //   if (!headphonesConnected) {
+  //     createDialogShowMessageAndAction(
+  //         context: context,
+  //         top: SizeConfig.blockSizeVertical * 50,
+  //         title: "Please plugin headphone for better recorder!",
+  //         titleLeftButton: "",
+  //         titleRightButton: "Understand!",
+  //         leftAction: () {},
+  //         rightAction: () {
+  //           Get.back();
+  //         });
+  //   }
+  // }
 
   void startListening() {
     lastWords = "";
