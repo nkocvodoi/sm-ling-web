@@ -42,7 +42,7 @@ class SettingStates extends ChangeNotifier {
 
   void setSpeakIndicator() {
     _speakIndicator = !_speakIndicator;
-    Application.sharePreference.putBool("speakIndicator", !_speakIndicator);
+    Application.sharePreference.putBool("speakIndicator", _speakIndicator);
     notifyListeners();
   }
 }

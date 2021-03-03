@@ -389,7 +389,8 @@ class _SettingState extends State<Setting> {
                                     AnimatedPositioned(
                                         left: settingStates.speakIndicator ? SizeConfig.safeBlockHorizontal * 4 : SizeConfig.safeBlockHorizontal * 12,
                                         child: GestureDetector(
-                                          onTap: () => settingStates.setSpeakIndicator(),
+                                          onTap: () =>
+                                            settingStates.setSpeakIndicator(),
                                           child: Container(
                                             decoration: BoxDecoration(
                                                 border: Border.all(color: Colors.white, width: 3),
@@ -455,7 +456,8 @@ class _SettingState extends State<Setting> {
                                     AnimatedPositioned(
                                         left: settingStates.hearIndicator ? SizeConfig.safeBlockHorizontal * 4 : SizeConfig.safeBlockHorizontal * 12,
                                         child: GestureDetector(
-                                          onTap: () => settingStates.setHearIndicator(),
+                                          onTap: () =>
+                                            settingStates.setHearIndicator(),
                                           child: Container(
                                             decoration: BoxDecoration(
                                                 border: Border.all(color: Colors.white, width: 3),
