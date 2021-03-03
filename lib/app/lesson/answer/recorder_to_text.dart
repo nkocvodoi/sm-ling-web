@@ -205,7 +205,8 @@ class _RecorderToTextState extends State<RecorderToText> {
                   shadowColor: Color(0xFFD965F4),
                   radius: 360,
                   child:
-                  speech.isListening
+                   _hasSpeech ||
+                      !speech.isNotListening
                           ? Container(
                               width: SizeConfig.safeBlockHorizontal * 30,
                               child: Lottie.asset("assets/lottie/waves.json")
@@ -219,7 +220,13 @@ class _RecorderToTextState extends State<RecorderToText> {
                       )
                           :
                       Image.asset("assets/16typh_on_the_mic.png",width: SizeConfig.safeBlockHorizontal * 15,fit: BoxFit.fitWidth),
-                  onPressed: () => speech.isListening ?  startListening() : false)),
+                  onPressed: () {
+                    !_hasSpeech || speech.isListening ? null : startListening();
+                    setState(() {
+                      _hasSpeech = true;
+                    });
+                  }
+              )),
           Padding(
             padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 10),
             child: RichText(

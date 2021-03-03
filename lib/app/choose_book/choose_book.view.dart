@@ -235,13 +235,14 @@ class BookItem extends StatelessWidget {
                             left: -SizeConfig.blockSizeHorizontal * 30 +
                                 (item.doneQuestions / item.totalQuestions) * SizeConfig.blockSizeHorizontal * 30,
                             duration: Duration(milliseconds: 500),
-                            child: Container(
-                              height: SizeConfig.safeBlockHorizontal * 2.5,
-                              width: SizeConfig.safeBlockHorizontal * 30,
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFADD6F3),
-                                  border: Border.all(color: Color(0xFFE5F3FD)),
-                                  borderRadius: BorderRadius.circular(90)),
+                            child:
+                            Container(
+                              // height: SizeConfig.safeBlockHorizontal * 2.5,
+                              // width: SizeConfig.safeBlockHorizontal * 30,
+                              // decoration: BoxDecoration(
+                              //     color: Color(0xFFADD6F3),
+                              //     border: Border.all(color: Color(0xFFE5F3FD)),
+                              //     borderRadius: BorderRadius.circular(90)),
                             ),
                           ),
                         ]))),
@@ -252,7 +253,7 @@ class BookItem extends StatelessWidget {
                                 "100.0%"
                             ? "100%"
                             : "${double.parse((item.doneQuestions / item.totalQuestions * 100).toStringAsFixed(1))}%")
-                        : "0.0%",
+                        : "0%",
                     style: TextStyle(
                       color: Color(0xFF84BDE5),
                       fontFamily: "Quicksand",

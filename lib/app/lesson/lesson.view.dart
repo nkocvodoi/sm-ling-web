@@ -67,11 +67,11 @@ class _LessonScreenState extends State<LessonScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (Application.sharePreference.getInt("count") == 1) {
-      Application.sharePreference
-        ..putInt("saveGrade", Application.currentBook.grade)
-        ..putString("saveBookId", Application.currentBook.id);
-    }
+    // if (Application.sharePreference.getInt("count") == 1) {
+    //   Application.sharePreference
+    //     ..putInt("saveGrade", Application.currentBook.grade)
+    //     ..putString("saveBookId", Application.currentBook.id);
+    // }
     final int saveGrade = Application.sharePreference.getInt("saveGrade");
     final String saveCurrentBookId = Application.sharePreference.getString("saveBookId");
     // TODO: implement build

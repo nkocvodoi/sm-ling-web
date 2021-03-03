@@ -216,7 +216,10 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                                                         color: Color(0xFF4285F4),
                                                         fontWeight: FontWeight.w700,
                                                         fontSize: TextSize.fontSize40)),
-                                                Image.asset('assets/class/droplets.png', height: SizeConfig.safeBlockHorizontal * 4, fit: BoxFit.fitWidth)
+                                                Image.asset(
+                                                    "assets/class/droplets.png",
+                                                  height: SizeConfig.safeBlockVertical * 4.5,
+                                                ),
                                               ],
                                             )
                                           : Row(
