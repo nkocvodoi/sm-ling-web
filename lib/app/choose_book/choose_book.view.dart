@@ -216,53 +216,50 @@ class BookItem extends StatelessWidget {
               ),
             ],
           )),
-          Container(
-            width: SizeConfig.blockSizeHorizontal * 43,
-            child: Row(
-              children: [
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Container(
-                        height: SizeConfig.safeBlockHorizontal * 2.5,
-                        width: SizeConfig.safeBlockHorizontal * 30,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                        child: Stack(alignment: Alignment.center, children: [
-                          Container(
-                            width: SizeConfig.blockSizeHorizontal * 30,
-                            color: Color(0xFFE5F3FD),
-                          ),
-                          AnimatedPositioned(
-                            left: -SizeConfig.blockSizeHorizontal * 30 +
-                                (item.doneQuestions / item.totalQuestions) * SizeConfig.blockSizeHorizontal * 30,
-                            duration: Duration(milliseconds: 500),
-                            child:
-                            Container(
-                              // height: SizeConfig.safeBlockHorizontal * 2.5,
-                              // width: SizeConfig.safeBlockHorizontal * 30,
-                              // decoration: BoxDecoration(
-                              //     color: Color(0xFFADD6F3),
-                              //     border: Border.all(color: Color(0xFFE5F3FD)),
-                              //     borderRadius: BorderRadius.circular(90)),
-                            ),
-                          ),
-                        ]))),
-                Expanded(child: SizedBox()),
-                Text(
-                    item.totalQuestions != 0
-                        ? ("${double.parse((item.doneQuestions / item.totalQuestions * 100).toStringAsFixed(1))}%" ==
-                                "100.0%"
-                            ? "100%"
-                            : "${double.parse((item.doneQuestions / item.totalQuestions * 100).toStringAsFixed(1))}%")
-                        : "0%",
-                    style: TextStyle(
-                      color: Color(0xFF84BDE5),
-                      fontFamily: "Quicksand",
-                      fontWeight: FontWeight.w600,
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    )),
-              ],
-            ),
-          ),
+          // Container(
+          //   width: SizeConfig.blockSizeHorizontal * 43,
+          //   child: Row(
+          //     children: [
+          //       Container(
+          //           height: SizeConfig.safeBlockHorizontal * 2.5,
+          //           width: SizeConfig.safeBlockHorizontal * 30,
+          //           decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
+          //           child: Stack(alignment: Alignment.center, children: [
+          //             Container(
+          //               width: SizeConfig.blockSizeHorizontal * 30,
+          //               color: Color(0xFFE5F3FD),
+          //             ),
+          //             AnimatedPositioned(
+          //               left: -SizeConfig.blockSizeHorizontal * 30 +
+          //                   (item.doneQuestions / item.totalQuestions) * SizeConfig.blockSizeHorizontal * 30,
+          //               duration: Duration(milliseconds: 500),
+          //               child: Container(
+          //                 height: SizeConfig.safeBlockHorizontal * 2.5,
+          //                 width: SizeConfig.safeBlockHorizontal * 30,
+          //                 decoration: BoxDecoration(
+          //                     color: Color(0xFFADD6F3),
+          //                     border: Border.all(color: Color(0xFFE5F3FD)),
+          //                     borderRadius: BorderRadius.circular(90)),
+          //               ),
+          //             ),
+          //           ])),
+          //       Expanded(child: SizedBox()),
+          //       Text(
+          //           item.totalQuestions != 0
+          //               ? ("${double.parse((item.doneQuestions / item.totalQuestions * 100).toStringAsFixed(1))}%" ==
+          //                       "100.0%"
+          //                   ? "100%"
+          //                   : "${double.parse((item.doneQuestions / item.totalQuestions * 100).toStringAsFixed(1))}%")
+          //               : "0%",
+          //           style: TextStyle(
+          //             color: Color(0xFF84BDE5),
+          //             fontFamily: "Quicksand",
+          //             fontWeight: FontWeight.w600,
+          //             fontSize: SizeConfig.safeBlockHorizontal * 4,
+          //           )),
+          //     ],
+          //   ),
+          // ),
           SizedBox(height: SizeConfig.safeBlockHorizontal * 5)
         ],
       );

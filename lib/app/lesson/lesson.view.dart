@@ -69,14 +69,14 @@ class _LessonScreenState extends State<LessonScreen> {
   Widget build(BuildContext context) {
     // if (Application.sharePreference.getInt("count") == 1) {
     //   Application.sharePreference
-    //     ..putInt("saveGrade", Application.currentBook.grade)
-    //     ..putString("saveBookId", Application.currentBook.id);
+    //     ..putInt("saveGrade", Application.currentBook.grade);
+    //     // ..putString("saveBookId", Application.currentBook.id);
     // }
-    final int saveGrade = Application.sharePreference.getInt("saveGrade");
-    final String saveCurrentBookId = Application.sharePreference.getString("saveBookId");
+    // final int saveGrade = Application.sharePreference.getInt("saveGrade");
+    // // final String saveCurrentBookId = Application.sharePreference.getString("saveBookId");
     // TODO: implement build
     return FutureBuilder(
-        future: LessonInfoService().loadLessonInfo(bookID: saveCurrentBookId, lesson: widget.userLesson, level: widget.userLevel, unitID: widget.id),
+        future: LessonInfoService().loadLessonInfo(bookID: Application.currentBook.id, lesson: widget.userLesson, level: widget.userLevel, unitID: widget.id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Questions> questions = Application.lessonInfo.lesson.questions;
@@ -91,7 +91,7 @@ class _LessonScreenState extends State<LessonScreen> {
                       body: Consumer3<LessonModel, MatchPairModel, SortWordsModel>(builder: (_, lessonModel, matchPairModel, sortWordsModel, __) {
                         return WillPopScope(
                             onWillPop: () async {
-                              backFunction(context, lessonModel, matchPairModel, sortWordsModel, widget.offset, saveCurrentBookId, saveGrade);
+                              backFunction(context, lessonModel, matchPairModel, sortWordsModel, widget.offset, Application.currentBook.id, Application.currentBook.grade);
                               return true;
                             },
                             child: Center(child: Stack(alignment: Alignment.center, children: [
@@ -117,7 +117,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                                         ),
                                                         onPressed: () {
                                                           backFunction(context, lessonModel, matchPairModel, sortWordsModel, widget.offset,
-                                                              saveCurrentBookId, saveGrade);
+                                                              Application.currentBook.id, Application.currentBook.grade);
                                                         })),
                                                 Positioned(
                                                     left: SizeConfig.safeBlockHorizontal * 12,
@@ -211,7 +211,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                             reportButton(
                                                 color: AppColor.correctButtonShadow,
                                                 focusWordIndex: lessonModel.focusWordIndex,
-                                                saveCurrentBookId: saveCurrentBookId),
+                                                saveCurrentBookId: Application.currentBook.id),
                                             SizedBox(width: SizeConfig.safeBlockHorizontal * 5)
                                           ],
                                         )
@@ -229,7 +229,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                             reportButton(
                                                 color: AppColor.wrongButtonShadow,
                                                 focusWordIndex: lessonModel.focusWordIndex,
-                                                saveCurrentBookId: saveCurrentBookId),
+                                                saveCurrentBookId: Application.currentBook.id),
                                             SizedBox(width: SizeConfig.safeBlockHorizontal * 5)
                                           ],
                                         )
@@ -250,7 +250,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                           trailing: reportButton(
                                               color: AppColor.wrongButtonShadow,
                                               focusWordIndex: lessonModel.focusWordIndex,
-                                              saveCurrentBookId: saveCurrentBookId),
+                                              saveCurrentBookId: Application.currentBook.id),
                                         )
                                             : ListTile(
                                           title: Text("Hmmm... something not right",
@@ -269,7 +269,7 @@ class _LessonScreenState extends State<LessonScreen> {
                                           trailing: reportButton(
                                               color: Color(0xFFEF8F00),
                                               focusWordIndex: lessonModel.focusWordIndex,
-                                              saveCurrentBookId: saveCurrentBookId),
+                                              saveCurrentBookId: Application.currentBook.id),
                                         ),
                                         Expanded(child: SizedBox()),
                                         CustomButton(
@@ -367,8 +367,8 @@ class _LessonScreenState extends State<LessonScreen> {
             return WillPopScope(
               onWillPop: () async {
                 Get.off(UnitScreen(
-                  grade: saveGrade,
-                  bookID: saveCurrentBookId,
+                  grade: Application.currentBook.grade,
+                  bookID: Application.currentBook.id,
                   startPosition: widget.offset,
                 ));
                 return true;
@@ -382,8 +382,8 @@ class _LessonScreenState extends State<LessonScreen> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => UnitScreen(
-                              grade: saveGrade,
-                              bookID: saveCurrentBookId,
+                              grade: Application.currentBook.grade,
+                              bookID: Application.currentBook.id,
                               startPosition: widget.offset,
                             )));
                 return true;
