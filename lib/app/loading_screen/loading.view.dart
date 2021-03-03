@@ -46,7 +46,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
     if (widget.fetchData == true) {
       if (Application.sharePreference.getString("token") != null) {
         UserProfile().loadUserProfile().then((value) => {
-        print("dit me m tại loading screen"),
               if (Application.user.avatar != null){
                 Provider.of<ClassModel>(context, listen: false).refreshData(),
                 Get.offAll(ClassScreen())
