@@ -65,29 +65,37 @@ class LessonInfoService {
         List<Questions> newList2 = [];
         List<Questions> newList3 = [];
         List<int> questionTypes = [];
-        newList2 = _functionCreateTestForTypeQuestion(questions: questions, type: "word", questionTypes: questionTypes);
-        newList3 = _functionCreateTestForTypeQuestion(questions: questions, type: "sentence", questionTypes: questionTypes);
-        newList2.addAll(newList3);
+        List<String> types = ["word","sentence"];
+        types.forEach((element) {
+          newList3 = _functionCreateTestForTypeQuestion(questions: questions, type: element, questionTypes: questionTypes);
+          newList2.addAll(newList3);
+        });
+
         if (Application.sharePreference.hasKey("speakIndicator")) {
           if (Application.sharePreference.getBool("speakIndicator")) {
-            questionTypes = [12];
-            newList2 =
-                _functionCreateTestForTypeQuestion(questions: questions, type: "word", questionTypes: questionTypes);
-            questionTypes = [4];
-            newList3 = _functionCreateTestForTypeQuestion(
-                questions: questions, type: "sentence", questionTypes: questionTypes);
-            newList2.addAll(newList3);
+            types.forEach((element) {
+              if(element == "word"){
+                questionTypes = [12];
+              } else{
+                questionTypes = [4];
+              }
+              newList3 = _functionCreateTestForTypeQuestion(questions: questions, type: element, questionTypes: questionTypes);
+              newList2.addAll(newList3);
+            });
           }
         }
         if (Application.sharePreference.hasKey("hearIndicator")) {
           if (Application.sharePreference.getBool("hearIndicator")) {
-            questionTypes = [2, 3, 6, 7, 11, 12];
-            newList2 =
-                _functionCreateTestForTypeQuestion(questions: questions, type: "word", questionTypes: questionTypes);
-            questionTypes = [1, 4, 7, 15, 16];
-            newList3 = _functionCreateTestForTypeQuestion(
-                questions: questions, type: "sentence", questionTypes: questionTypes);
-            newList2.addAll(newList3);
+            types.forEach((element) {
+              if(element == "word"){
+                questionTypes = [2, 3, 6, 7, 11, 12];
+              } else{
+                questionTypes = [1, 4, 7, 15, 16];
+              }
+              newList3 = _functionCreateTestForTypeQuestion(
+                  questions: questions, type: element, questionTypes: questionTypes);
+              newList2.addAll(newList3);
+            });
           }
         }
         Application.lessonInfo.lesson.questions = newList2;
