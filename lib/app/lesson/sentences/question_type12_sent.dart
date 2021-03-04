@@ -13,8 +13,7 @@ import '../lesson.provider.dart';
 class QuestionType12Sent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex as int];
-//    var question = Application.lessonInfo.lesson.questions[4];
+    var question = Application.lessonInfo.lesson.questions[Provider.of<LessonModel>(context, listen: false).focusWordIndex];
     Sentences s = Application.lessonInfo.findSentence(question.focusSentence);
     // TODO: implement build
     return Column(

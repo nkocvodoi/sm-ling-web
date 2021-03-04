@@ -33,7 +33,7 @@ class _SortWordsState extends State<SortWords> {
   String language = "en-US";
   double volume = 1;
   double pitch = 1.0;
-  double rate = Platform.isIOS ? 0.4 : 0.8;
+  double rate = 0.8;
   TtsState ttsState = TtsState.stopped;
 
   get isPlaying => ttsState == TtsState.playing;
@@ -70,17 +70,9 @@ class _SortWordsState extends State<SortWords> {
     initTts();
   }
 
-  initTts() async {
+  // ignore: avoid_void_async
+  void initTts() async {
     flutterTts = FlutterTts();
-    if (Platform.isIOS) {
-      await flutterTts.setSharedInstance(true);
-      await flutterTts.setIosAudioCategory(IosTextToSpeechAudioCategory.playAndRecord, [
-        IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-        IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
-        IosTextToSpeechAudioCategoryOptions.mixWithOthers
-      ]);
-      await flutterTts.awaitSpeakCompletion(true);
-    }
     flutterTts.setStartHandler(() {
       setState(() {
         ttsState = TtsState.playing;

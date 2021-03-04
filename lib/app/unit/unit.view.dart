@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:SMLingg/app/class_screen/class.provider.dart';
 import 'package:SMLingg/app/components/custom.class_appbar.component.dart';
 import 'package:SMLingg/app/loading_screen/loading.view.dart';
 import 'package:SMLingg/app/unit/tool_tip_model.dart';
@@ -9,11 +10,10 @@ import 'package:SMLingg/config/application.dart';
 import 'package:SMLingg/config/config_screen.dart';
 import 'package:SMLingg/models/unit/unit_list.dart';
 import 'package:SMLingg/services/save_result.service.dart';
-import 'package:SMLingg/services/user.service.dart';
 import 'package:SMLingg/services/unit_list.service.dart';
+import 'package:SMLingg/services/user.service.dart';
 import 'package:SMLingg/themes/style.dart';
 import 'package:flutter/material.dart';
-import 'package:SMLingg/app/class_screen/class.provider.dart';
 import 'package:polygon_clipper/polygon_clipper.dart';
 import 'package:provider/provider.dart';
 
@@ -91,96 +91,63 @@ class _UnitState extends State<UnitScreen> {
                       child: GlowingOverscrollIndicator(
                         axisDirection: AxisDirection.down,
                         color: Colors.lightBlueAccent,
-                        child: Center(child: Container(width: SizeConfig.screenWidth,child: SingleChildScrollView(
-                          controller: _controller,
-                          child: Column(children: [
-                            ...List.generate(
-                              (unitCount % 3 == 0)
-                                  ? (unitCount ~/ 3 * 2)
-                                  : (unitCount ~/ 3 * 2 + 1),
-                                  (index) => ((index) % 2 == 1)
-                                  ? Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 5, bottom: 10),
-                                child: Column(
-                                  children: [
-                                    _hexagon(index ~/ 2 * 3 + 3, listKeys,
-                                        index, unitModel),
-                                    _unitName(
-                                        unitList[index ~/ 2 * 3 + 2].name)
-                                  ],
-                                ),
-                              )
-                                  : Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 25, bottom: 10),
-                                child: Container(
-                                  height: (unitList[index ~/ 2 * 3]
-                                      .name
-                                      .length >
-                                      unitList[index ~/ 2 * 3 + 1]
-                                          .name
-                                          .length)
-                                      ? SizeConfig.blockSizeHorizontal *
-                                      35 +
-                                      (unitList[index ~/ 2 * 3]
-                                          .name
-                                          .length ~/
-                                          10 +
-                                          3) *
-                                          SizeConfig
-                                              .blockSizeHorizontal *
-                                          4
-                                      : SizeConfig.blockSizeHorizontal *
-                                      35 +
-                                      (unitList[index ~/ 2 * 3 + 1]
-                                          .name
-                                          .length ~/
-                                          10 +
-                                          3) *
-                                          SizeConfig
-                                              .blockSizeHorizontal *
-                                          4,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          _hexagon(index ~/ 2 * 3 + 1,
-                                              listKeys, index, unitModel),
-                                          _unitName(
-                                              unitList[index ~/ 2 * 3]
-                                                  .name),
-                                        ],
-                                      ),
-                                      (index > unitCount ~/ 2 &&
-                                          unitCount % 3 == 1)
-                                          ? SizedBox(
-                                        width: SizeConfig
-                                            .blockSizeHorizontal *
-                                            35,
-                                      )
-                                          : Column(
-                                        children: [
-                                          _hexagon(
-                                              index ~/ 2 * 3 + 2,
-                                              listKeys,
-                                              index,
-                                              unitModel),
-                                          _unitName(unitList[
-                                          index ~/ 2 * 3 +
-                                              1]
-                                              .name),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            )
-                          ]),
-                        ))),
+                        child: Center(
+                            child: Container(
+                                width: SizeConfig.screenWidth,
+                                child: SingleChildScrollView(
+                                  controller: _controller,
+                                  child: Column(children: [
+                                    ...List.generate(
+                                      (unitCount % 3 == 0) ? (unitCount ~/ 3 * 2) : (unitCount ~/ 3 * 2 + 1),
+                                      (index) => ((index) % 2 == 1)
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(top: 5, bottom: 10),
+                                              child: Column(
+                                                children: [
+                                                  _hexagon(index ~/ 2 * 3 + 3, listKeys, index, unitModel),
+                                                  _unitName(unitList[index ~/ 2 * 3 + 2].name)
+                                                ],
+                                              ),
+                                            )
+                                          : Padding(
+                                              padding: const EdgeInsets.only(top: 25, bottom: 10),
+                                              child: Container(
+                                                height: (unitList[index ~/ 2 * 3].name.length >
+                                                        unitList[index ~/ 2 * 3 + 1].name.length)
+                                                    ? SizeConfig.blockSizeHorizontal * 35 +
+                                                        (unitList[index ~/ 2 * 3].name.length ~/ 10 + 3) *
+                                                            SizeConfig.blockSizeHorizontal *
+                                                            4
+                                                    : SizeConfig.blockSizeHorizontal * 35 +
+                                                        (unitList[index ~/ 2 * 3 + 1].name.length ~/ 10 + 3) *
+                                                            SizeConfig.blockSizeHorizontal *
+                                                            4,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        _hexagon(index ~/ 2 * 3 + 1, listKeys, index, unitModel),
+                                                        _unitName(unitList[index ~/ 2 * 3].name),
+                                                      ],
+                                                    ),
+                                                    (index > unitCount ~/ 2 && unitCount % 3 == 1)
+                                                        ? SizedBox(
+                                                            width: SizeConfig.blockSizeHorizontal * 35,
+                                                          )
+                                                        : Column(
+                                                            children: [
+                                                              _hexagon(index ~/ 2 * 3 + 2, listKeys, index, unitModel),
+                                                              _unitName(unitList[index ~/ 2 * 3 + 1].name),
+                                                            ],
+                                                          ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                    )
+                                  ]),
+                                ))),
                       ));
                 }));
           } else {
@@ -206,17 +173,12 @@ class _UnitState extends State<UnitScreen> {
           Provider.of<UnitModel>(context, listen: false).setOpen(false);
         }
         emit = StreamController();
-        aPopup = popup(tooltips(context, widget.grade, widget.bookID,
-            Application.unitList.units, unit - 1, emit,
+        aPopup = popup(tooltips(context, widget.grade, widget.bookID, Application.unitList.units, unit - 1, emit,
             offset: _controller.offset));
-        emit.stream.listen((a) => {
-              aPopup.dismiss(),
-              emit.close(),
-              Provider.of<UnitModel>(context, listen: false).setOpen(false)
-            });
+        emit.stream.listen(
+            (a) => {aPopup.dismiss(), emit.close(), Provider.of<UnitModel>(context, listen: false).setOpen(false)});
 
-        showToolTips(
-            aPopup, listKeys[unit - 1] as GlobalKey<State<StatefulWidget>>);
+        showToolTips(aPopup, listKeys[unit - 1] as GlobalKey<State<StatefulWidget>>);
         if (pressTime >= 3) {
           SaveResultService()
               .saveResult(
@@ -234,15 +196,13 @@ class _UnitState extends State<UnitScreen> {
               Provider.of<ClassModel>(context, listen: false).refreshData();
             }
             UnitListService().loadUnitList(Application.currentBook.id);
-          }).then((value) =>
-              Navigator.pushReplacement(
+          }).then((value) => Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                       builder: (context) => UnitScreen(
                           grade: Application.currentBook.grade,
                           bookID: Application.currentBook.id,
-                          startPosition: _controller.offset)))
-          );
+                          startPosition: _controller.offset))));
 
           pressTime = 0;
         }
@@ -257,11 +217,8 @@ class _UnitState extends State<UnitScreen> {
               borderRadius: 10,
               rotate: 90,
               child: Container(
-                color: (unitModel.userLevel(unit - 1) ==
-                            Application.unitList.units[unit - 1].totalLevels &&
-                        unitModel.userLesson(unit - 1) ==
-                            Application
-                                .unitList.units[unit - 1].totalLessonsOfLevel)
+                color: (unitModel.userLevel(unit - 1) == Application.unitList.units[unit - 1].totalLevels &&
+                        unitModel.userLesson(unit - 1) == Application.unitList.units[unit - 1].totalLessonsOfLevel)
                     ? LevelColor.levelLightColor[index % 7].withOpacity(0.6)
                     : LevelColor.defaultLightColor,
               ),
@@ -280,19 +237,18 @@ class _UnitState extends State<UnitScreen> {
                       children: [
                         Container(
                           color: (unitModel.userLevel(unit - 1) == Application.unitList.units[unit - 1].totalLevels &&
-                                  unitModel.userLesson(unit - 1) == Application.unitList.units[unit - 1].totalLessonsOfLevel)
+                                  unitModel.userLesson(unit - 1) ==
+                                      Application.unitList.units[unit - 1].totalLessonsOfLevel)
                               ? LevelColor.levelDarkColor[index % 7]
                               : LevelColor.defaultDarkColor,
                         ),
                         AnimatedPositioned(
                             duration: Duration(milliseconds: 1500),
                             bottom: (unitModel.userLesson(unit - 1) !=
-                                    Application.unitList.units[unit - 1]
-                                        .totalLessonsOfLevel)
+                                    Application.unitList.units[unit - 1].totalLessonsOfLevel)
                                 ? -SizeConfig.blockSizeHorizontal * 28 +
                                     (unitModel.userLesson(unit - 1) /
-                                            Application.unitList.units[unit - 1]
-                                                .totalLessonsOfLevel) *
+                                            Application.unitList.units[unit - 1].totalLessonsOfLevel) *
                                         SizeConfig.blockSizeHorizontal *
                                         28
                                 : -SizeConfig.blockSizeHorizontal * 28,
@@ -305,27 +261,30 @@ class _UnitState extends State<UnitScreen> {
                     )),
                 width: SizeConfig.blockSizeHorizontal * 28,
               ),
-              (unitModel.userLevel(unit - 1) ==
-                          Application.unitList.units[unit - 1].totalLevels &&
-                      unitModel.userLesson(unit - 1) ==
-                          Application
-                              .unitList.units[unit - 1].totalLessonsOfLevel)
+              (unitModel.userLevel(unit - 1) == Application.unitList.units[unit - 1].totalLevels &&
+                      unitModel.userLesson(unit - 1) == Application.unitList.units[unit - 1].totalLessonsOfLevel)
                   ? Padding(
                       padding: EdgeInsets.only(top: 5),
                       child: Stack(
                         children: [
                           Positioned(
-                            bottom: -3,
-                            child: Image.asset(
-                              'assets/star.jpg',
-                              width: SizeConfig.blockSizeHorizontal * 12,
-                              color: LevelColor.coreShadowColor[index % 7],
+                            bottom: -5,
+                            child: Container(
+                              height: SizeConfig.blockSizeHorizontal * 8,
+                              child: Image.asset(
+                                'assets/star.png',
+                                fit: BoxFit.fitHeight,
+                                color: LevelColor.coreShadowColor[index % 7],
+                              ),
                             ),
                           ),
-                          Image.asset(
-                            'assets/star.jpg',
-                            width: SizeConfig.blockSizeHorizontal * 12,
-                            color: LevelColor.coreColor[index % 7],
+                          Container(
+                            height: SizeConfig.blockSizeHorizontal * 8,
+                            child: Image.asset(
+                              'assets/star.png',
+                              fit: BoxFit.fitHeight,
+                              color: LevelColor.coreColor[index % 7],
+                            ),
                           ),
                         ],
                       ),
@@ -354,21 +313,16 @@ class _UnitState extends State<UnitScreen> {
                 alignment: Alignment.center,
                 children: [
                   (unitModel.userLevel(unit - 1) == Application.unitList.units[unit - 1].totalLevels &&
-                      unitModel.userLesson(unit - 1) == Application.unitList.units[unit - 1].totalLessonsOfLevel)
-                     ? Image.asset('assets/unit/lucigacfinish.png',
-                          height: SizeConfig.blockSizeVertical * 5)
-                      : Image.asset('assets/unit/lucgiac.png',
-                          height: SizeConfig.blockSizeVertical * 5),
+                          unitModel.userLesson(unit - 1) == Application.unitList.units[unit - 1].totalLessonsOfLevel)
+                      ? Image.asset('assets/unit/lucigacfinish.png', height: SizeConfig.blockSizeVertical * 5)
+                      : Image.asset('assets/unit/lucgiac.png', height: SizeConfig.blockSizeVertical * 5),
                   Text(
                     (unitModel.userLevel(unit - 1)).toString(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: (unitModel.userLevel(unit - 1) ==
-                                  Application
-                                      .unitList.units[unit - 1].totalLevels &&
+                      color: (unitModel.userLevel(unit - 1) == Application.unitList.units[unit - 1].totalLevels &&
                               unitModel.userLesson(unit - 1) ==
-                                  Application.unitList.units[unit - 1]
-                                      .totalLessonsOfLevel)
+                                  Application.unitList.units[unit - 1].totalLessonsOfLevel)
                           ? Color(0xFFED8100)
                           : LevelColor.defaultTextColor,
                       fontSize: SizeConfig.blockSizeVertical * 2.5,

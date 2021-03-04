@@ -69,6 +69,13 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print("correctAnswer: ${widget.correctAnswer}");
+    print("offset: ${widget.offset}");
+    print("focusWordIndex: ${widget.focusWordIndex}");
+    print("timeStart: ${widget.timeStart}");
+    print("timeEnd: ${widget.timeEnd}");
+    print("results: ${widget.results}");
+    print("totalQuestion: ${widget.totalQuestion}");
     checkType();
     Future.delayed(Duration(milliseconds: 1000), () => setState(() => _firstPoint = true)).then((value) =>
         Future.delayed(Duration(milliseconds: 700), () => setState(() => _secondPoint = true)).then((value) =>
@@ -89,7 +96,6 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                 width: SizeConfig.screenWidth,
                 height: SizeConfig.screenHeight,
                 child: Stack(alignment: Alignment.topCenter, children: [
-                  Container(),
                   AnimatedOpacity(
                       opacity: _secondPoint ? 0 : 1,
                       duration: Duration(milliseconds: 500),
@@ -301,33 +307,37 @@ class _FinishLessonScreenState extends State<FinishLessonScreen> {
                               child: Text((Application.currentUnit.userLevel + 1).toString(),
                                   style:
                                       TextStyle(color: Color(0xFFE88B00), fontSize: 70, fontWeight: FontWeight.w700)))),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: AnimatedPositioned(
-                        duration: Duration(milliseconds: _thirdPoint ? 1000 : 800),
-                        right: _thirdPoint
-                            ? SizeConfig.safeBlockHorizontal * 42.5
-                            : _secondPoint
-                            ? SizeConfig.safeBlockHorizontal * 40
-                            : SizeConfig.safeBlockHorizontal * 4.5,
-                        top: _thirdPoint
-                            ? SizeConfig.safeBlockVertical * 60
-                            : _secondPoint
-                            ? SizeConfig.safeBlockVertical * 25
-                            : SizeConfig.safeBlockVertical * 3,
-                        child: AnimatedContainer(
-                            height: SizeConfig.safeBlockHorizontal * 15,
-                            width: _thirdPoint
-                                ? SizeConfig.safeBlockHorizontal * 15
-                                : _secondPoint
-                                ? SizeConfig.safeBlockHorizontal * 20
-                                : SizeConfig.safeBlockHorizontal * 6,
-                            duration: Duration(milliseconds: 500),
-                            child: AnimatedOpacity(
-                                duration: Duration(milliseconds: 500),
-                                opacity: _fourthPoint ? 0 : 1,
-                                child: Image.asset("assets/class/droplets.png",height: SizeConfig.safeBlockHorizontal * 4.5)))),
-                  )
+                  AnimatedPositioned(
+                      duration: Duration(milliseconds: _thirdPoint ? 1000 : 800),
+                      right: _thirdPoint
+                          ? SizeConfig.safeBlockHorizontal * 42.5
+                          : _secondPoint
+                          ? SizeConfig.safeBlockHorizontal * 40
+                          : SizeConfig.safeBlockHorizontal * 4.5,
+                      top: _thirdPoint
+                          ? SizeConfig.safeBlockVertical * 60
+                          : _secondPoint
+                          ? SizeConfig.safeBlockVertical * 25
+                          : SizeConfig.safeBlockVertical * 0.25,
+                      child: AnimatedContainer(
+                          height: SizeConfig.safeBlockHorizontal * 15,
+                          width: _thirdPoint
+                              ? SizeConfig.safeBlockHorizontal * 15
+                              : _secondPoint
+                              ? SizeConfig.safeBlockHorizontal * 20
+                              : SizeConfig.safeBlockHorizontal * 6,
+                          duration: Duration(milliseconds: 500),
+                          child: AnimatedOpacity(
+                              duration: Duration(milliseconds: 500),
+                              opacity: _fourthPoint ? 0 : 1,
+                              child:
+                              // Align(
+                              //   alignment: Alignment.topRight,
+                              //   child:
+                                Image.asset("assets/class/droplets.png",height: SizeConfig.safeBlockHorizontal * 5),
+                              // )
+                          ))),
+
                 ]))),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: AnimatedOpacity(
